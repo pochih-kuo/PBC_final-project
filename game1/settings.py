@@ -14,4 +14,4 @@ LIGHT_RED = (255, 0, 0)
 
 PLAYER_SPEED_X = 5
 
-space = pygame.image.load('C:/Users/SHU-MIN WANG/Desktop/2.png')
+space = pygame.image.load('2.png')

@@ -9,7 +9,7 @@ class Student:
 		self.pos_y = (DISPLAY_HEIGHT * 0.65)
 		self.direction_x = 0
 		self.speed_x = 10
-		self.studentImg = pygame.image.load('C:/Users/SHU-MIN WANG/Desktop/student.png').convert_alpha()
+		self.studentImg = pygame.image.load('student.png').convert_alpha()
 		self.rect = self.studentImg.get_rect()
 		self.rect.topleft = (self.pos_x, self.pos_y)
 	
@@ -39,7 +39,7 @@ class Stone:
 		self.pos_x = randint(0, 750)
 		self.pos_y = -50
 		self.speed_y = randint(5, 15)
-		self.stoneImg = pygame.image.load('C:/Users/SHU-MIN WANG/Desktop/stone.jpg').convert_alpha()
+		self.stoneImg = pygame.image.load('stone.jpg').convert_alpha()
 		self.rect = self.stoneImg.get_rect()
 		self.rect.topleft = (self.pos_x, self.pos_y)
 	
