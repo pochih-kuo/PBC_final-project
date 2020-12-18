@@ -123,7 +123,7 @@ def main():
             # 遊戲分數儀表板
             text_surface = my_font.render('GPA = {}'.format(round(points,2)), True, (0, 0, 0))
             # 渲染物件
-            background_raw = pygame.image.load(os.path.abspath('background.jpg'))
+            background_raw = pygame.image.load(os.path.abspath('study.gif'))
             # 調整背景圖片大小
             background = pygame.transform.scale(background_raw, (WINDOW_WIDTH , WINDOW_HEIGHT ))
             background.convert()
@@ -166,7 +166,7 @@ def main():
             
             text_surface_list = print_sirting(academic_performance, romantic_relationship, interpersonal_relationship, health, text_surface_list)
             # 渲染物件
-            background_raw = pygame.image.load(os.path.abspath('background2.png'))
+            background_raw = pygame.image.load(os.path.abspath('game2\\background2.png'))
             # 調整背景圖片大小
             background = pygame.transform.scale(background_raw, (WINDOW_WIDTH , WINDOW_HEIGHT ))
             background.convert()

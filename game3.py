@@ -22,7 +22,8 @@ class Picture(pygame.sprite.Sprite):
     def __init__(self, x_position, y_position, path, point):
         super().__init__()
         # 載入圖片
-        self.raw_image = pygame.image.load(os.path.abspath(path)).convert_alpha()
+        self.raw_image = pygame.image.load('./game3/'+path).convert_alpha()
+        #self.raw_image = pygame.image.load(os.path.abspath('./game2/'+path)).convert_alpha()
         # 縮小圖片
         self.image = pygame.transform.scale(self.raw_image, (IMAGEWIDTH, IMAGEHEIGHT))
         #  回傳位置
@@ -126,7 +127,8 @@ def main():
         # 遊戲分數儀表板
         text_surface = my_font.render('$$ = {}'.format(round(points,2)), True, (0, 0, 0))
         # 渲染物件
-        background_raw = pygame.image.load(os.path.abspath('background.jpg'))
+        background_raw = pygame.image.load('./game3/background.jpg')
+        # background_raw = pygame.image.load(os.path.abspath('./game2/background.jpg'))
         # 調整背景圖片大小
         background = pygame.transform.scale(background_raw, (WINDOW_WIDTH , WINDOW_HEIGHT ))
         background.convert()
