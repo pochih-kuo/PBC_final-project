@@ -8,18 +8,18 @@ from pygame.locals import Color, QUIT, MOUSEBUTTONDOWN, USEREVENT
 WINDOW_WIDTH = 800
 WINDOW_HEIGHT = 600
 BOSSWIDTH = 150
-BOSSHEIGHT = 450
-COMPUTERWIDTH = 200
-COMPUTERHEIGHT = 300
+BOSSHEIGHT = 470
+COMPUTERWIDTH = 300
+COMPUTERHEIGHT = 320
 PHONEWIDTH = 40
 PHONEHEIGHT = 50
 FPS = 10
-boss_x_position = 80
-boss_y_position = 150
-computer_x_position = 300
-computer_y_position = 230
+boss_x_position = 50
+boss_y_position = 130
+computer_x_position = 247
+computer_y_position = 220
 phone_x_position = 200
-phone_y_position = 450
+phone_y_position = 455
 show_probability1 = 60  # 每次顯示通知機率 (%)
 # show_probability2 = 30
 bosspath = os.path.abspath('boss.gif')
@@ -119,10 +119,12 @@ def main():
                 # 當使用者點擊滑鼠時，檢查是否滑鼠位置 x, y 有在手機上
                 if phone.rect.topleft[0] < pygame.mouse.get_pos()[0] < phone.rect.topleft[0] + PHONEWIDTH \
                    and phone.rect.topleft[1] < pygame.mouse.get_pos()[1] < phone.rect.topleft[1] + PHONEHEIGHT:
+                   
                     # 算分
-                    satisfaction += 5
+                    satisfaction += 50
+                
                 else:
-                    satisfaction -= 5
+                    satisfaction -= 50
 
                 if satisfaction <= 0:
                     satisfaction = 0
