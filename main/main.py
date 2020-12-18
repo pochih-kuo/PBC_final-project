@@ -3,7 +3,7 @@ import pygame as pg
 import tkinter as tk
 import webbrowser
 # 設定視窗尺寸
-win_width, win_height = 600, 800
+win_width, win_height = 600, 600
 clock = pg.time.Clock()
 
 pg.init()
