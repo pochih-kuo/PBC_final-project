@@ -25,7 +25,7 @@ def initial():  # 遊戲初始畫面
     bg.blit(imageBG, (0,0))
 
     # 插入遊戲標題與開始鍵
-    textTitle = font1.render("My Life in NTU", True, (0,0,0), (255,255,255))
+    textTitle = font1.render("My Life in NTU", True, (0,0,0))
     imageStart = pg.image.load("start.png")
     imageStart.convert()
     pos_Title = [180, 250]
@@ -72,10 +72,10 @@ def intro():  # 遊戲說明畫面
     bg.blit(imageNext, pos_Next)
 
     # 插入文字
-    textWelcome = font2.render("Welcome!", True, (0,71,125), (255,255,255))
-    textFreshman = font2.render("You are a freshman of NTU.", True, (0,71,125), (255,255,255))
-    textTime2journey = font2.render("It's time to have a memorable journey in NTU", True, (0,71,125), (255,255,255))
-    textHope = font2.render("Hope you enjoy 4-year life in university.", True, (0,71,125), (255,255,255))
+    textWelcome = font2.render("Welcome!", True, (0,71,125))
+    textFreshman = font2.render("You are a freshman of NTU.", True, (0,71,125))
+    textTime2journey = font2.render("It's time to have a memorable journey in NTU", True, (0,71,125))
+    textHope = font2.render("Hope you enjoy 4-year life in university.", True, (0,71,125))
     pos_Welcome, pos_Freshman, pos_Time2journey, pos_Hope = [120, 140], [120, 180], [120, 220], [120,260]
     bg.blit(textWelcome, pos_Welcome)
     bg.blit(textFreshman, pos_Freshman)
@@ -108,7 +108,7 @@ def rolechoose():  # 角色選擇畫面
     # 插入 姓名、性別、Play圖片
     imageName = pg.image.load("name.png")
     imageName = pg.transform.scale(imageName, (120,35))
-    textGender = font2.render("Gender:", True, (0,0,0), (255,255,255))
+    textGender = font2.render("Gender:", True, (0,0,0))
     imageNMale = pg.image.load("male_grey.png")  # 灰底(未選擇)
     imageNMale = pg.transform.scale(imageNMale, (120,35))
     imageNFemale = pg.image.load("female_grey.png")  # 灰底(未選擇)
@@ -185,7 +185,7 @@ def lake(gender, point, grade):  # 醉月湖畫面
     imageMessage = pg.transform.scale(imageMessage,(450,350))
     imageResume = pg.image.load("resume.png")
     imageResume = pg.transform.scale(imageResume, (120,35))
-    textJump = font4.render("Jump", True, (0,0,0), (255,255,255))
+    textJump = font4.render("Jump", True, (0,0,0))
     imagePark.convert()
     imageMessage.convert()
     imageResume.convert()
@@ -196,9 +196,9 @@ def lake(gender, point, grade):  # 醉月湖畫面
     bg.blit(textJump, pos_Jump)
 
     # 插入文字
-    textWow = font4.render("Wow!", True, (0,0,0), (255,255,255))
-    textGoodplace = font4.render("Such a wonderful place.", True, (0,0,0), (255,255,255))
-    textWhat2do = font2.render("What will you do?", True, (0,0,0), (255,255,255))
+    textWow = font4.render("Wow!", True, (0,0,0))
+    textGoodplace = font4.render("Such a wonderful place.", True, (0,0,0))
+    textWhat2do = font2.render("What will you do?", True, (0,0,0))
     pos_Wow, pos_Goodplace, pos_What2do = [150, 150], [150, 200], [300, 270]
     bg.blit(textWow, pos_Wow)
     bg.blit(textGoodplace, pos_Goodplace)
@@ -276,11 +276,11 @@ def stage1(gender, point, grade):  # 大一畫面
     bg.blit(imageFriend, pos_Friend)
     
     # 插入能力值分數
-    score_Love = font4.render(str(point["Love"]), True, (0,0,0), (255,255,255))
-    score_Money = font4.render(str(point["Money"]), True, (0,0,0), (255,255,255))
-    score_Health = font4.render(str(point["Health"]), True, (0,0,0), (255,255,255))
-    score_Study = font4.render(str(point["Study"]), True, (0,0,0), (255,255,255))
-    score_Friend = font4.render(str(point["Friend"]), True, (0,0,0), (255,255,255))    
+    score_Love = font4.render(str(point["Love"]), True, (0,0,0))
+    score_Money = font4.render(str(point["Money"]), True, (0,0,0))
+    score_Health = font4.render(str(point["Health"]), True, (0,0,0))
+    score_Study = font4.render(str(point["Study"]), True, (0,0,0))
+    score_Friend = font4.render(str(point["Friend"]), True, (0,0,0))    
     pos_scLove, pos_scMoney, pos_scHealth, pos_scStudy, pos_scFriend = [100,550], [100,600], [100,650],[100,700],[100,750]
     bg.blit(score_Love, pos_scLove)
     bg.blit(score_Money, pos_scMoney)
@@ -323,7 +323,7 @@ def stage1(gender, point, grade):  # 大一畫面
         if pairs_list[1] == 0:
             sum_zero_point += 1
     if sum_zero_point >= 3:
-        Gameover()
+        gameover()
 
     while True:
         for event in pg.event.get():            
@@ -376,11 +376,11 @@ def stage2(gender, point, grade):  # 大二畫面
     bg.blit(imageFriend, pos_Friend)
 
     # 插入能力值分數
-    score_Love = font4.render(str(point["Love"]), True, (0,0,0), (255,255,255))
-    score_Money = font4.render(str(point["Money"]), True, (0,0,0), (255,255,255))
-    score_Health = font4.render(str(point["Health"]), True, (0,0,0), (255,255,255))
-    score_Study = font4.render(str(point["Study"]), True, (0,0,0), (255,255,255))
-    score_Friend = font4.render(str(point["Friend"]), True, (0,0,0), (255,255,255))    
+    score_Love = font4.render(str(point["Love"]), True, (0,0,0))
+    score_Money = font4.render(str(point["Money"]), True, (0,0,0))
+    score_Health = font4.render(str(point["Health"]), True, (0,0,0))
+    score_Study = font4.render(str(point["Study"]), True, (0,0,0))
+    score_Friend = font4.render(str(point["Friend"]), True, (0,0,0))    
     pos_scLove, pos_scMoney, pos_scHealth, pos_scStudy, pos_scFriend = [100,550], [100,600], [100,650],[100,700],[100,750]
     bg.blit(score_Love, pos_scLove)
     bg.blit(score_Money, pos_scMoney)
@@ -424,7 +424,7 @@ def stage2(gender, point, grade):  # 大二畫面
         if pairs_list[1] == 0:
             sum_zero_point += 1
     if sum_zero_point >= 3:
-        Gameover()
+        gameover()
 
     while True:
         for event in pg.event.get():            
@@ -438,6 +438,10 @@ def stage2(gender, point, grade):  # 大二畫面
                 # 進入大二遊戲畫面
                     grade += 1
                     stage3(gender, point, grade)
+                elif pos_Coco[0] < pg.mouse.get_pos()[0] < pos_Coco[0]+150\
+                  and pos_Coco[1] < pg.mouse.get_pos()[1] < pos_Coco[1]+150:
+                # 進入skip畫面
+                    skip(gender, point, grade)
                 elif pos_Lake[0] < pg.mouse.get_pos()[0] < pos_Lake[0]+150\
                   and pos_Lake[1] < pg.mouse.get_pos()[1] < pos_Lake[1]+150:
                 # 進入醉月湖畫面
@@ -476,11 +480,11 @@ def stage3(gender, point, grade):  # 大三畫面
     bg.blit(imageFriend, pos_Friend)
 
     # 插入能力值分數
-    score_Love = font4.render(str(point["Love"]), True, (0,0,0), (255,255,255))
-    score_Money = font4.render(str(point["Money"]), True, (0,0,0), (255,255,255))
-    score_Health = font4.render(str(point["Health"]), True, (0,0,0), (255,255,255))
-    score_Study = font4.render(str(point["Study"]), True, (0,0,0), (255,255,255))
-    score_Friend = font4.render(str(point["Friend"]), True, (0,0,0), (255,255,255))    
+    score_Love = font4.render(str(point["Love"]), True, (0,0,0))
+    score_Money = font4.render(str(point["Money"]), True, (0,0,0))
+    score_Health = font4.render(str(point["Health"]), True, (0,0,0))
+    score_Study = font4.render(str(point["Study"]), True, (0,0,0))
+    score_Friend = font4.render(str(point["Friend"]), True, (0,0,0))    
     pos_scLove, pos_scMoney, pos_scHealth, pos_scStudy, pos_scFriend = [100,550], [100,600], [100,650],[100,700],[100,750]
     bg.blit(score_Love, pos_scLove)
     bg.blit(score_Money, pos_scMoney)
@@ -526,7 +530,7 @@ def stage3(gender, point, grade):  # 大三畫面
         if pairs_list[1] == 0:
             sum_zero_point += 1
     if sum_zero_point >= 3:
-        Gameover()
+        gameover()
 
     while True:
         for event in pg.event.get():            
@@ -540,6 +544,14 @@ def stage3(gender, point, grade):  # 大三畫面
                 # 進入大三遊戲畫面
                     grade += 1
                     stage4(gender, point, grade)
+                elif pos_Coco[0] < pg.mouse.get_pos()[0] < pos_Coco[0]+150\
+                  and pos_Coco[1] < pg.mouse.get_pos()[1] < pos_Coco[1]+150:
+                # 進入skip畫面
+                    skip(gender, point, grade)
+                elif pos_Lib[0] < pg.mouse.get_pos()[0] < pos_Lib[0]+150\
+                  and pos_Lib[1] < pg.mouse.get_pos()[1] < pos_Lib[1]+150:
+                # 進入skip畫面
+                    skip(gender, point, grade)
                 elif pos_Lake[0] < pg.mouse.get_pos()[0] < pos_Lake[0]+150\
                   and pos_Lake[1] < pg.mouse.get_pos()[1] < pos_Lake[1]+150:
                 # 進入醉月湖畫面
@@ -578,11 +590,11 @@ def stage4(gender, point, grade):  # 大四畫面
     bg.blit(imageFriend, pos_Friend)
 
     # 插入能力值分數
-    score_Love = font4.render(str(point["Love"]), True, (0,0,0), (255,255,255))
-    score_Money = font4.render(str(point["Money"]), True, (0,0,0), (255,255,255))
-    score_Health = font4.render(str(point["Health"]), True, (0,0,0), (255,255,255))
-    score_Study = font4.render(str(point["Study"]), True, (0,0,0), (255,255,255))
-    score_Friend = font4.render(str(point["Friend"]), True, (0,0,0), (255,255,255))    
+    score_Love = font4.render(str(point["Love"]), True, (0,0,0))
+    score_Money = font4.render(str(point["Money"]), True, (0,0,0))
+    score_Health = font4.render(str(point["Health"]), True, (0,0,0))
+    score_Study = font4.render(str(point["Study"]), True, (0,0,0))
+    score_Friend = font4.render(str(point["Friend"]), True, (0,0,0))    
     pos_scLove, pos_scMoney, pos_scHealth, pos_scStudy, pos_scFriend = [100,550], [100,600], [100,650],[100,700],[100,750]
     bg.blit(score_Love, pos_scLove)
     bg.blit(score_Money, pos_scMoney)
@@ -629,7 +641,7 @@ def stage4(gender, point, grade):  # 大四畫面
         if pairs_list[1] == 0:
             sum_zero_point += 1
     if sum_zero_point >= 3:
-        Gameover()
+        gameover()
 
     while True:
         for event in pg.event.get():            
@@ -642,10 +654,67 @@ def stage4(gender, point, grade):  # 大四畫面
                   and pos_Lab[1] < pg.mouse.get_pos()[1] < pos_Lab[1]+150:
                 # 進入大四遊戲畫面
                     final(gender, point)
+                elif pos_Coco[0] < pg.mouse.get_pos()[0] < pos_Coco[0]+150\
+                  and pos_Coco[1] < pg.mouse.get_pos()[1] < pos_Coco[1]+150:
+                # 進入skip畫面
+                    skip(gender, point, grade)
+                elif pos_Lib[0] < pg.mouse.get_pos()[0] < pos_Lib[0]+150\
+                  and pos_Lib[1] < pg.mouse.get_pos()[1] < pos_Lib[1]+150:
+                # 進入skip畫面
+                    skip(gender, point, grade)
+                elif pos_Dorm[0] < pg.mouse.get_pos()[0] < pos_Dorm[0]+150\
+                  and pos_Dorm[1] < pg.mouse.get_pos()[1] < pos_Dorm[1]+150:
+                # 進入skip畫面
+                    skip(gender, point, grade)
                 elif pos_Lake[0] < pg.mouse.get_pos()[0] < pos_Lake[0]+150\
                   and pos_Lake[1] < pg.mouse.get_pos()[1] < pos_Lake[1]+150:
                 # 進入醉月湖畫面
                     lake(gender, point, grade)
+
+def skip(gender, point, grade):  # 非該年級遊戲畫面
+    # 設定畫布並插入背景畫面
+    bg = pg.Surface((win_width, win_height))
+    bg.convert()
+    imageBG = pg.image.load("bg_orange.jpg")
+    imageBG = pg.transform.scale(imageBG,(win_width, win_height))
+    imageBG.convert()
+    bg.blit(imageBG, (0,0))
+
+    imageResume = pg.image.load("resume.png")
+    imageResume = pg.transform.scale(imageResume, (120,35))
+    imageResume.convert()
+    pos_Resume = [450,680]
+    bg.blit(imageResume, pos_Resume)
+
+    # 插入繼續文字
+    textComplete = font1.render("You have completed the task.", True, (165,42,42))
+    textMoveon = font1.render("Please Move on to another task!", True, (165,42,42))
+    pos_Complete, pos_Moveon = [70, 250], [50, 350]
+    bg.blit(textComplete, pos_Complete)
+    bg.blit(textMoveon, pos_Moveon)
+
+    # 顯示畫布
+    screen.blit(bg, (0,0))
+    pg.display.update()
+
+    while True:
+        for event in pg.event.get():            
+            if event.type == pg.QUIT:  # 關閉程式
+                pg.quit()
+                sys.exit()
+
+            if event.type == pg.MOUSEBUTTONDOWN:
+                if pos_Resume[0] < pg.mouse.get_pos()[0] < pos_Resume[0]+150\
+                  and pos_Resume[1] < pg.mouse.get_pos()[1] < pos_Resume[1]+100:
+                    # 回到各年級畫面
+                    if grade == 1:
+                        stage1(gender, point, grade)
+                    elif grade == 2:
+                        stage2(gender, point, grade)
+                    elif grade == 3:
+                        stage3(gender, point, grade)
+                    elif grade == 4:
+                        stage4(gender, point, grade)
 
 def final(gender, point):  # 遊戲結束畫面
     # 設定畫布並插入背景畫面
@@ -679,9 +748,9 @@ def final(gender, point):  # 遊戲結束畫面
         prize = "knowledgeable Boy" if gender == "Male" else "knowledgeable Girl"
     
     # 顯示遊戲結果
-    textCongratulation = font2.render("Congratulations!", True, (0,0,0), (255,255,255))
-    textYouare = font2.render("You have been a", True, (0,0,0), (255,255,255))
-    textPrize = font4.render(prize, True, (165,42,42), (255,255,255))
+    textCongratulation = font2.render("Congratulations!", True, (0,0,0))
+    textYouare = font2.render("You have been a", True, (0,0,0))
+    textPrize = font4.render(prize, True, (165,42,42))
     pos_Contratulation = [300,180]
     pos_Youare = [300,210]
     pos_Prize = [300, 240]
@@ -699,7 +768,7 @@ def final(gender, point):  # 遊戲結束畫面
                 pg.quit()
                 sys.exit()
 
-def Gameover():  # 遊戲失敗畫面
+def gameover():  # 遊戲失敗畫面
     # 設定畫布並插入背景畫面
     bg = pg.Surface((win_width, win_height))
     bg.convert()
@@ -709,10 +778,9 @@ def Gameover():  # 遊戲失敗畫面
     bg.blit(imageBG, (0,0))
 
     # 插入失敗文字
-    textGameover = font1.render("Game over!", True, (165,42,42), (255,255,255))
-    textDropout = font1.render("You are dropped out of school.", True, (165,42,42), (255,255,255))
-    pos_Gameover = [220, 250]
-    pos_Dropout = [50, 350]
+    textGameover = font1.render("Game over!", True, (165,42,42))
+    textDropout = font1.render("You are dropped out of school.", True, (165,42,42))
+    pos_Gameover, pos_Dropout = [220, 250], [50, 350]
     bg.blit(textGameover, pos_Gameover)
     bg.blit(textDropout, pos_Dropout)
 
