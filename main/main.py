@@ -28,8 +28,8 @@ def initial():  # 遊戲初始畫面
     textTitle = font1.render("My Life in NTU", True, (0,0,0))
     imageStart = pg.image.load("start.png")
     imageStart.convert()
-    pos_Title = [180, 250]
-    pos_Start = [180, 400]
+    pos_Title = [180, 150]
+    pos_Start = [180, 300]
     bg.blit(textTitle, pos_Title)
     bg.blit(imageStart, pos_Start)
 
@@ -58,15 +58,15 @@ def intro():  # 遊戲說明畫面
 
     # 插入老師、對話框、繼續圖片
     imageTeacher = pg.image.load("teacher.jpg")
-    imageTeacher = pg.transform.scale(imageTeacher,(300,300))
+    imageTeacher = pg.transform.scale(imageTeacher,(200, 200))
     imageMessage = pg.image.load("message.png")
-    imageMessage = pg.transform.scale(imageMessage,(500,350))
+    imageMessage = pg.transform.scale(imageMessage,(500, 250))
     imageNext = pg.image.load("next.png")
     imageNext = pg.transform.scale(imageNext, (120,35))
     imageTeacher.convert()
     imageMessage.convert()
     imageNext.convert()
-    pos_Teacher, pos_Message, pos_Next = [50,450],[70,70], [450,730]
+    pos_Teacher, pos_Message, pos_Next = [50,300],[70,70], [400,450]
     bg.blit(imageTeacher,pos_Teacher)
     bg.blit(imageMessage, pos_Message)
     bg.blit(imageNext, pos_Next)
@@ -76,7 +76,7 @@ def intro():  # 遊戲說明畫面
     textFreshman = font2.render("You are a freshman of NTU.", True, (0,71,125))
     textTime2journey = font2.render("It's time to have a memorable journey in NTU", True, (0,71,125))
     textHope = font2.render("Hope you enjoy 4-year life in university.", True, (0,71,125))
-    pos_Welcome, pos_Freshman, pos_Time2journey, pos_Hope = [120, 140], [120, 180], [120, 220], [120,260]
+    pos_Welcome, pos_Freshman, pos_Time2journey, pos_Hope = [120, 110], [120, 140], [120, 170], [120,200]
     bg.blit(textWelcome, pos_Welcome)
     bg.blit(textFreshman, pos_Freshman)
     bg.blit(textTime2journey, pos_Time2journey)
@@ -125,7 +125,7 @@ def rolechoose():  # 角色選擇畫面
     imagePlay.convert()
     imageMale.convert()
     imageFemale.convert()
-    pos_Name, pos_Gender, pos_NMale, pos_NFemale, pos_Play = [80, 270],[100, 370],[220,370], [380,370], [250, 460]
+    pos_Name, pos_Gender, pos_NMale, pos_NFemale, pos_Play = [80, 150],[100, 250],[220, 250], [380, 250], [250, 340]
     bg.blit(imageName, pos_Name)
     bg.blit(textGender, pos_Gender)
     bg.blit(imageNMale, pos_NMale)
@@ -148,14 +148,14 @@ def rolechoose():  # 角色選擇畫面
                   and pos_NMale[1] < pg.mouse.get_pos()[1] < pos_NMale[1]+50:
                 # 選擇男性
                     gender = "Male"
-                    pos_Male = [220,370]
+                    pos_Male = [220, 250]
                     bg.blit(imageMale, pos_Male)
                     bg.blit(imageNFemale, pos_NFemale)  # 灰底Female覆蓋
                 elif pos_NFemale[0] < pg.mouse.get_pos()[0] < pos_NFemale[0]+100\
                   and pos_NFemale[1] < pg.mouse.get_pos()[1] < pos_NFemale[1]+50:
                 # 選擇女性
                     gender = "Female"
-                    pos_Female = [380,370]
+                    pos_Female = [380, 250]
                     bg.blit(imageFemale, pos_Female)
                     bg.blit(imageNMale, pos_NMale)   # 灰底Male覆蓋
                 
@@ -181,15 +181,16 @@ def lake(gender, point, grade):  # 醉月湖畫面
     
     # 插入圖片、對話框、繼續圖片
     imagePark = pg.image.load("park.png")
+    imagePark = pg.transform.scale(imagePark,(200,200))
     imageMessage = pg.image.load("message.png")
-    imageMessage = pg.transform.scale(imageMessage,(450,350))
+    imageMessage = pg.transform.scale(imageMessage,(450,250))
     imageResume = pg.image.load("resume.png")
     imageResume = pg.transform.scale(imageResume, (120,35))
     textJump = font4.render("Jump", True, (0,0,0))
     imagePark.convert()
     imageMessage.convert()
     imageResume.convert()
-    pos_Park, pos_Message, pos_Resume, pos_Jump = [50,450],[100,70], [450,680], [450, 630]
+    pos_Park, pos_Message, pos_Resume, pos_Jump = [50,350],[100,50], [400,470], [400, 400]
     bg.blit(imagePark,pos_Park)
     bg.blit(imageMessage, pos_Message)
     bg.blit(imageResume, pos_Resume)
@@ -199,7 +200,7 @@ def lake(gender, point, grade):  # 醉月湖畫面
     textWow = font4.render("Wow!", True, (0,0,0))
     textGoodplace = font4.render("Such a wonderful place.", True, (0,0,0))
     textWhat2do = font2.render("What will you do?", True, (0,0,0))
-    pos_Wow, pos_Goodplace, pos_What2do = [150, 150], [150, 200], [300, 270]
+    pos_Wow, pos_Goodplace, pos_What2do = [150, 90], [150, 140], [300, 190]
     bg.blit(textWow, pos_Wow)
     bg.blit(textGoodplace, pos_Goodplace)
     bg.blit(textWhat2do, pos_What2do)
@@ -268,7 +269,7 @@ def stage1(gender, point, grade):  # 大一畫面
     imageHealth.convert()
     imageStudy.convert()
     imageFriend.convert()
-    pos_Love, pos_Money, pos_Health, pos_Study, pos_Friend = [40, 540],[40,590],[40,640],[40,690],[40,740]
+    pos_Love, pos_Money, pos_Health, pos_Study, pos_Friend = [50, 320],[50,370],[50,420],[50,470],[50,520]
     bg.blit(imageLove, pos_Love)
     bg.blit(imageMoney, pos_Money)
     bg.blit(imageHealth, pos_Health)
@@ -280,8 +281,8 @@ def stage1(gender, point, grade):  # 大一畫面
     score_Money = font4.render(str(point["Money"]), True, (0,0,0))
     score_Health = font4.render(str(point["Health"]), True, (0,0,0))
     score_Study = font4.render(str(point["Study"]), True, (0,0,0))
-    score_Friend = font4.render(str(point["Friend"]), True, (0,0,0))    
-    pos_scLove, pos_scMoney, pos_scHealth, pos_scStudy, pos_scFriend = [100,550], [100,600], [100,650],[100,700],[100,750]
+    score_Friend = font4.render(str(point["Friend"]), True, (0,0,0)) 
+    pos_scLove, pos_scMoney, pos_scHealth, pos_scStudy, pos_scFriend = [110,330], [110,380], [110,430],[110,480],[110,530]
     bg.blit(score_Love, pos_scLove)
     bg.blit(score_Money, pos_scMoney)
     bg.blit(score_Health, pos_scHealth)
@@ -301,8 +302,8 @@ def stage1(gender, point, grade):  # 大一畫面
     imageLake = pg.transform.scale(imageLake, (150,150))
     imageAlert = pg.image.load("alert.png")
 
-    pos_Coco, pos_Lib, pos_Dorm, pos_Lab, pos_Lake = [200,400],[200,50],[400,500],[400,200],[30,250]
-    pos_Alert1 = [270,500]
+    pos_Coco, pos_Lib, pos_Dorm, pos_Lab, pos_Lake = [220,350],[220,30],[420,330],[420,120],[30,120]
+    pos_Alert1 = [290,450]
     bg.blit(imageCoco, pos_Coco)
     bg.blit(imageLib, pos_Lib)
     bg.blit(imageDorm, pos_Dorm)
@@ -352,7 +353,7 @@ def stage2(gender, point, grade):  # 大二畫面
     imageBG.convert()
     bg.blit(imageBG, (0,0))
 
-    # 插入能力值圖片
+    # 插入能力值
     imageLove = pg.image.load("love.png")
     imageLove = pg.transform.scale(imageLove, (40,40))
     imageMoney = pg.image.load("money.png")
@@ -368,26 +369,27 @@ def stage2(gender, point, grade):  # 大二畫面
     imageHealth.convert()
     imageStudy.convert()
     imageFriend.convert()
-    pos_Love, pos_Money, pos_Health, pos_Study, pos_Friend = [40, 540],[40,590],[40,640],[40,690],[40,740]
+    pos_Love, pos_Money, pos_Health, pos_Study, pos_Friend = [50, 320],[50,370],[50,420],[50,470],[50,520]
     bg.blit(imageLove, pos_Love)
     bg.blit(imageMoney, pos_Money)
     bg.blit(imageHealth, pos_Health)
     bg.blit(imageStudy, pos_Study)
     bg.blit(imageFriend, pos_Friend)
-
+    
     # 插入能力值分數
     score_Love = font4.render(str(point["Love"]), True, (0,0,0))
     score_Money = font4.render(str(point["Money"]), True, (0,0,0))
     score_Health = font4.render(str(point["Health"]), True, (0,0,0))
     score_Study = font4.render(str(point["Study"]), True, (0,0,0))
-    score_Friend = font4.render(str(point["Friend"]), True, (0,0,0))    
-    pos_scLove, pos_scMoney, pos_scHealth, pos_scStudy, pos_scFriend = [100,550], [100,600], [100,650],[100,700],[100,750]
+    score_Friend = font4.render(str(point["Friend"]), True, (0,0,0)) 
+    pos_scLove, pos_scMoney, pos_scHealth, pos_scStudy, pos_scFriend = [110,330], [110,380], [110,430],[110,480],[110,530]
     bg.blit(score_Love, pos_scLove)
     bg.blit(score_Money, pos_scMoney)
     bg.blit(score_Health, pos_scHealth)
     bg.blit(score_Study, pos_scStudy)
     bg.blit(score_Friend, pos_scFriend)
 
+    # 插入關卡、未完成任務及已完成任務
     imageCoco = pg.image.load("coco.png")
     imageCoco = pg.transform.scale(imageCoco, (150,150))
     imageLib = pg.image.load("library.png")
@@ -401,8 +403,8 @@ def stage2(gender, point, grade):  # 大二畫面
     imageAlert = pg.image.load("alert.png")
     imageCheck = pg.image.load("check.png")
 
-    pos_Coco, pos_Lib, pos_Dorm, pos_Lab, pos_Lake = [200,400],[200,50],[400,500],[400,200],[30,250]
-    pos_Alert2, pos_Check1 = [270, 150], [270,500]
+    pos_Coco, pos_Lib, pos_Dorm, pos_Lab, pos_Lake = [220,350],[220,30],[420,330],[420,120],[30,120]
+    pos_Alert2, pos_Check1 = [290, 130], [290,450]
     bg.blit(imageCoco, pos_Coco)
     bg.blit(imageLib, pos_Lib)
     bg.blit(imageDorm, pos_Dorm)
@@ -456,7 +458,7 @@ def stage3(gender, point, grade):  # 大三畫面
     imageBG.convert()
     bg.blit(imageBG, (0,0))
 
-    # 插入能力值圖片
+    # 插入能力值
     imageLove = pg.image.load("love.png")
     imageLove = pg.transform.scale(imageLove, (40,40))
     imageMoney = pg.image.load("money.png")
@@ -472,20 +474,20 @@ def stage3(gender, point, grade):  # 大三畫面
     imageHealth.convert()
     imageStudy.convert()
     imageFriend.convert()
-    pos_Love, pos_Money, pos_Health, pos_Study, pos_Friend = [40, 540],[40,590],[40,640],[40,690],[40,740]
+    pos_Love, pos_Money, pos_Health, pos_Study, pos_Friend = [50, 320],[50,370],[50,420],[50,470],[50,520]
     bg.blit(imageLove, pos_Love)
     bg.blit(imageMoney, pos_Money)
     bg.blit(imageHealth, pos_Health)
     bg.blit(imageStudy, pos_Study)
     bg.blit(imageFriend, pos_Friend)
-
+    
     # 插入能力值分數
     score_Love = font4.render(str(point["Love"]), True, (0,0,0))
     score_Money = font4.render(str(point["Money"]), True, (0,0,0))
     score_Health = font4.render(str(point["Health"]), True, (0,0,0))
     score_Study = font4.render(str(point["Study"]), True, (0,0,0))
-    score_Friend = font4.render(str(point["Friend"]), True, (0,0,0))    
-    pos_scLove, pos_scMoney, pos_scHealth, pos_scStudy, pos_scFriend = [100,550], [100,600], [100,650],[100,700],[100,750]
+    score_Friend = font4.render(str(point["Friend"]), True, (0,0,0)) 
+    pos_scLove, pos_scMoney, pos_scHealth, pos_scStudy, pos_scFriend = [110,330], [110,380], [110,430],[110,480],[110,530]
     bg.blit(score_Love, pos_scLove)
     bg.blit(score_Money, pos_scMoney)
     bg.blit(score_Health, pos_scHealth)
@@ -506,8 +508,8 @@ def stage3(gender, point, grade):  # 大三畫面
     imageAlert = pg.image.load("alert.png")
     imageCheck = pg.image.load("check.png")
 
-    pos_Coco, pos_Lib, pos_Dorm, pos_Lab, pos_Lake = [200,400],[200,50],[400,500],[400,200],[30,250]
-    pos_Alert3, pos_Check1, pos_Check2 = [470,600], [270, 150], [270,500]
+    pos_Coco, pos_Lib, pos_Dorm, pos_Lab, pos_Lake = [220,350],[220,30],[420,330],[420,120],[30,120]
+    pos_Alert3, pos_Check1, pos_Check2 = [490,430], [290, 130], [290,450]
     bg.blit(imageCoco, pos_Coco)
     bg.blit(imageLib, pos_Lib)
     bg.blit(imageDorm, pos_Dorm)
@@ -566,7 +568,7 @@ def stage4(gender, point, grade):  # 大四畫面
     imageBG.convert()
     bg.blit(imageBG, (0,0))
 
-    # 插入能力值圖片
+    # 插入能力值
     imageLove = pg.image.load("love.png")
     imageLove = pg.transform.scale(imageLove, (40,40))
     imageMoney = pg.image.load("money.png")
@@ -577,25 +579,25 @@ def stage4(gender, point, grade):  # 大四畫面
     imageStudy = pg.transform.scale(imageStudy, (40,40))
     imageFriend = pg.image.load("friend.png")
     imageFriend = pg.transform.scale(imageFriend, (40,40))
-    pos_Love, pos_Money, pos_Health, pos_Study, pos_Friend = [40, 540],[40,590],[40,640],[40,690],[40,740]
     imageLove.convert()
     imageMoney.convert()
     imageHealth.convert()
     imageStudy.convert()
     imageFriend.convert()
+    pos_Love, pos_Money, pos_Health, pos_Study, pos_Friend = [50, 320],[50,370],[50,420],[50,470],[50,520]
     bg.blit(imageLove, pos_Love)
     bg.blit(imageMoney, pos_Money)
     bg.blit(imageHealth, pos_Health)
     bg.blit(imageStudy, pos_Study)
     bg.blit(imageFriend, pos_Friend)
-
+    
     # 插入能力值分數
     score_Love = font4.render(str(point["Love"]), True, (0,0,0))
     score_Money = font4.render(str(point["Money"]), True, (0,0,0))
     score_Health = font4.render(str(point["Health"]), True, (0,0,0))
     score_Study = font4.render(str(point["Study"]), True, (0,0,0))
-    score_Friend = font4.render(str(point["Friend"]), True, (0,0,0))    
-    pos_scLove, pos_scMoney, pos_scHealth, pos_scStudy, pos_scFriend = [100,550], [100,600], [100,650],[100,700],[100,750]
+    score_Friend = font4.render(str(point["Friend"]), True, (0,0,0)) 
+    pos_scLove, pos_scMoney, pos_scHealth, pos_scStudy, pos_scFriend = [110,330], [110,380], [110,430],[110,480],[110,530]
     bg.blit(score_Love, pos_scLove)
     bg.blit(score_Money, pos_scMoney)
     bg.blit(score_Health, pos_scHealth)
@@ -616,8 +618,8 @@ def stage4(gender, point, grade):  # 大四畫面
     imageAlert = pg.image.load("alert.png")
     imageCheck = pg.image.load("check.png")
 
-    pos_Coco, pos_Lib, pos_Dorm, pos_Lab, pos_Lake = [200,400],[200,50],[400,500],[400,200],[30,250]
-    pos_Alert4, pos_Check1, pos_Check2, pos_Check3= [470,300], [470,600], [270, 150], [270,500]
+    pos_Coco, pos_Lib, pos_Dorm, pos_Lab, pos_Lake = [220,350],[220,30],[420,330],[420,120],[30,120]
+    pos_Alert4, pos_Check1, pos_Check2, pos_Check3= [490,220], [490,430], [290, 130], [290,450]
     bg.blit(imageCoco, pos_Coco)
     bg.blit(imageLib, pos_Lib)
     bg.blit(imageDorm, pos_Dorm)
@@ -683,13 +685,13 @@ def skip(gender, point, grade):  # 非該年級遊戲畫面
     imageResume = pg.image.load("resume.png")
     imageResume = pg.transform.scale(imageResume, (120,35))
     imageResume.convert()
-    pos_Resume = [450,680]
+    pos_Resume = [450,480]
     bg.blit(imageResume, pos_Resume)
 
     # 插入繼續文字
-    textComplete = font1.render("You have completed the task.", True, (165,42,42))
-    textMoveon = font1.render("Please Move on to another task!", True, (165,42,42))
-    pos_Complete, pos_Moveon = [70, 250], [50, 350]
+    textComplete = font1.render("You have completed the task.", True, (0,0,0))
+    textMoveon = font1.render("Please Move on to another task!", True, (0,0,0))
+    pos_Complete, pos_Moveon = [70, 150], [50, 250]
     bg.blit(textComplete, pos_Complete)
     bg.blit(textMoveon, pos_Moveon)
 
@@ -720,16 +722,10 @@ def final(gender, point):  # 遊戲結束畫面
     # 設定畫布並插入背景畫面
     bg = pg.Surface((win_width, win_height))
     bg.convert()
-    imageBG = pg.image.load("bg_final.jpg")
+    imageBG = pg.image.load("bg_orange.jpg")
     imageBG = pg.transform.scale(imageBG,(win_width, win_height))
     imageBG.convert()
     bg.blit(imageBG, (0,0))
-    
-    # 插入對話框                
-    imageMessage = pg.image.load("message.png")
-    imageMessage = pg.transform.scale(imageMessage,(300,200))
-    pos_Message = [270,150]
-    bg.blit(imageMessage, pos_Message)
 
     # 成績結算
     point_list = list(point.items())
@@ -748,12 +744,12 @@ def final(gender, point):  # 遊戲結束畫面
         prize = "knowledgeable Boy" if gender == "Male" else "knowledgeable Girl"
     
     # 顯示遊戲結果
-    textCongratulation = font2.render("Congratulations!", True, (0,0,0))
-    textYouare = font2.render("You have been a", True, (0,0,0))
-    textPrize = font4.render(prize, True, (165,42,42))
-    pos_Contratulation = [300,180]
-    pos_Youare = [300,210]
-    pos_Prize = [300, 240]
+    textCongratulation = font4.render("Congratulations!", True, (0,0,0))
+    textYouare = font4.render("You have been a", True, (0,0,0))
+    textPrize = font1.render(prize, True, (165,42,42))
+    pos_Contratulation = [200,150]
+    pos_Youare = [50,210]
+    pos_Prize = [300, 205]
     bg.blit(textCongratulation, pos_Contratulation)
     bg.blit(textYouare, pos_Youare)
     bg.blit(textPrize, pos_Prize)
@@ -772,15 +768,15 @@ def gameover():  # 遊戲失敗畫面
     # 設定畫布並插入背景畫面
     bg = pg.Surface((win_width, win_height))
     bg.convert()
-    imageBG = pg.image.load("bg_final.jpg")
+    imageBG = pg.image.load("bg_orange.jpg")
     imageBG = pg.transform.scale(imageBG,(win_width, win_height))
     imageBG.convert()
     bg.blit(imageBG, (0,0))
 
     # 插入失敗文字
-    textGameover = font1.render("Game over!", True, (165,42,42))
-    textDropout = font1.render("You are dropped out of school.", True, (165,42,42))
-    pos_Gameover, pos_Dropout = [220, 250], [50, 350]
+    textGameover = font1.render("Game over!", True, (0,0,0))
+    textDropout = font1.render("You are dropped out of school.", True, (0,0,0))
+    pos_Gameover, pos_Dropout = [200, 150], [50, 250]
     bg.blit(textGameover, pos_Gameover)
     bg.blit(textDropout, pos_Dropout)
 
