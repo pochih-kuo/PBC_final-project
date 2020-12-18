@@ -7,8 +7,8 @@ from pygame.locals import Color, QUIT, MOUSEBUTTONDOWN, USEREVENT
 
 WINDOW_WIDTH = 800
 WINDOW_HEIGHT = 600
-BOSSWIDTH = 120
-BOSSHEIGHT = 300
+BOSSWIDTH = 150
+BOSSHEIGHT = 450
 COMPUTERWIDTH = 200
 COMPUTERHEIGHT = 300
 PHONEWIDTH = 40
@@ -101,6 +101,7 @@ def main():
                     # hide (藏在右下)
                     PATH = bosspath
                     boss = Line(BOSSWIDTH, BOSSHEIGHT, WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_WIDTH, WINDOW_HEIGHT, PATH)
+                    BossIsHere = False
 
             if event.type == MOUSEBUTTONDOWN and game_over_time == 0 and BossIsHere is True:
                 # 當使用者點擊滑鼠時，檢查是否滑鼠位置 x, y 有在電腦上
