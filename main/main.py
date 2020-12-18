@@ -7,18 +7,17 @@ win_width, win_height = 600, 800
 clock = pg.time.Clock()
 
 pg.init()
+# 設定字型
 font1 = pg.font.Font(None, 50)
 font2 = pg.font.Font(None, 28)
 font3 = pg.font.Font(None, 20)
 screen = pg.display.set_mode((win_width, win_height))
-pg.display.set_caption("My Life in NTU")
+pg.display.set_caption("My Life in NTU")  # 設定視窗標題
 
 def initial():  # 遊戲初始畫面
-    # 設定畫布
+    # 設定畫布並插入背景圖片
     bg = pg.Surface((win_width, win_height))
     bg.convert()
-
-    # 插入背景圖片
     imageBG = pg.image.load("bg_blue.jpg")
     imageBG = pg.transform.scale(imageBG,(win_width, win_height))
     imageBG.convert()
@@ -27,6 +26,7 @@ def initial():  # 遊戲初始畫面
     # 插入遊戲標題與開始鍵
     textTitle = font1.render("My Life in NTU", True, (0,0,0), (255,255,255))
     imageStart = pg.image.load("start.png")
+    imageStart.convert()
     pos_Title = [180, 250]
     pos_Start = [180, 400]
     bg.blit(textTitle, pos_Title)
@@ -41,29 +41,30 @@ def initial():  # 遊戲初始畫面
             if event.type == pg.QUIT:  # 關閉程式
                 pg.quit()
                 sys.exit()
-            if event.type == pg.MOUSEBUTTONDOWN:
+            if event.type == pg.MOUSEBUTTONDOWN:  # 點選並進入遊戲說明
                 if pos_Start[0] < pg.mouse.get_pos()[0] < pos_Start[0]+150\
                   and pos_Start[1] < pg.mouse.get_pos()[1] < pos_Start[1]+100:
                     intro()  # 進入遊戲說明
 
 def intro():  # 遊戲說明畫面
-    # 設定畫布
+    # 設定畫布並插入背景圖片
     bg = pg.Surface((win_width, win_height))
     bg.convert()
-
-    # 插入背景圖片
     imageBG = pg.image.load("bg_blue.jpg")
     imageBG = pg.transform.scale(imageBG,(win_width, win_height))
     imageBG.convert()
     bg.blit(imageBG, (0,0))
 
+    # 插入老師、對話框、繼續圖片
     imageTeacher = pg.image.load("teacher.jpg")
     imageTeacher = pg.transform.scale(imageTeacher,(300,300))
     imageMessage = pg.image.load("message.png")
     imageMessage = pg.transform.scale(imageMessage,(450,350))
     imageNext = pg.image.load("next.png")
     imageNext = pg.transform.scale(imageNext, (120,35))
-    
+    imageTeacher.convert()
+    imageMessage.convert()
+    imageNext.convert()
     pos_Teacher, pos_Message, pos_Next = [50,450],[100,70], [450,730]
     bg.blit(imageTeacher,pos_Teacher)
     bg.blit(imageMessage, pos_Message)
@@ -72,102 +73,109 @@ def intro():  # 遊戲說明畫面
     # 顯示畫布
     screen.blit(bg, (0,0))
     pg.display.update()
+
     while True:
         for event in pg.event.get():
             if event.type == pg.QUIT:  # 關閉程式
                 pg.quit()
                 sys.exit()
-            if event.type == pg.MOUSEBUTTONDOWN:
+            if event.type == pg.MOUSEBUTTONDOWN:  # 點選並進入角色選擇畫面
                 if pos_Next[0] < pg.mouse.get_pos()[0] < pos_Next[0]+150\
                   and pos_Next[1] < pg.mouse.get_pos()[1] < pos_Next[1]+100:
-                    rolechoose()  # 進入遊戲說明    
+                    rolechoose()  # 進入角色選擇畫面    
 
 def rolechoose():  # 角色選擇畫面
+    # 設定畫布並插入背景畫面
     bg = pg.Surface((win_width, win_height))
     bg.convert()
-
     imageBG = pg.image.load("bg_blue.jpg")
     imageBG = pg.transform.scale(imageBG,(win_width, win_height))
     imageBG.convert()
     bg.blit(imageBG, (0,0))
 
+    # 插入 姓名、性別、Play圖片
     imageName = pg.image.load("name.png")
     imageName = pg.transform.scale(imageName, (120,35))
     textGender = font2.render("Gender:", True, (0,0,0), (255,255,255))
-    imageNMale = pg.image.load("male_grey.png")
+    imageNMale = pg.image.load("male_grey.png")  # 灰底(未選擇)
     imageNMale = pg.transform.scale(imageNMale, (120,35))
-    imageNFemale = pg.image.load("female_grey.png")
+    imageNFemale = pg.image.load("female_grey.png")  # 灰底(未選擇)
     imageNFemale = pg.transform.scale(imageNFemale, (120,35))
     imagePlay = pg.image.load("play.png")
     imagePlay = pg.transform.scale(imagePlay, (120,35))
-    imageMale = pg.image.load("male.png")
+    imageMale = pg.image.load("male.png")  # 藍底(選擇)
     imageMale = pg.transform.scale(imageMale, (120,35))
-    imageFemale = pg.image.load("female.png")
+    imageFemale = pg.image.load("female.png")  # 藍底(選擇)
     imageFemale = pg.transform.scale(imageFemale, (120,35))
-
     imageName.convert()
     imageNMale.convert()
     imageNFemale.convert()
     imagePlay.convert()
     imageMale.convert()
     imageFemale.convert()
-
     pos_Name, pos_Gender, pos_NMale, pos_NFemale, pos_Play = [80, 270],[100, 370],[220,370], [380,370], [250, 460]
-
     bg.blit(imageName, pos_Name)
     bg.blit(textGender, pos_Gender)
     bg.blit(imageNMale, pos_NMale)
     bg.blit(imageNFemale, pos_NFemale)
     bg.blit(imagePlay, pos_Play)
     
+    # 顯示畫布
     screen.blit(bg,(0,0))
     pg.display.update()
-    gender = ""
+    gender = ""  # 記錄角色性別
 
     while True:
-        for event in pg.event.get():            
-            if event.type == pg.QUIT:
+        for event in pg.event.get():   
+            if event.type == pg.QUIT:  # 關閉程式
                 pg.quit()
                 sys.exit()
 
             if event.type == pg.MOUSEBUTTONDOWN:
                 if pos_NMale[0] < pg.mouse.get_pos()[0] < pos_NMale[0]+100\
                   and pos_NMale[1] < pg.mouse.get_pos()[1] < pos_NMale[1]+50:
+                # 選擇男性
                     gender = "Male"
                     pos_Male = [220,370]
                     bg.blit(imageMale, pos_Male)
-                    bg.blit(imageNFemale, pos_NFemale)
+                    bg.blit(imageNFemale, pos_NFemale)  # 灰底Female覆蓋
                 elif pos_NFemale[0] < pg.mouse.get_pos()[0] < pos_NFemale[0]+100\
                   and pos_NFemale[1] < pg.mouse.get_pos()[1] < pos_NFemale[1]+50:
+                # 選擇女性
                     gender = "Female"
                     pos_Female = [380,370]
                     bg.blit(imageFemale, pos_Female)
-                    bg.blit(imageNMale, pos_NMale)
+                    bg.blit(imageNMale, pos_NMale)   # 灰底Male覆蓋
                 
                 screen.blit(bg, (0,0))
                 pg.display.update()
             
                 if pos_Play[0] < pg.mouse.get_pos()[0] < pos_Play[0]+100\
                   and pos_Play[1] < pg.mouse.get_pos()[1] < pos_Play[1]+50:
-                    if gender != "":
+                    if gender != "":  # 進入大一畫面
+                    # 記錄初始化分數、年級
                         point = {"Love": 60, "Money":60, "Health":60, "Study":60, "Friend":60}
                         grade = 1
                         stage1(gender, point, grade)
 
-def lake(gender, point, grade):
+def lake(gender, point, grade):  # 醉月湖畫面
+    # 設定畫布並插入背景畫面
     bg = pg.Surface((win_width, win_height))
     bg.convert()
     imageBG = pg.image.load("bg_orange.jpg")
     imageBG = pg.transform.scale(imageBG,(win_width, win_height))
     imageBG.convert()
     bg.blit(imageBG, (0,0))    
-                    
+    
+    # 插入圖片、對話框、繼續圖片
     imageHelp = pg.image.load("help.png")
     imageMessage = pg.image.load("message.png")
     imageMessage = pg.transform.scale(imageMessage,(450,350))
     imageNext = pg.image.load("next.png")
     imageNext = pg.transform.scale(imageNext, (120,35))
-    
+    imageHelp.convert()
+    imageMessage.convert()
+    imageNext.convert()
     pos_Help, pos_Message, pos_Next = [50,450],[100,70], [450,730]
     bg.blit(imageHelp,pos_Help)
     bg.blit(imageMessage, pos_Message)
@@ -176,15 +184,17 @@ def lake(gender, point, grade):
     # 顯示畫布
     screen.blit(bg, (0,0))
     pg.display.update()
+    point["Health"] -= 10
 
     while True:
         for event in pg.event.get():
             if event.type == pg.QUIT:  # 關閉程式
                 pg.quit()
                 sys.exit()
-            if event.type == pg.MOUSEBUTTONDOWN:  # 回到主畫面
+            if event.type == pg.MOUSEBUTTONDOWN:
                 if pos_Next[0] < pg.mouse.get_pos()[0] < pos_Next[0]+150\
                   and pos_Next[1] < pg.mouse.get_pos()[1] < pos_Next[1]+100:
+                    # 回到各年級畫面
                     if grade == 1:
                         stage1(gender, point, grade)
                     elif grade == 2:
@@ -194,7 +204,8 @@ def lake(gender, point, grade):
                     elif grade == 4:
                         stage4(gender, point, grade)
 
-def stage1(gender, point, grade):  # 主畫面1
+def stage1(gender, point, grade):  # 大一畫面
+    # 設定畫布並插入背景畫面
     bg = pg.Surface((win_width, win_height))
     bg.convert()
     imageBG = pg.image.load("bg_blue.jpg")
@@ -202,7 +213,7 @@ def stage1(gender, point, grade):  # 主畫面1
     imageBG.convert()
     bg.blit(imageBG, (0,0))
 
-    # 能力值
+    # 插入能力值
     imageLove = pg.image.load("love.png")
     imageLove = pg.transform.scale(imageLove, (40,40))
     imageMoney = pg.image.load("money.png")
@@ -218,26 +229,29 @@ def stage1(gender, point, grade):  # 主畫面1
     imageHealth.convert()
     imageStudy.convert()
     imageFriend.convert()
-
-    score_Love = font2.render(str(point["Love"]), True, (0,0,0), (255,255,255))
-    score_Money = font2.render(str(point["Money"]), True, (0,0,0), (255,255,255))
-    score_Health = font2.render(str(point["Health"]), True, (0,0,0), (255,255,255))
-    score_Study = font2.render(str(point["Study"]), True, (0,0,0), (255,255,255))
-    score_Friend = font2.render(str(point["Friend"]), True, (0,0,0), (255,255,255))    
-
     pos_Love, pos_Money, pos_Health, pos_Study, pos_Friend = [20, 540],[20,590],[20,640],[20,690],[20,740]
-    pos_scLove, pos_scMoney, pos_scHealth, pos_scStudy, pos_scFriend = [80,540], [80,590], [80,640],[80,690],[80,740]
+
     bg.blit(imageLove, pos_Love)
     bg.blit(imageMoney, pos_Money)
     bg.blit(imageHealth, pos_Health)
     bg.blit(imageStudy, pos_Study)
     bg.blit(imageFriend, pos_Friend)
+    
+    # 插入能力值分數
+    score_Love = font2.render(str(point["Love"]), True, (0,0,0), (255,255,255))
+    score_Money = font2.render(str(point["Money"]), True, (0,0,0), (255,255,255))
+    score_Health = font2.render(str(point["Health"]), True, (0,0,0), (255,255,255))
+    score_Study = font2.render(str(point["Study"]), True, (0,0,0), (255,255,255))
+    score_Friend = font2.render(str(point["Friend"]), True, (0,0,0), (255,255,255))    
+    pos_scLove, pos_scMoney, pos_scHealth, pos_scStudy, pos_scFriend = [80,540], [80,590], [80,640],[80,690],[80,740]
+    
     bg.blit(score_Love, pos_scLove)
     bg.blit(score_Money, pos_scMoney)
     bg.blit(score_Health, pos_scHealth)
     bg.blit(score_Study, pos_scStudy)
     bg.blit(score_Friend, pos_scFriend)
 
+    # 插入關卡、未完成任務及已完成任務
     imageCoco = pg.image.load("coco.png")
     imageCoco = pg.transform.scale(imageCoco, (150,150))
     imageLib = pg.image.load("library.png")
@@ -259,25 +273,30 @@ def stage1(gender, point, grade):  # 主畫面1
     bg.blit(imageLake, pos_Lake)
     bg.blit(imageAlert, pos_Alert1)
 
+    # 顯示畫布
     screen.blit(bg,(0,0))
     pg.display.update()
+
     while True:
         for event in pg.event.get():            
-            if event.type == pg.QUIT:
+            if event.type == pg.QUIT:  # 關閉程式
                 pg.quit()
                 sys.exit()
 
             if event.type == pg.MOUSEBUTTONDOWN:
                 if pos_Coco[0] < pg.mouse.get_pos()[0] < pos_Coco[0]+150\
                   and pos_Coco[1] < pg.mouse.get_pos()[1] < pos_Coco[1]+150:
+                # 進入大一遊戲畫面
                     grade += 1
                     stage2(gender, point, grade)
                 
                 elif pos_Lake[0] < pg.mouse.get_pos()[0] < pos_Lake[0]+150\
                   and pos_Lake[1] < pg.mouse.get_pos()[1] < pos_Lake[1]+150:
+                # 進入醉月湖畫面
                     lake(gender, point, grade)
 
-def stage2(gender, point, grade):  # 主畫面2
+def stage2(gender, point, grade):  # 大二畫面
+    # 設定畫布並插入背景畫面
     bg = pg.Surface((win_width, win_height))
     bg.convert()
     imageBG = pg.image.load("bg_blue.jpg")
@@ -285,7 +304,7 @@ def stage2(gender, point, grade):  # 主畫面2
     imageBG.convert()
     bg.blit(imageBG, (0,0))
 
-    # 能力值
+    # 插入能力值圖片
     imageLove = pg.image.load("love.png")
     imageLove = pg.transform.scale(imageLove, (40,40))
     imageMoney = pg.image.load("money.png")
@@ -301,20 +320,20 @@ def stage2(gender, point, grade):  # 主畫面2
     imageHealth.convert()
     imageStudy.convert()
     imageFriend.convert()
-
-    score_Love = font2.render(str(point["Love"]), True, (0,0,0), (255,255,255))
-    score_Money = font2.render(str(point["Money"]), True, (0,0,0), (255,255,255))
-    score_Health = font2.render(str(point["Health"]), True, (0,0,0), (255,255,255))
-    score_Study = font2.render(str(point["Study"]), True, (0,0,0), (255,255,255))
-    score_Friend = font2.render(str(point["Friend"]), True, (0,0,0), (255,255,255))    
-
     pos_Love, pos_Money, pos_Health, pos_Study, pos_Friend = [20, 540],[20,590],[20,640],[20,690],[20,740]
-    pos_scLove, pos_scMoney, pos_scHealth, pos_scStudy, pos_scFriend = [80,540], [80,590], [80,640],[80,690],[80,740]
     bg.blit(imageLove, pos_Love)
     bg.blit(imageMoney, pos_Money)
     bg.blit(imageHealth, pos_Health)
     bg.blit(imageStudy, pos_Study)
     bg.blit(imageFriend, pos_Friend)
+
+    # 插入能力值分數
+    score_Love = font2.render(str(point["Love"]), True, (0,0,0), (255,255,255))
+    score_Money = font2.render(str(point["Money"]), True, (0,0,0), (255,255,255))
+    score_Health = font2.render(str(point["Health"]), True, (0,0,0), (255,255,255))
+    score_Study = font2.render(str(point["Study"]), True, (0,0,0), (255,255,255))
+    score_Friend = font2.render(str(point["Friend"]), True, (0,0,0), (255,255,255))    
+    pos_scLove, pos_scMoney, pos_scHealth, pos_scStudy, pos_scFriend = [80,540], [80,590], [80,640],[80,690],[80,740]
     bg.blit(score_Love, pos_scLove)
     bg.blit(score_Money, pos_scMoney)
     bg.blit(score_Health, pos_scHealth)
@@ -344,25 +363,29 @@ def stage2(gender, point, grade):  # 主畫面2
     bg.blit(imageAlert, pos_Alert2)
     bg.blit(imageCheck, pos_Check1)
 
+    # 顯示畫布
     screen.blit(bg,(0,0))
     pg.display.update()
     
     while True:
         for event in pg.event.get():            
-            if event.type == pg.QUIT:
+            if event.type == pg.QUIT:  # 關閉程式
                 pg.quit()
                 sys.exit()
 
             if event.type == pg.MOUSEBUTTONDOWN:
                 if pos_Lib[0] < pg.mouse.get_pos()[0] < pos_Lib[0]+150\
                   and pos_Lib[1] < pg.mouse.get_pos()[1] < pos_Lib[1]+150:
+                # 進入大二遊戲畫面
                     grade += 1
                     stage3(gender, point, grade)
                 elif pos_Lake[0] < pg.mouse.get_pos()[0] < pos_Lake[0]+150\
                   and pos_Lake[1] < pg.mouse.get_pos()[1] < pos_Lake[1]+150:
+                # 進入醉月湖畫面
                     lake(gender, point, grade)
 
-def stage3(gender, point, grade):  # 主畫面3
+def stage3(gender, point, grade):  # 大三畫面
+    # 設定畫布並插入背景畫面
     bg = pg.Surface((win_width, win_height))
     bg.convert()
     imageBG = pg.image.load("bg_blue.jpg")
@@ -370,7 +393,7 @@ def stage3(gender, point, grade):  # 主畫面3
     imageBG.convert()
     bg.blit(imageBG, (0,0))
 
-    # 能力值
+    # 插入能力值圖片
     imageLove = pg.image.load("love.png")
     imageLove = pg.transform.scale(imageLove, (40,40))
     imageMoney = pg.image.load("money.png")
@@ -386,26 +409,27 @@ def stage3(gender, point, grade):  # 主畫面3
     imageHealth.convert()
     imageStudy.convert()
     imageFriend.convert()
-
-    score_Love = font2.render(str(point["Love"]), True, (0,0,0), (255,255,255))
-    score_Money = font2.render(str(point["Money"]), True, (0,0,0), (255,255,255))
-    score_Health = font2.render(str(point["Health"]), True, (0,0,0), (255,255,255))
-    score_Study = font2.render(str(point["Study"]), True, (0,0,0), (255,255,255))
-    score_Friend = font2.render(str(point["Friend"]), True, (0,0,0), (255,255,255))    
-
     pos_Love, pos_Money, pos_Health, pos_Study, pos_Friend = [20, 540],[20,590],[20,640],[20,690],[20,740]
-    pos_scLove, pos_scMoney, pos_scHealth, pos_scStudy, pos_scFriend = [80,540], [80,590], [80,640],[80,690],[80,740]
     bg.blit(imageLove, pos_Love)
     bg.blit(imageMoney, pos_Money)
     bg.blit(imageHealth, pos_Health)
     bg.blit(imageStudy, pos_Study)
     bg.blit(imageFriend, pos_Friend)
+
+    # 插入能力值分數
+    score_Love = font2.render(str(point["Love"]), True, (0,0,0), (255,255,255))
+    score_Money = font2.render(str(point["Money"]), True, (0,0,0), (255,255,255))
+    score_Health = font2.render(str(point["Health"]), True, (0,0,0), (255,255,255))
+    score_Study = font2.render(str(point["Study"]), True, (0,0,0), (255,255,255))
+    score_Friend = font2.render(str(point["Friend"]), True, (0,0,0), (255,255,255))    
+    pos_scLove, pos_scMoney, pos_scHealth, pos_scStudy, pos_scFriend = [80,540], [80,590], [80,640],[80,690],[80,740]
     bg.blit(score_Love, pos_scLove)
     bg.blit(score_Money, pos_scMoney)
     bg.blit(score_Health, pos_scHealth)
     bg.blit(score_Study, pos_scStudy)
     bg.blit(score_Friend, pos_scFriend)
 
+    # 插入關卡、未完成任務及已完成任務
     imageCoco = pg.image.load("coco.png")
     imageCoco = pg.transform.scale(imageCoco, (150,150))
     imageLib = pg.image.load("library.png")
@@ -430,25 +454,29 @@ def stage3(gender, point, grade):  # 主畫面3
     bg.blit(imageCheck, pos_Check1)
     bg.blit(imageCheck, pos_Check2)
 
+    # 顯示畫布
     screen.blit(bg,(0,0))
     pg.display.update()
     
     while True:
         for event in pg.event.get():            
-            if event.type == pg.QUIT:
+            if event.type == pg.QUIT:  # 關閉程式
                 pg.quit()
                 sys.exit()
 
             if event.type == pg.MOUSEBUTTONDOWN:
                 if pos_Dorm[0] < pg.mouse.get_pos()[0] < pos_Dorm[0]+150\
                   and pos_Dorm[1] < pg.mouse.get_pos()[1] < pos_Dorm[1]+150:
+                # 進入大三遊戲畫面
                     grade += 1
                     stage4(gender, point, grade)
                 elif pos_Lake[0] < pg.mouse.get_pos()[0] < pos_Lake[0]+150\
                   and pos_Lake[1] < pg.mouse.get_pos()[1] < pos_Lake[1]+150:
+                # 進入醉月湖畫面
                     lake(gender, point, grade)
 
-def stage4(gender, point, grade):  # 主畫面3
+def stage4(gender, point, grade):  # 大四畫面
+    # 設定畫布並插入背景畫面
     bg = pg.Surface((win_width, win_height))
     bg.convert()
     imageBG = pg.image.load("bg_blue.jpg")
@@ -456,7 +484,7 @@ def stage4(gender, point, grade):  # 主畫面3
     imageBG.convert()
     bg.blit(imageBG, (0,0))
 
-    # 能力值
+    # 插入能力值圖片
     imageLove = pg.image.load("love.png")
     imageLove = pg.transform.scale(imageLove, (40,40))
     imageMoney = pg.image.load("money.png")
@@ -473,6 +501,7 @@ def stage4(gender, point, grade):  # 主畫面3
     imageStudy.convert()
     imageFriend.convert()
 
+    # 插入能力值分數
     score_Love = font2.render(str(point["Love"]), True, (0,0,0), (255,255,255))
     score_Money = font2.render(str(point["Money"]), True, (0,0,0), (255,255,255))
     score_Health = font2.render(str(point["Health"]), True, (0,0,0), (255,255,255))
@@ -492,6 +521,7 @@ def stage4(gender, point, grade):  # 主畫面3
     bg.blit(score_Study, pos_scStudy)
     bg.blit(score_Friend, pos_scFriend)
 
+    # 插入關卡、未完成任務及已完成任務
     imageCoco = pg.image.load("coco.png")
     imageCoco = pg.transform.scale(imageCoco, (150,150))
     imageLib = pg.image.load("library.png")
@@ -517,45 +547,48 @@ def stage4(gender, point, grade):  # 主畫面3
     bg.blit(imageCheck, pos_Check2)
     bg.blit(imageCheck, pos_Check3)
 
+    # 顯示畫布
     screen.blit(bg,(0,0))
     pg.display.update()
 
     while True:
         for event in pg.event.get():            
-            if event.type == pg.QUIT:
+            if event.type == pg.QUIT:  # 關閉程式
                 pg.quit()
                 sys.exit()
 
             if event.type == pg.MOUSEBUTTONDOWN:
                 if pos_Lab[0] < pg.mouse.get_pos()[0] < pos_Lab[0]+150\
                   and pos_Lab[1] < pg.mouse.get_pos()[1] < pos_Lab[1]+150:
+                # 進入大四遊戲畫面
                     final(gender, point)
                 elif pos_Lake[0] < pg.mouse.get_pos()[0] < pos_Lake[0]+150\
                   and pos_Lake[1] < pg.mouse.get_pos()[1] < pos_Lake[1]+150:
+                # 進入醉月湖畫面
                     lake(gender, point, grade)
 
-def final(gender, point):
+def final(gender, point):  # 遊戲結束畫面
+    # 設定畫布並插入背景畫面
     bg = pg.Surface((win_width, win_height))
     bg.convert()
     imageBG = pg.image.load("bg_final.jpg")
     imageBG = pg.transform.scale(imageBG,(win_width, win_height))
     imageBG.convert()
     bg.blit(imageBG, (0,0))    
-                    
-    imageMessage = pg.image.load("message.png")
-    imageMessage = pg.transform.scale(imageMessage,(250,200))
     
+    # 插入對話框                
+    imageMessage = pg.image.load("message.png")
+    imageMessage = pg.transform.scale(imageMessage,(250,200))    
     pos_Message = [300,150]
     bg.blit(imageMessage, pos_Message)
 
-    
     # 顯示畫布
     screen.blit(bg, (0,0))
     pg.display.update()
 
     while True:
         for event in pg.event.get():            
-            if event.type == pg.QUIT:
+            if event.type == pg.QUIT:  # 關閉程式
                 pg.quit()
                 sys.exit()
 
