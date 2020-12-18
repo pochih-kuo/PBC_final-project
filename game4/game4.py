@@ -7,14 +7,24 @@ from pygame.locals import Color, QUIT, MOUSEBUTTONDOWN, USEREVENT
 
 WINDOW_WIDTH = 800
 WINDOW_HEIGHT = 600
-IMAGEWIDTH = 120
-IMAGEHEIGHT = 300
+BOSSWIDTH = 120
+BOSSHEIGHT = 300
+COMPUTERWIDTH = 200
+COMPUTERHEIGHT = 300
+PHONEWIDTH = 40
+PHONEHEIGHT = 50
 FPS = 10
-line_x_position = 80
-line_y_position = 150
+boss_x_position = 80
+boss_y_position = 150
+computer_x_position = 300
+computer_y_position = 230
+phone_x_position = 200
+phone_y_position = 450
 show_probability1 = 60  # 每次顯示通知機率 (%)
 # show_probability2 = 30
-path1 = os.path.abspath('C:\\Users\\flyan\\OneDrive\\文件\\商管程式設計\\PBC_final-project\\game4\\boss.jpg')
+bosspath = os.path.abspath('boss.gif')
+computerpath = os.path.abspath('computer.gif')
+phonepath = os.path.abspath('phone.gif')
 
 
 def print_sirting(academic_performance, romantic_relationship, wealth, health, text_surface_list):
@@ -55,7 +65,9 @@ def main():
     # load window surface
     window_surface = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
     pygame.display.set_caption('Maximize Your Utility!')
-    line = Line(IMAGEWIDTH, IMAGEHEIGHT, WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_WIDTH, WINDOW_HEIGHT, path1)
+    computer = Line(COMPUTERWIDTH, COMPUTERHEIGHT, computer_x_position, computer_y_position, WINDOW_WIDTH, WINDOW_HEIGHT, computerpath)
+    phone = Line(PHONEWIDTH, PHONEHEIGHT, phone_x_position, phone_y_position, WINDOW_WIDTH, WINDOW_HEIGHT, phonepath)
+    boss = Line(BOSSWIDTH, BOSSHEIGHT, WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_WIDTH, WINDOW_HEIGHT, bosspath)
     reload_line_event = USEREVENT + 1
     pygame.time.set_timer(reload_line_event, 2000)  # 更新頻率(unit = ms)
 
@@ -82,18 +94,18 @@ def main():
             elif event.type == reload_line_event and game_over_time == 0:
                 ran_number = random.randrange(0, 100)
                 if ran_number < show_probability1:
-                    PATH = path1
-                    line = Line(IMAGEWIDTH, IMAGEHEIGHT, line_x_position, line_y_position, WINDOW_WIDTH, WINDOW_HEIGHT, PATH)
+                    PATH = bosspath
+                    boss = Line(BOSSWIDTH, BOSSHEIGHT, boss_x_position, boss_y_position, WINDOW_WIDTH, WINDOW_HEIGHT, PATH)
                     BossIsHere = True  #老闆出現
                 else:
                     # hide (藏在右下)
-                    PATH = path1
-                    line = Line(IMAGEWIDTH, IMAGEHEIGHT, WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_WIDTH, WINDOW_HEIGHT, PATH)
+                    PATH = bosspath
+                    boss = Line(BOSSWIDTH, BOSSHEIGHT, WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_WIDTH, WINDOW_HEIGHT, PATH)
 
             if event.type == MOUSEBUTTONDOWN and game_over_time == 0 and BossIsHere is True:
                 # 當使用者點擊滑鼠時，檢查是否滑鼠位置 x, y 有在電腦上
-                if 240 < pygame.mouse.get_pos()[0] < 320 and \
-                   230 < pygame.mouse.get_pos()[1] < 320:
+                if computer.rect.topleft[0] < pygame.mouse.get_pos()[0] < computer.rect.topleft[0] + COMPUTERWIDTH \
+                   and computer.rect.topleft[1] < pygame.mouse.get_pos()[1] < computer.rect.topleft[1] + COMPUTERHEIGHT:
                     # 算分
                     salary += 50
                 else:
@@ -104,8 +116,8 @@ def main():
 
             elif event.type == MOUSEBUTTONDOWN and game_over_time == 0 and BossIsHere is False:
                 # 當使用者點擊滑鼠時，檢查是否滑鼠位置 x, y 有在手機上
-                if 80 < pygame.mouse.get_pos()[0] < 100 and \
-                   100 < pygame.mouse.get_pos()[1] < 150:
+                if phone.rect.topleft[0] < pygame.mouse.get_pos()[0] < phone.rect.topleft[0] + PHONEWIDTH \
+                   and phone.rect.topleft[1] < pygame.mouse.get_pos()[1] < phone.rect.topleft[1] + PHONEHEIGHT:
                     # 算分
                     satisfaction += 5
                 else:
@@ -119,12 +131,14 @@ def main():
             # 遊戲分數儀表板
             text_surface = my_font.render('salary = {}'.format(round(salary,2)), True, (0, 0, 0))
             # 渲染物件
-            background_raw = pygame.image.load(os.path.abspath('C:\\Users\\flyan\\OneDrive\\文件\\商管程式設計\\PBC_final-project\\game4\\background.jpg'))
+            background_raw = pygame.image.load(os.path.abspath('background.jpg'))
             # 調整背景圖片大小
             background = pygame.transform.scale(background_raw, (WINDOW_WIDTH , WINDOW_HEIGHT ))
             background.convert()
             window_surface.blit(background, (0,0))
-            window_surface.blit(line.image, line.rect)
+            window_surface.blit(boss.image, boss.rect)
+            window_surface.blit(computer.image, computer.rect)
+            window_surface.blit(phone.image, phone.rect)
             window_surface.blit(text_surface, (10, 5 ))
 
         elif game_over_time == 1:
@@ -164,7 +178,7 @@ def main():
 
             text_surface_list = print_sirting(academic_performance, romantic_relationship, wealth, health, text_surface_list)
             # 渲染物件
-            background_raw = pygame.image.load(os.path.abspath('C:\\Users\\flyan\\OneDrive\\文件\\商管程式設計\\PBC_final-project\\game4\\background2.png'))
+            background_raw = pygame.image.load(os.path.abspath('background2.png'))
             # 調整背景圖片大小
             background = pygame.transform.scale(background_raw, (WINDOW_WIDTH , WINDOW_HEIGHT ))
             background.convert()
