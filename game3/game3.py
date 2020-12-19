@@ -5,44 +5,47 @@ import os
 import pygame
 from pygame.locals import Color, QUIT, MOUSEBUTTONDOWN, USEREVENT
 
-WINDOW_WIDTH = 800
-WINDOW_HEIGHT = 600
-IMAGEWIDTH = 100
-IMAGEHEIGHT = 100
-FPS = 10
-SPACING = 50
-FIRST_X_POSITION = 100
-FIRST_Y_POSITION = 100
-
-
-pathes = ['clothes1.png', 'clothes2.png', 'clothes3.png', 'pants1.png', 'pants2.png', 'pants3.png', 'shoes1.png', 'shoes2.png', 'shoes3.png']
-point_list = [1,2,3, 4, 5, 6, 7, 8, 9]
-
-class Picture(pygame.sprite.Sprite):
-    def __init__(self, x_position, y_position, path, point):
-        super().__init__()
-        # 載入圖片
-        self.raw_image = pygame.image.load(os.path.abspath(path)).convert_alpha()
-        # 縮小圖片
-        self.image = pygame.transform.scale(self.raw_image, (IMAGEWIDTH, IMAGEHEIGHT))
-        #  回傳位置
-        self.rect = self.image.get_rect()
-        #  定位
-        self.rect.topleft = (x_position, y_position)
-        self.width = IMAGEWIDTH
-        self.height = IMAGEHEIGHT
-        self.window_width = WINDOW_WIDTH
-        self.window_height = WINDOW_HEIGHT
-        self.point = point
-
 def main():
+    
+    # ---------------------------
+    WINDOW_WIDTH = 600
+    WINDOW_HEIGHT = 600
+    IMAGEWIDTH = 100
+    IMAGEHEIGHT = 100
+    FPS = 10
+    SPACING = 50
+    FIRST_X_POSITION = 100
+    FIRST_Y_POSITION = 50
+
+    pathes = ['clothes1.png', 'clothes2.png', 'clothes3.png', 'pants1.png', 'pants2.png', 'pants3.png', 'shoes1.png', 'shoes2.png', 'shoes3.png']
+    point_list = [1,2,3, 4, 5, 6, 7, 8, 9]
+    # ---------------------------
+
+    class Picture(pygame.sprite.Sprite):
+        def __init__(self, x_position, y_position, path, point):
+            super().__init__()
+            # 載入圖片
+            self.raw_image = pygame.image.load('G3-'+path).convert_alpha()
+            #self.raw_image = pygame.image.load(os.path.abspath('./game2/'+path)).convert_alpha()
+            # 縮小圖片
+            self.image = pygame.transform.scale(self.raw_image, (IMAGEWIDTH, IMAGEHEIGHT))
+            #  回傳位置
+            self.rect = self.image.get_rect()
+            #  定位
+            self.rect.topleft = (x_position, y_position)
+            self.width = IMAGEWIDTH
+            self.height = IMAGEHEIGHT
+            self.window_width = WINDOW_WIDTH
+            self.window_height = WINDOW_HEIGHT
+            self.point = point
+    
     pygame.init()
 
     # load window surface
     window_surface = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
     pygame.display.set_caption('Choose Wisely')
     group = pygame.sprite.Group()
-    ok = Picture(600, 400,'ok.png', 0)
+    ok = Picture(300-40, 480,'ok.png', 0)
     ok.image = pygame.transform.scale(ok.raw_image, (80, 80))
     square_for_clothes = Picture(WINDOW_WIDTH, WINDOW_HEIGHT, 'square.png', 0)  # 把 square 藏在右下角
     square_for_pants = Picture(WINDOW_WIDTH, WINDOW_HEIGHT, 'square.png', 0)  # 把 square 藏在右下角
@@ -126,7 +129,8 @@ def main():
         # 遊戲分數儀表板
         text_surface = my_font.render('$$ = {}'.format(round(points,2)), True, (0, 0, 0))
         # 渲染物件
-        background_raw = pygame.image.load(os.path.abspath('background.jpg'))
+        background_raw = pygame.image.load('G3-background.jpg')
+        # background_raw = pygame.image.load(os.path.abspath('./game2/background.jpg'))
         # 調整背景圖片大小
         background = pygame.transform.scale(background_raw, (WINDOW_WIDTH , WINDOW_HEIGHT ))
         background.convert()
