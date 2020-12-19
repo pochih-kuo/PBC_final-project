@@ -40,6 +40,7 @@ def main():
             self.window_height = WINDOW_HEIGHT
             self.point = point
     
+    
     pygame.init()
 
     # load window surface
@@ -77,7 +78,7 @@ def main():
     pants_point = 0
     shoes_point = 0
     my_font = pygame.font.SysFont(None, 30)
-    my_score_font = pygame.font.SysFont(None, 100)
+    my_score_font = pygame.font.SysFont(None, 90)
     main_clock = pygame.time.Clock()
     page = 0
     t = 0
@@ -130,7 +131,11 @@ def main():
                     and RESUME.rect.topleft[1] < pygame.mouse.get_pos()[1] < RESUME.rect.topleft[1] + RESUME.height:
                     page = 1
 
-                    
+            elif event.type == MOUSEBUTTONDOWN and page == 2:
+                if RESUME.rect.topleft[0] < pygame.mouse.get_pos()[0] < RESUME.rect.topleft[0] + RESUME.width \
+                    and RESUME.rect.topleft[1] < pygame.mouse.get_pos()[1] < RESUME.rect.topleft[1] + RESUME.height:
+                    return romantic_relationship, money, health, academic_performance, interpersonal_relationship
+  
         if page == 1:  # 遊戲畫面
             points = clothes_points + pants_point + shoes_point
             # 遊戲分數儀表板
@@ -171,7 +176,7 @@ def main():
                 def __init__(self, width, height, x_position, y_position, window_width, window_height, path):
                     super().__init__()
                     # 載入圖片
-                    self.raw_image = pygame.image.load(path).convert_alpha()
+                    self.raw_image = pygame.image.load('G3-'+path).convert_alpha()
                     # 縮小圖片
                     self.image = pygame.transform.scale(
                         self.raw_image, (width, height))
@@ -184,15 +189,13 @@ def main():
                     self.window_width = window_width
                     self.window_height = window_height
 
-            def print_sirting(point, academic_performance, romantic_relationship, interpersonal_relationship, health, money, text_surface_list):
+            def print_sirting(academic_performance, romantic_relationship, interpersonal_relationship, money, text_surface_list):
                 my_final_font = pygame.font.SysFont(None, 60)
-                my_space_font = pygame.font.SysFont(None, 10)
-                list_ = [point, romantic_relationship, money, health, academic_performance,
+
+                list_ = [romantic_relationship, money, academic_performance,
                          interpersonal_relationship]
-                list_[0] = '      = ' + str(list_[0])
-                text_surface_list.append(my_final_font.render(
-                    list_[0], True, (0, 0, 0)))
-                for i in range(1, len(list_)):
+
+                for i in range(len(list_)):
                     if list_[i] >= 0:
                         list_[i] = '+' + str(list_[i])
                     else:
@@ -213,7 +216,59 @@ def main():
             else:
                 score_surface = my_score_font.render('{}'.format(score), True, (0, 0, 0))
                 window_surface.blit(score_surface, (WINDOW_WIDTH/2 - 75, 100))
-        
+                # icons
+                love = Line(60, 60, 200, 
+                            140 + 70*1, WINDOW_WIDTH, WINDOW_HEIGHT, 'love.png')
+                money = Line(60, 60, 200,
+                            140+70*2, WINDOW_WIDTH, WINDOW_HEIGHT, 'money.png')
+                study = Line(60, 60, 200,
+                            140+70*3, WINDOW_WIDTH, WINDOW_HEIGHT, 'study.png')
+                friend = Line(60, 60, 200,
+                            140+70*4, WINDOW_WIDTH, WINDOW_HEIGHT, 'friend.png')
+                item_list = [love, money, study, friend]
+                group = pygame.sprite.Group()
+                for item in item_list:
+                    group.add(item)
+                
+                # 計算分數與顯示
+                health = 0
+                if score <= 60:
+                    academic_performance = -30
+                    romantic_relationship = 30
+                    interpersonal_relationship = 10
+                    money = 0
+                elif 60 < score <= 70:
+                    academic_performance = -10
+                    romantic_relationship = 20
+                    interpersonal_relationship = 10
+                    money = 0
+                elif 70 < score <= 80:
+                    academic_performance = 0
+                    romantic_relationship = 10
+                    interpersonal_relationship = 10
+                    money = 0
+                elif 80 < score <= 90:
+                    academic_performance = 10
+                    romantic_relationship = -10
+                    interpersonal_relationship = 0
+                    money = 0
+                else:
+                    academic_performance = 30
+                    romantic_relationship = 0  # 學霸加成
+                    interpersonal_relationship = 10
+                    money = 20
+                
+                text_surface_list = []
+                text_surface_list = print_sirting(
+                                              academic_performance, romantic_relationship,
+                                              interpersonal_relationship, money, text_surface_list)
+                RESUME = Line(157, 34, 400,
+                          500, WINDOW_WIDTH, WINDOW_HEIGHT, 'resume.png')
+                window_surface.blit(RESUME.image, RESUME.rect)
+                for i in range(len(text_surface_list)):
+                    window_surface.blit(
+                        text_surface_list[i], (300, 220 + 70*i))  # text position
+
         elif page == 0:  # 遊戲說明畫面
             background_raw = pygame.image.load(
                 'G3-background2.jpg')
