@@ -57,30 +57,19 @@ def intro():  # 遊戲說明畫面
     bg.blit(imageBG, (0,0))
 
     # 插入老師、對話框、繼續圖片
-    imageTeacher = pg.image.load("teacher.jpg")
-    imageTeacher = pg.transform.scale(imageTeacher,(200, 200))
-    imageMessage = pg.image.load("message.png")
-    imageMessage = pg.transform.scale(imageMessage,(500, 250))
+    imageMessage = pg.image.load("start_msg.png")
+    imageMessage = pg.transform.smoothscale(imageMessage,(500, 500))
+    imageTeacher = pg.image.load("teacher.png")
+    imageTeacher = pg.transform.scale(imageTeacher,(230, 230))
     imageNext = pg.image.load("next.png")
     imageNext = pg.transform.scale(imageNext, (120,35))
     imageTeacher.convert()
     imageMessage.convert()
     imageNext.convert()
-    pos_Teacher, pos_Message, pos_Next = [50,300],[70,70], [400,450]
-    bg.blit(imageTeacher,pos_Teacher)
+    pos_Teacher, pos_Message, pos_Next = [50,370],[50,0], [300,470]
     bg.blit(imageMessage, pos_Message)
+    bg.blit(imageTeacher,pos_Teacher)
     bg.blit(imageNext, pos_Next)
-
-    # 插入文字
-    textWelcome = font2.render("Welcome!", True, (0,71,125))
-    textFreshman = font2.render("You are a freshman of NTU.", True, (0,71,125))
-    textTime2journey = font2.render("It's time to have a memorable journey in NTU", True, (0,71,125))
-    textHope = font2.render("Hope you enjoy 4-year life in university.", True, (0,71,125))
-    pos_Welcome, pos_Freshman, pos_Time2journey, pos_Hope = [120, 110], [120, 140], [120, 170], [120,200]
-    bg.blit(textWelcome, pos_Welcome)
-    bg.blit(textFreshman, pos_Freshman)
-    bg.blit(textTime2journey, pos_Time2journey)
-    bg.blit(textHope, pos_Hope)
 
     # 顯示畫布
     screen.blit(bg, (0,0))
@@ -174,36 +163,26 @@ def lake(gender, point, grade):  # 醉月湖畫面
     # 設定畫布並插入背景畫面
     bg = pg.Surface((win_width, win_height))
     bg.convert()
-    imageBG = pg.image.load("bg_orange.jpg")
+    imageBG = pg.image.load("bg_lake.jpg")
     imageBG = pg.transform.scale(imageBG,(win_width, win_height))
     imageBG.convert()
     bg.blit(imageBG, (0,0))    
     
     # 插入圖片、對話框、繼續圖片
-    imagePark = pg.image.load("park.png")
-    imagePark = pg.transform.scale(imagePark,(200,200))
-    imageMessage = pg.image.load("message.png")
-    imageMessage = pg.transform.scale(imageMessage,(450,250))
-    imageResume = pg.image.load("resume.png")
-    imageResume = pg.transform.scale(imageResume, (120,35))
-    textJump = font4.render("Jump", True, (0,0,0))
-    imagePark.convert()
+    imageMessage = pg.image.load("lake_bubble.png")
+    imageMessage = pg.transform.smoothscale(imageMessage,(550,270))
+    imageJump = pg.image.load("jump.png")
+    imageJump = pg.transform.smoothscale(imageJump,(200,80))
+    imageNojump = pg.image.load("nojump.png")
+    imageNojump = pg.transform.smoothscale(imageNojump,(200,80))
     imageMessage.convert()
-    imageResume.convert()
-    pos_Park, pos_Message, pos_Resume, pos_Jump = [50,350],[100,50], [400,470], [400, 400]
-    bg.blit(imagePark,pos_Park)
+    imageJump.convert()
+    imageNojump.convert()
+    pos_Message, pos_Jump, pos_Nojump = [20,250], [80,310], [310,310]
     bg.blit(imageMessage, pos_Message)
-    bg.blit(imageResume, pos_Resume)
-    bg.blit(textJump, pos_Jump)
+    bg.blit(imageJump, pos_Jump)
+    bg.blit(imageNojump, pos_Nojump)
 
-    # 插入文字
-    textWow = font4.render("Wow!", True, (0,0,0))
-    textGoodplace = font4.render("Such a wonderful place.", True, (0,0,0))
-    textWhat2do = font2.render("What will you do?", True, (0,0,0))
-    pos_Wow, pos_Goodplace, pos_What2do = [150, 90], [150, 140], [300, 190]
-    bg.blit(textWow, pos_Wow)
-    bg.blit(textGoodplace, pos_Goodplace)
-    bg.blit(textWhat2do, pos_What2do)
     # 顯示畫布
     screen.blit(bg, (0,0))
     pg.display.update()
@@ -214,8 +193,8 @@ def lake(gender, point, grade):  # 醉月湖畫面
                 pg.quit()
                 sys.exit()
             if event.type == pg.MOUSEBUTTONDOWN:
-                if pos_Resume[0] < pg.mouse.get_pos()[0] < pos_Resume[0]+150\
-                  and pos_Resume[1] < pg.mouse.get_pos()[1] < pos_Resume[1]+100:
+                if pos_Nojump[0] < pg.mouse.get_pos()[0] < pos_Nojump[0]+200\
+                  and pos_Nojump[1] < pg.mouse.get_pos()[1] < pos_Nojump[1]+80:
                     # 回到各年級畫面
                     if grade == 1:
                         stage1(gender, point, grade)
@@ -226,8 +205,8 @@ def lake(gender, point, grade):  # 醉月湖畫面
                     elif grade == 4:
                         stage4(gender, point, grade)
                 
-                if pos_Jump[0] < pg.mouse.get_pos()[0] < pos_Jump[0]+100\
-                  and pos_Jump[1] < pg.mouse.get_pos()[1] < pos_Jump[1]+100:
+                if pos_Jump[0] < pg.mouse.get_pos()[0] < pos_Jump[0]+200\
+                  and pos_Jump[1] < pg.mouse.get_pos()[1] < pos_Jump[1]+80:
                     # 扣分、開啟網頁
                     point["Health"] -= 10
                     if point["Health"] <= 0:
@@ -248,7 +227,7 @@ def stage1(gender, point, grade):  # 大一畫面
     # 設定畫布並插入背景畫面
     bg = pg.Surface((win_width, win_height))
     bg.convert()
-    imageBG = pg.image.load("bg_blue.jpg")
+    imageBG = pg.image.load("bg_main.png")
     imageBG = pg.transform.scale(imageBG,(win_width, win_height))
     imageBG.convert()
     bg.blit(imageBG, (0,0))
@@ -291,21 +270,21 @@ def stage1(gender, point, grade):  # 大一畫面
 
     # 插入關卡、未完成任務及已完成任務
     imageCoco = pg.image.load("coco.png")
-    imageCoco = pg.transform.scale(imageCoco, (150,150))
+    imageCoco = pg.transform.scale(imageCoco, (200,450))
     imageLib = pg.image.load("library.png")
-    imageLib = pg.transform.scale(imageLib, (150,150))
+    imageLib = pg.transform.scale(imageLib, (190,190))
     imageDorm = pg.image.load("dorm.png")
-    imageDorm = pg.transform.scale(imageDorm, (150,150))
+    imageDorm = pg.transform.scale(imageDorm, (170,170))
     imageLab = pg.image.load("laboratory.png")
-    imageLab = pg.transform.scale(imageLab, (150,150))
+    imageLab = pg.transform.scale(imageLab, (170,170))
     imageLake = pg.image.load("lake.png")
-    imageLake = pg.transform.scale(imageLake, (150,150))
+    imageLake = pg.transform.scale(imageLake, (170,170))
     imageAlert = pg.image.load("alert.png")
 
-    pos_Coco, pos_Lib, pos_Dorm, pos_Lab, pos_Lake = [220,350],[220,30],[420,330],[420,120],[30,120]
-    pos_Alert1 = [290,450]
-    bg.blit(imageCoco, pos_Coco)
+    pos_Lib, pos_Coco, pos_Dorm, pos_Lab, pos_Lake = [200,10],[200,90],[410,330],[410,130],[10,100]
+    pos_Alert1 = [310,470]
     bg.blit(imageLib, pos_Lib)
+    bg.blit(imageCoco, pos_Coco)
     bg.blit(imageDorm, pos_Dorm)
     bg.blit(imageLab, pos_Lab)
     bg.blit(imageLake, pos_Lake)
@@ -333,14 +312,14 @@ def stage1(gender, point, grade):  # 大一畫面
                 sys.exit()
 
             if event.type == pg.MOUSEBUTTONDOWN:
-                if pos_Coco[0] < pg.mouse.get_pos()[0] < pos_Coco[0]+150\
-                  and pos_Coco[1] < pg.mouse.get_pos()[1] < pos_Coco[1]+150:
+                if pos_Coco[0] < pg.mouse.get_pos()[0] < pos_Coco[0]+200\
+                  and pos_Coco[1]+100 < pg.mouse.get_pos()[1] < pos_Coco[1]+450:
                 # 進入大一遊戲畫面
                     grade += 1
                     stage2(gender, point, grade)
                 
-                elif pos_Lake[0] < pg.mouse.get_pos()[0] < pos_Lake[0]+150\
-                  and pos_Lake[1] < pg.mouse.get_pos()[1] < pos_Lake[1]+150:
+                elif pos_Lake[0] < pg.mouse.get_pos()[0] < pos_Lake[0]+170\
+                  and pos_Lake[1] < pg.mouse.get_pos()[1] < pos_Lake[1]+170:
                 # 進入醉月湖畫面
                     lake(gender, point, grade)
 
@@ -348,7 +327,7 @@ def stage2(gender, point, grade):  # 大二畫面
     # 設定畫布並插入背景畫面
     bg = pg.Surface((win_width, win_height))
     bg.convert()
-    imageBG = pg.image.load("bg_blue.jpg")
+    imageBG = pg.image.load("bg_main.png")
     imageBG = pg.transform.scale(imageBG,(win_width, win_height))
     imageBG.convert()
     bg.blit(imageBG, (0,0))
@@ -391,22 +370,23 @@ def stage2(gender, point, grade):  # 大二畫面
 
     # 插入關卡、未完成任務及已完成任務
     imageCoco = pg.image.load("coco.png")
-    imageCoco = pg.transform.scale(imageCoco, (150,150))
+    imageCoco = pg.transform.scale(imageCoco, (200,450))
     imageLib = pg.image.load("library.png")
-    imageLib = pg.transform.scale(imageLib, (150,150))
+    imageLib = pg.transform.scale(imageLib, (190,190))
     imageDorm = pg.image.load("dorm.png")
-    imageDorm = pg.transform.scale(imageDorm, (150,150))
+    imageDorm = pg.transform.scale(imageDorm, (170,170))
     imageLab = pg.image.load("laboratory.png")
-    imageLab = pg.transform.scale(imageLab, (150,150))
+    imageLab = pg.transform.scale(imageLab, (170,170))
     imageLake = pg.image.load("lake.png")
-    imageLake = pg.transform.scale(imageLake, (150,150))
+    imageLake = pg.transform.scale(imageLake, (170,170))
     imageAlert = pg.image.load("alert.png")
     imageCheck = pg.image.load("check.png")
 
-    pos_Coco, pos_Lib, pos_Dorm, pos_Lab, pos_Lake = [220,350],[220,30],[420,330],[420,120],[30,120]
-    pos_Alert2, pos_Check1 = [290, 130], [290,450]
-    bg.blit(imageCoco, pos_Coco)
+    pos_Lib, pos_Coco, pos_Dorm, pos_Lab, pos_Lake = [200,10],[200,90],[410,330],[410,130],[10,100]
+    pos_Alert2, pos_Check1 = [310, 120], [310,470]
+
     bg.blit(imageLib, pos_Lib)
+    bg.blit(imageCoco, pos_Coco)
     bg.blit(imageDorm, pos_Dorm)
     bg.blit(imageLab, pos_Lab)
     bg.blit(imageLake, pos_Lake)
@@ -435,17 +415,17 @@ def stage2(gender, point, grade):  # 大二畫面
                 sys.exit()
 
             if event.type == pg.MOUSEBUTTONDOWN:
-                if pos_Lib[0] < pg.mouse.get_pos()[0] < pos_Lib[0]+150\
-                  and pos_Lib[1] < pg.mouse.get_pos()[1] < pos_Lib[1]+150:
+                if pos_Lib[0] < pg.mouse.get_pos()[0] < pos_Lib[0]+190\
+                  and pos_Lib[1] < pg.mouse.get_pos()[1] < pos_Lib[1]+190:
                 # 進入大二遊戲畫面
                     grade += 1
                     stage3(gender, point, grade)
-                elif pos_Coco[0] < pg.mouse.get_pos()[0] < pos_Coco[0]+150\
-                  and pos_Coco[1] < pg.mouse.get_pos()[1] < pos_Coco[1]+150:
+                elif pos_Coco[0] < pg.mouse.get_pos()[0] < pos_Coco[0]+200\
+                  and pos_Coco[1]+100 < pg.mouse.get_pos()[1] < pos_Coco[1]+450:
                 # 進入skip畫面
                     skip(gender, point, grade)
-                elif pos_Lake[0] < pg.mouse.get_pos()[0] < pos_Lake[0]+150\
-                  and pos_Lake[1] < pg.mouse.get_pos()[1] < pos_Lake[1]+150:
+                elif pos_Lake[0] < pg.mouse.get_pos()[0] < pos_Lake[0]+170\
+                  and pos_Lake[1] < pg.mouse.get_pos()[1] < pos_Lake[1]+170:
                 # 進入醉月湖畫面
                     lake(gender, point, grade)
 
@@ -453,7 +433,7 @@ def stage3(gender, point, grade):  # 大三畫面
     # 設定畫布並插入背景畫面
     bg = pg.Surface((win_width, win_height))
     bg.convert()
-    imageBG = pg.image.load("bg_blue.jpg")
+    imageBG = pg.image.load("bg_main.png")
     imageBG = pg.transform.scale(imageBG,(win_width, win_height))
     imageBG.convert()
     bg.blit(imageBG, (0,0))
@@ -496,22 +476,22 @@ def stage3(gender, point, grade):  # 大三畫面
 
     # 插入關卡、未完成任務及已完成任務
     imageCoco = pg.image.load("coco.png")
-    imageCoco = pg.transform.scale(imageCoco, (150,150))
+    imageCoco = pg.transform.scale(imageCoco, (200,450))
     imageLib = pg.image.load("library.png")
-    imageLib = pg.transform.scale(imageLib, (150,150))
+    imageLib = pg.transform.scale(imageLib, (190,190))
     imageDorm = pg.image.load("dorm.png")
-    imageDorm = pg.transform.scale(imageDorm, (150,150))
+    imageDorm = pg.transform.scale(imageDorm, (170,170))
     imageLab = pg.image.load("laboratory.png")
-    imageLab = pg.transform.scale(imageLab, (150,150))
+    imageLab = pg.transform.scale(imageLab, (170,170))
     imageLake = pg.image.load("lake.png")
-    imageLake = pg.transform.scale(imageLake, (150,150))
+    imageLake = pg.transform.scale(imageLake, (170,170))
     imageAlert = pg.image.load("alert.png")
     imageCheck = pg.image.load("check.png")
 
-    pos_Coco, pos_Lib, pos_Dorm, pos_Lab, pos_Lake = [220,350],[220,30],[420,330],[420,120],[30,120]
-    pos_Alert3, pos_Check1, pos_Check2 = [490,430], [290, 130], [290,450]
-    bg.blit(imageCoco, pos_Coco)
+    pos_Lib, pos_Coco, pos_Dorm, pos_Lab, pos_Lake = [200,10],[200,90],[410,330],[410,130],[10,100]
+    pos_Alert3, pos_Check1, pos_Check2 = [490,440], [310, 120], [310,470]
     bg.blit(imageLib, pos_Lib)
+    bg.blit(imageCoco, pos_Coco)
     bg.blit(imageDorm, pos_Dorm)
     bg.blit(imageLab, pos_Lab)
     bg.blit(imageLake, pos_Lake)
@@ -541,21 +521,21 @@ def stage3(gender, point, grade):  # 大三畫面
                 sys.exit()
 
             if event.type == pg.MOUSEBUTTONDOWN:
-                if pos_Dorm[0] < pg.mouse.get_pos()[0] < pos_Dorm[0]+150\
-                  and pos_Dorm[1] < pg.mouse.get_pos()[1] < pos_Dorm[1]+150:
+                if pos_Dorm[0] < pg.mouse.get_pos()[0] < pos_Dorm[0]+170\
+                  and pos_Dorm[1] < pg.mouse.get_pos()[1] < pos_Dorm[1]+170:
                 # 進入大三遊戲畫面
                     grade += 1
                     stage4(gender, point, grade)
-                elif pos_Coco[0] < pg.mouse.get_pos()[0] < pos_Coco[0]+150\
-                  and pos_Coco[1] < pg.mouse.get_pos()[1] < pos_Coco[1]+150:
+                elif pos_Coco[0] < pg.mouse.get_pos()[0] < pos_Coco[0]+200\
+                  and pos_Coco[1]+100 < pg.mouse.get_pos()[1] < pos_Coco[1]+450:
                 # 進入skip畫面
                     skip(gender, point, grade)
-                elif pos_Lib[0] < pg.mouse.get_pos()[0] < pos_Lib[0]+150\
-                  and pos_Lib[1] < pg.mouse.get_pos()[1] < pos_Lib[1]+150:
+                elif pos_Lib[0] < pg.mouse.get_pos()[0] < pos_Lib[0]+190\
+                  and pos_Lib[1] < pg.mouse.get_pos()[1] < pos_Lib[1]+190:
                 # 進入skip畫面
                     skip(gender, point, grade)
-                elif pos_Lake[0] < pg.mouse.get_pos()[0] < pos_Lake[0]+150\
-                  and pos_Lake[1] < pg.mouse.get_pos()[1] < pos_Lake[1]+150:
+                elif pos_Lake[0] < pg.mouse.get_pos()[0] < pos_Lake[0]+170\
+                  and pos_Lake[1] < pg.mouse.get_pos()[1] < pos_Lake[1]+170:
                 # 進入醉月湖畫面
                     lake(gender, point, grade)
 
@@ -563,7 +543,7 @@ def stage4(gender, point, grade):  # 大四畫面
     # 設定畫布並插入背景畫面
     bg = pg.Surface((win_width, win_height))
     bg.convert()
-    imageBG = pg.image.load("bg_blue.jpg")
+    imageBG = pg.image.load("bg_main.png")
     imageBG = pg.transform.scale(imageBG,(win_width, win_height))
     imageBG.convert()
     bg.blit(imageBG, (0,0))
@@ -606,22 +586,22 @@ def stage4(gender, point, grade):  # 大四畫面
 
     # 插入關卡、未完成任務及已完成任務
     imageCoco = pg.image.load("coco.png")
-    imageCoco = pg.transform.scale(imageCoco, (150,150))
+    imageCoco = pg.transform.scale(imageCoco, (200,450))
     imageLib = pg.image.load("library.png")
-    imageLib = pg.transform.scale(imageLib, (150,150))
+    imageLib = pg.transform.scale(imageLib, (190,190))
     imageDorm = pg.image.load("dorm.png")
-    imageDorm = pg.transform.scale(imageDorm, (150,150))
+    imageDorm = pg.transform.scale(imageDorm, (170,170))
     imageLab = pg.image.load("laboratory.png")
-    imageLab = pg.transform.scale(imageLab, (150,150))
+    imageLab = pg.transform.scale(imageLab, (170,170))
     imageLake = pg.image.load("lake.png")
-    imageLake = pg.transform.scale(imageLake, (150,150))
+    imageLake = pg.transform.scale(imageLake, (170,170))
     imageAlert = pg.image.load("alert.png")
     imageCheck = pg.image.load("check.png")
 
-    pos_Coco, pos_Lib, pos_Dorm, pos_Lab, pos_Lake = [220,350],[220,30],[420,330],[420,120],[30,120]
-    pos_Alert4, pos_Check1, pos_Check2, pos_Check3= [490,220], [490,430], [290, 130], [290,450]
-    bg.blit(imageCoco, pos_Coco)
+    pos_Lib, pos_Coco, pos_Dorm, pos_Lab, pos_Lake = [200,10],[200,90],[410,330],[410,130],[10,100]
+    pos_Alert4, pos_Check1, pos_Check2, pos_Check3= [490,240], [490,440], [310, 120], [310,470]
     bg.blit(imageLib, pos_Lib)
+    bg.blit(imageCoco, pos_Coco)
     bg.blit(imageDorm, pos_Dorm)
     bg.blit(imageLab, pos_Lab)
     bg.blit(imageLake, pos_Lake)
@@ -652,24 +632,24 @@ def stage4(gender, point, grade):  # 大四畫面
                 sys.exit()
 
             if event.type == pg.MOUSEBUTTONDOWN:
-                if pos_Lab[0] < pg.mouse.get_pos()[0] < pos_Lab[0]+150\
-                  and pos_Lab[1] < pg.mouse.get_pos()[1] < pos_Lab[1]+150:
+                if pos_Lab[0] < pg.mouse.get_pos()[0] < pos_Lab[0]+170\
+                  and pos_Lab[1] < pg.mouse.get_pos()[1] < pos_Lab[1]+170:
                 # 進入大四遊戲畫面
                     final(gender, point)
-                elif pos_Coco[0] < pg.mouse.get_pos()[0] < pos_Coco[0]+150\
-                  and pos_Coco[1] < pg.mouse.get_pos()[1] < pos_Coco[1]+150:
+                elif pos_Coco[0] < pg.mouse.get_pos()[0] < pos_Coco[0]+200\
+                  and pos_Coco[1]+100 < pg.mouse.get_pos()[1] < pos_Coco[1]+450:
                 # 進入skip畫面
                     skip(gender, point, grade)
-                elif pos_Lib[0] < pg.mouse.get_pos()[0] < pos_Lib[0]+150\
-                  and pos_Lib[1] < pg.mouse.get_pos()[1] < pos_Lib[1]+150:
+                elif pos_Lib[0] < pg.mouse.get_pos()[0] < pos_Lib[0]+190\
+                  and pos_Lib[1] < pg.mouse.get_pos()[1] < pos_Lib[1]+190:
                 # 進入skip畫面
                     skip(gender, point, grade)
-                elif pos_Dorm[0] < pg.mouse.get_pos()[0] < pos_Dorm[0]+150\
-                  and pos_Dorm[1] < pg.mouse.get_pos()[1] < pos_Dorm[1]+150:
+                elif pos_Dorm[0] < pg.mouse.get_pos()[0] < pos_Dorm[0]+170\
+                  and pos_Dorm[1] < pg.mouse.get_pos()[1] < pos_Dorm[1]+170:
                 # 進入skip畫面
                     skip(gender, point, grade)
-                elif pos_Lake[0] < pg.mouse.get_pos()[0] < pos_Lake[0]+150\
-                  and pos_Lake[1] < pg.mouse.get_pos()[1] < pos_Lake[1]+150:
+                elif pos_Lake[0] < pg.mouse.get_pos()[0] < pos_Lake[0]+170\
+                  and pos_Lake[1] < pg.mouse.get_pos()[1] < pos_Lake[1]+170:
                 # 進入醉月湖畫面
                     lake(gender, point, grade)
 
@@ -677,23 +657,20 @@ def skip(gender, point, grade):  # 非該年級遊戲畫面
     # 設定畫布並插入背景畫面
     bg = pg.Surface((win_width, win_height))
     bg.convert()
-    imageBG = pg.image.load("bg_orange.jpg")
+    imageBG = pg.image.load("bg_blue.jpg")
     imageBG = pg.transform.scale(imageBG,(win_width, win_height))
     imageBG.convert()
     bg.blit(imageBG, (0,0))
 
-    imageResume = pg.image.load("resume.png")
-    imageResume = pg.transform.scale(imageResume, (120,35))
-    imageResume.convert()
-    pos_Resume = [450,480]
-    bg.blit(imageResume, pos_Resume)
-
-    # 插入繼續文字
-    textComplete = font1.render("You have completed the task.", True, (0,0,0))
-    textMoveon = font1.render("Please Move on to another task!", True, (0,0,0))
-    pos_Complete, pos_Moveon = [70, 150], [50, 250]
-    bg.blit(textComplete, pos_Complete)
-    bg.blit(textMoveon, pos_Moveon)
+    imageMessage = pg.image.load("finished_msg.png")
+    imageMessage = pg.transform.smoothscale(imageMessage,(450,450))
+    imageBack = pg.image.load("back_witharrow.png")
+    imageBack = pg.transform.scale(imageBack, (120,40))
+    imageMessage.convert()
+    imageBack.convert()
+    pos_Message, pos_Back = [70,70], [80,500]
+    bg.blit(imageMessage, pos_Message)
+    bg.blit(imageBack, pos_Back)
 
     # 顯示畫布
     screen.blit(bg, (0,0))
@@ -706,8 +683,8 @@ def skip(gender, point, grade):  # 非該年級遊戲畫面
                 sys.exit()
 
             if event.type == pg.MOUSEBUTTONDOWN:
-                if pos_Resume[0] < pg.mouse.get_pos()[0] < pos_Resume[0]+150\
-                  and pos_Resume[1] < pg.mouse.get_pos()[1] < pos_Resume[1]+100:
+                if pos_Back[0] < pg.mouse.get_pos()[0] < pos_Back[0]+120\
+                  and pos_Back[1] < pg.mouse.get_pos()[1] < pos_Back[1]+40:
                     # 回到各年級畫面
                     if grade == 1:
                         stage1(gender, point, grade)
@@ -722,10 +699,21 @@ def final(gender, point):  # 遊戲結束畫面
     # 設定畫布並插入背景畫面
     bg = pg.Surface((win_width, win_height))
     bg.convert()
-    imageBG = pg.image.load("bg_orange.jpg")
+    imageBG = pg.image.load("bg_blue.jpg")
     imageBG = pg.transform.scale(imageBG,(win_width, win_height))
     imageBG.convert()
     bg.blit(imageBG, (0,0))
+
+    imageMessage = pg.image.load("ending_bubble.png")
+    imageMessage = pg.transform.smoothscale(imageMessage,(500,250))
+    imageRestart = pg.image.load("restart.png")
+    imageRestart = pg.transform.scale(imageRestart,(120,40))
+    imageMessage.convert()
+    imageRestart.convert()
+    pos_Message, pos_Restart = [50,50], [250, 350]
+    bg.blit(imageMessage, pos_Message)
+    bg.blit(imageRestart, pos_Restart)
+
 
     # 成績結算
     point_list = list(point.items())
@@ -744,14 +732,8 @@ def final(gender, point):  # 遊戲結束畫面
         prize = "knowledgeable Boy" if gender == "Male" else "knowledgeable Girl"
     
     # 顯示遊戲結果
-    textCongratulation = font4.render("Congratulations!", True, (0,0,0))
-    textYouare = font4.render("You have been a", True, (0,0,0))
     textPrize = font1.render(prize, True, (165,42,42))
-    pos_Contratulation = [200,150]
-    pos_Youare = [50,210]
-    pos_Prize = [300, 205]
-    bg.blit(textCongratulation, pos_Contratulation)
-    bg.blit(textYouare, pos_Youare)
+    pos_Prize = [150, 150]
     bg.blit(textPrize, pos_Prize)
 
     # 顯示畫布
@@ -764,21 +746,29 @@ def final(gender, point):  # 遊戲結束畫面
                 pg.quit()
                 sys.exit()
 
+            if event.type == pg.MOUSEBUTTONDOWN:  # 重新開始
+                if pos_Restart[0] < pg.mouse.get_pos()[0] < pos_Restart[0]+120\
+                  and pos_Restart[1] < pg.mouse.get_pos()[1] < pos_Restart[1]+40:
+                    initial()
+
 def gameover():  # 遊戲失敗畫面
     # 設定畫布並插入背景畫面
     bg = pg.Surface((win_width, win_height))
     bg.convert()
-    imageBG = pg.image.load("bg_orange.jpg")
+    imageBG = pg.image.load("bg_blue.jpg")
     imageBG = pg.transform.scale(imageBG,(win_width, win_height))
     imageBG.convert()
     bg.blit(imageBG, (0,0))
 
-    # 插入失敗文字
-    textGameover = font1.render("Game over!", True, (0,0,0))
-    textDropout = font1.render("You are dropped out of school.", True, (0,0,0))
-    pos_Gameover, pos_Dropout = [200, 150], [50, 250]
-    bg.blit(textGameover, pos_Gameover)
-    bg.blit(textDropout, pos_Dropout)
+    imageMessage = pg.image.load("expell_msg.png")
+    imageMessage = pg.transform.smoothscale(imageMessage,(500,500))
+    imageRestart = pg.image.load("restart.png")
+    imageRestart = pg.transform.scale(imageRestart,(120,40))
+    imageMessage.convert()
+    imageRestart.convert()
+    pos_Message, pos_Restart = [50,20], [250, 480]
+    bg.blit(imageMessage, pos_Message)
+    bg.blit(imageRestart, pos_Restart)
 
     # 顯示畫布
     screen.blit(bg, (0,0))
@@ -789,6 +779,11 @@ def gameover():  # 遊戲失敗畫面
             if event.type == pg.QUIT:  # 關閉程式
                 pg.quit()
                 sys.exit()
+
+            if event.type == pg.MOUSEBUTTONDOWN:  # 重新開始
+                if pos_Restart[0] < pg.mouse.get_pos()[0] < pos_Restart[0]+120\
+                  and pos_Restart[1] < pg.mouse.get_pos()[1] < pos_Restart[1]+40:
+                    initial()
 
 if __name__ == '__main__':    
     initial()
