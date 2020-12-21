@@ -51,8 +51,8 @@ def game1_start():
             elif self.pos_x + 29 >= 600:    # 加上student的寬度
                 self.pos_x = 571			
             self.rect.topleft = (self.pos_x, self.pos_y)			
-	def draw(self):
-		self.game.gameDisplay.blit(self.studentImg, (self.pos_x, self.pos_y))
+        def draw(self):
+            self.game.gameDisplay.blit(self.studentImg, (self.pos_x, self.pos_y))
 
     class Stone:
         def __init__(self, game):
