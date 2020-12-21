@@ -313,10 +313,10 @@ def main():
                 pygame.mouse.set_cursor(*pygame.cursors.diamond)
             else:
                 pygame.mouse.set_cursor(*pygame.cursors.tri_left)
+            
+            # 渲染物件
             background_raw = pygame.image.load(
                 'G3-background2.jpg')
-                
-            # 調整背景圖片大小
             background = pygame.transform.scale(
                 background_raw, (WINDOW_WIDTH, WINDOW_HEIGHT))
             background.convert()
@@ -324,10 +324,12 @@ def main():
             window_surface.blit(RESUME.image, RESUME.rect)
             
             # introduction text
-            my_intro_font = pygame.font.SysFont(None, 50)
-            intro_text = my_intro_font.render(
-                'this is the introduction.', True, (0, 0, 0))
-            window_surface.blit(intro_text, (10, 10))
+            # my_intro_font = pygame.font.SysFont(None, 50)
+            # intro_text = my_intro_font.render(
+                # 'this is the introduction.', True, (0, 0, 0))
+            # window_surface.blit(intro_text, (10, 10))
+            intro = pygame.image.load('G3-intro1.png')
+            window_surface.blit(intro, (0, 0))
 
         pygame.display.update()
         # 控制遊戲迴圈迭代速率
