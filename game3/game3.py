@@ -137,6 +137,27 @@ def main():
                     return romantic_relationship, money, health, academic_performance, interpersonal_relationship
   
         if page == 1:  # 遊戲畫面
+        
+            # cursor
+            touch = 0
+            for item in list:
+                if item.rect.topleft[0] < pygame.mouse.get_pos()[0] < item.rect.topleft[0] + IMAGEWIDTH \
+                    and item.rect.topleft[1] < pygame.mouse.get_pos()[1] < item.rect.topleft[1] + IMAGEHEIGHT:
+                    # pygame.mouse.set_cursor(*pygame.cursors.diamond)
+                    touch = 1
+                    break
+
+            if ok.rect.topleft[0] < pygame.mouse.get_pos()[0] < ok.rect.topleft[0] + 80 \
+                and ok.rect.topleft[1] < pygame.mouse.get_pos()[1] < ok.rect.topleft[1] + 80:
+                touch = 1
+                # pygame.mouse.set_cursor(*pygame.cursors.diamond)
+            
+            if touch == 1:
+                pygame.mouse.set_cursor(*pygame.cursors.diamond)
+            else:
+                pygame.mouse.set_cursor(*pygame.cursors.tri_left)
+            
+            # 計分
             points = clothes_points + pants_point + shoes_point
             # 遊戲分數儀表板
             text_surface = my_font.render('$$ = {}'.format(round(points,2)), True, (0, 0, 0))
@@ -155,6 +176,14 @@ def main():
             window_surface.blit(text_surface, (10, 5 ))
         
         elif page == 2 :  # 顯示分數    
+        
+            # cursor
+            if RESUME.rect.topleft[0] < pygame.mouse.get_pos()[0] < RESUME.rect.topleft[0] + RESUME.width \
+                and RESUME.rect.topleft[1] < pygame.mouse.get_pos()[1] < RESUME.rect.topleft[1] + RESUME.height:
+                pygame.mouse.set_cursor(*pygame.cursors.diamond)
+            else:
+                pygame.mouse.set_cursor(*pygame.cursors.tri_left)
+            
             points = clothes_points + pants_point + shoes_point
             # 遊戲分數儀表板
             text_surface = my_font.render('$$ = {}'.format(round(points,2)), True, (0, 0, 0))
@@ -270,19 +299,28 @@ def main():
                         text_surface_list[i], (300, 220 + 70*i))  # text position
 
         elif page == 0:  # 遊戲說明畫面
-            background_raw = pygame.image.load(
-                'G3-background2.jpg')
-            # 調整背景圖片大小
-            background = pygame.transform.scale(
-                background_raw, (WINDOW_WIDTH, WINDOW_HEIGHT))
-            background.convert()
-            window_surface.blit(background, (0, 0))
-            
+        
             # RESUME button
             RESUME = Picture(400, 500, 'start.png', 0)
             RESUME.image = pygame.transform.scale(RESUME.raw_image, (117, 34))
             RESUME.width = 117
             RESUME.height = 34
+
+
+            # cursor
+            if RESUME.rect.topleft[0] < pygame.mouse.get_pos()[0] < RESUME.rect.topleft[0] + RESUME.width \
+                and RESUME.rect.topleft[1] < pygame.mouse.get_pos()[1] < RESUME.rect.topleft[1] + RESUME.height:
+                pygame.mouse.set_cursor(*pygame.cursors.diamond)
+            else:
+                pygame.mouse.set_cursor(*pygame.cursors.tri_left)
+            background_raw = pygame.image.load(
+                'G3-background2.jpg')
+                
+            # 調整背景圖片大小
+            background = pygame.transform.scale(
+                background_raw, (WINDOW_WIDTH, WINDOW_HEIGHT))
+            background.convert()
+            window_surface.blit(background, (0, 0))
             window_surface.blit(RESUME.image, RESUME.rect)
             
             # introduction text
@@ -290,7 +328,7 @@ def main():
             intro_text = my_intro_font.render(
                 'this is the introduction.', True, (0, 0, 0))
             window_surface.blit(intro_text, (10, 10))
-        
+
         pygame.display.update()
         # 控制遊戲迴圈迭代速率
         main_clock.tick(FPS)
