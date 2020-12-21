@@ -216,6 +216,17 @@ def lake(gender, point, grade):  # 醉月湖畫面
                         point["Health"] = 0
                     webbrowser.open("https://scc_osa.ntu.edu.tw")
                     
+                    # 計算是否失敗
+                    point_list = list(point.items())
+                    point_list.sort(key=lambda x:x[1], reverse=True)
+                    sum_zero_point = 0
+                    for pairs in point_list:
+                        pairs_list = list(pairs)
+                        if pairs_list[1] == 0:
+                            sum_zero_point += 1
+                    if sum_zero_point >= 3:
+                        gameover()
+
                     # 回到各年級畫面
                     if grade == 1:
                         stage1(gender, point, grade)
@@ -319,18 +330,25 @@ def stage1(gender, point, grade):  # 大一畫面
                   and pos_Coco[1]+100 < pygame.mouse.get_pos()[1] < pos_Coco[1]+450:
                 # 進入大一遊戲畫面
                     grade += 1
+                    
                     # adj_Love, adj_Money, adj_Health, adj_Study, adj_Friend = game1_start()
                     # print(adj_Love, adj_Money, adj_Health, adj_Study, adj_Friend)
-                # # 計算是否失敗
-                #     point_list = list(point.items())
-                #     point_list.sort(key=lambda x:x[1], reverse=True)
-                #     sum_zero_point = 0
-                #     for pairs in point_list:
-                #         pairs_list = list(pairs)
-                #         if pairs_list[1] == 0:
-                #             sum_zero_point += 1
-                #     if sum_zero_point >= 3:
-                #         gameover()
+                    # point["Love"] += adj_Love
+                    # point["Money"] += adj_Money
+                    # point["Health"] += adj_Health
+                    # point["Study"] += adj_Study
+                    # point["Friend"] += adj_Friend
+
+                    # 計算是否失敗
+                    point_list = list(point.items())
+                    point_list.sort(key=lambda x:x[1], reverse=True)
+                    sum_zero_point = 0
+                    for pairs in point_list:
+                        pairs_list = list(pairs)
+                        if pairs_list[1] == 0:
+                            sum_zero_point += 1
+                    if sum_zero_point >= 3:
+                        gameover()
                     
                     stage2(gender, point, grade)
                 
@@ -436,7 +454,7 @@ def stage2(gender, point, grade):  # 大二畫面
                 # 進入大二遊戲畫面
                     grade += 1
 
-                    adj_Love, adj_Money, adj_Health, adj_Study, adj_Friend = game3()
+                    adj_Love, adj_Money, adj_Health, adj_Study, adj_Friend = game2_start()
                     print(adj_Love, adj_Money, adj_Health, adj_Study, adj_Friend)
                     point["Love"] += adj_Love
                     point["Money"] += adj_Money
@@ -830,12 +848,6 @@ def gameover():  # 遊戲失敗畫面
                     initial()
 
 # def game1_start():
-#     # import sys, math
-#     # import pygame
-#     # from random import randint
-#     # import time
-    
-
 #     class Student:
 #         def __init__(self, game):
 #             self.game = game
@@ -860,8 +872,8 @@ def gameover():  # 遊戲失敗畫面
 #             elif self.pos_x + 29 >= 600:    # 加上student的寬度
 #                 self.pos_x = 571            
 #             self.rect.topleft = (self.pos_x, self.pos_y)            
-#     def draw(self):
-#         self.game.gameDisplay.blit(self.studentImg, (self.pos_x, self.pos_y))
+#         def draw(self):
+#             self.game.gameDisplay.blit(self.studentImg, (self.pos_x, self.pos_y))
 
 #     class Stone:
 #         def __init__(self, game):
@@ -880,7 +892,10 @@ def gameover():  # 遊戲失敗畫面
 
 #     class Game:
 #         def __init__(self):
+#             pygame.init()        
 #             self.gameDisplay = pygame.display.set_mode((600, 600))
+#             # pygame.display.set_caption('Dodge people on Palm Avenue!')
+            
 #             self.clock = pygame.time.Clock()
 #             self.last_spawn_stone = pygame.time.get_ticks()    # 獲取時間(毫秒)
 #             self.stones = []
@@ -1024,10 +1039,16 @@ def gameover():  # 遊戲失敗畫面
 #         academic_performance = 0
 #         interpersonal_relationship = -20
     
+#     else:
+#         romantic_relationship = 60
+#         money = 60
+#         health = 60
+#         academic_performance = 60
+#         interpersonal_relationship = 60
+    
 #     return romantic_relationship, money, health, academic_performance,interpersonal_relationship
     
 
-# 可以把整個 code 複製貼上, 並用五個參數接這個function (return in line 142)
 
 def game2_start():
     WINDOW_WIDTH = 600
@@ -1076,16 +1097,8 @@ def game2_start():
 
             text_surface_list.append(my_final_font.render(
                 list_[i], True, (0, 0, 0)))
-            # text_surface_list.append(my_space_font.render(
-            # ' ', True, (0, 0, 0)))
-
         return text_surface_list
 
-    '''
-    pygame.init()
-
-    pygame.display.set_caption('Stop Procrastinating!')
-    '''
     window_surface = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
     line = Line(IMAGEWIDTH, IMAGEHEIGHT, WINDOW_WIDTH,
                 WINDOW_HEIGHT, WINDOW_WIDTH, WINDOW_HEIGHT, path1)
@@ -1218,7 +1231,6 @@ def game2_start():
                 money_value = 20
 
             text_surface_list = []
-
             text_surface_list = print_sirting(points,
                                               academic_performance, romantic_relationship,
                                               interpersonal_relationship, health_value, money_value, text_surface_list)
