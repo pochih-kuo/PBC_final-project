@@ -11,18 +11,18 @@ def game1_start():
     game = Game()
     game.game_intro()
     if game.collision_check == True:
-        romantic_relationship = 60
-        money = 30
-        health = 30
-        academic_performance = 60
-        interpersonal_relationship = 40
+        romantic_relationship = 0
+        money = -30
+        health = -30
+        academic_performance = 0
+        interpersonal_relationship = -20
     
-    else:
-        romantic_relationship = 60
-        money = 60
-        health = 60
-        academic_performance = 60
-        interpersonal_relationship = 60
+    # else:
+    #     romantic_relationship = 60
+    #     money = 60
+    #     health = 60
+    #     academic_performance = 60
+    #     interpersonal_relationship = 60
     
     return romantic_relationship, money, health, academic_performance,interpersonal_relationship
     
