@@ -40,10 +40,10 @@ def game2_start():
             self.window_width = window_width
             self.window_height = window_height
 
-    def print_sirting(point, academic_performance, romantic_relationship, interpersonal_relationship, health, money, text_surface_list):
+    def print_sirting(point, academic_performance, romantic_relationship, interpersonal_relationship, health_value, money_value, text_surface_list):
         my_final_font = pygame.font.SysFont(None, 60)
         my_space_font = pygame.font.SysFont(None, 10)
-        list_ = [point, romantic_relationship, money, health, academic_performance,
+        list_ = [point, romantic_relationship, money_value, health_value, academic_performance,
                  interpersonal_relationship]
         list_[0] = '      = ' + str(list_[0])
         text_surface_list.append(my_final_font.render(
@@ -139,7 +139,7 @@ def game2_start():
             elif event.type == MOUSEBUTTONDOWN and game_over_time == 1:
                 if RESUME.rect.topleft[0] < pygame.mouse.get_pos()[0] < RESUME.rect.topleft[0] + RESUME.width \
                         and RESUME.rect.topleft[1] < pygame.mouse.get_pos()[1] < RESUME.rect.topleft[1] + RESUME.height:
-                    return romantic_relationship, money, health, academic_performance,\
+                    return romantic_relationship, money_value, health_value, academic_performance,\
                         interpersonal_relationship
 
             elif event.type == MOUSEBUTTONDOWN and game_over_time == 2:
@@ -171,38 +171,38 @@ def game2_start():
                 academic_performance = -30
                 romantic_relationship = 30
                 interpersonal_relationship = 10
-                health = -20
-                money = 0
+                health_value = -20
+                money_value = 0
             elif 1 < points <= 2:
                 academic_performance = -10
                 romantic_relationship = 20
                 interpersonal_relationship = 10
-                health = 0
-                money = 0
+                health_value = 0
+                money_value = 0
             elif 2 < points <= 3:
                 academic_performance = 0
                 romantic_relationship = 10
                 interpersonal_relationship = 10
-                health = -10
-                money = 0
+                health_value = -10
+                money_value = 0
             elif 3 < points <= 4:
                 academic_performance = 10
                 romantic_relationship = -10
                 interpersonal_relationship = 0
-                health = 10
-                money = 0
+                health_value = 10
+                money_value = 0
             else:
                 academic_performance = 30
                 romantic_relationship = 0  # 學霸加成
                 interpersonal_relationship = 10
-                health = 20
-                money = 20
+                health_value = 20
+                money_value = 20
 
             text_surface_list = []
 
             text_surface_list = print_sirting(points,
                                               academic_performance, romantic_relationship,
-                                              interpersonal_relationship, health, money, text_surface_list)
+                                              interpersonal_relationship, health_value, money_value, text_surface_list)
 
             GPA = Line(int(141*0.9), int(68*0.9), 50, 50,
                        WINDOW_WIDTH, WINDOW_HEIGHT, 'gpa.png')
