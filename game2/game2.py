@@ -266,8 +266,8 @@ def game2_start():
 
         elif game_over_time == 2:  # 遊戲說明畫面
         
-            RESUME = Line(157, 34, 350,
-                          400, WINDOW_WIDTH, WINDOW_HEIGHT, 'G2-resume.png')
+            RESUME = Line(int(185/2), int(67/2), 400,
+                          430, WINDOW_WIDTH, WINDOW_HEIGHT, 'G2-play.png')
             # cursor
             if RESUME.rect.topleft[0] < pygame.mouse.get_pos()[0] < RESUME.rect.topleft[0] + RESUME.width \
                 and RESUME.rect.topleft[1] < pygame.mouse.get_pos()[1] < RESUME.rect.topleft[1] + RESUME.height:
