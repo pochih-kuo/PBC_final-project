@@ -297,7 +297,7 @@ def game3():
                 text_surface_list = print_sirting(
                                               academic_performance, romantic_relationship,
                                               interpersonal_relationship, money, text_surface_list)
-                RESUME = Line(233, 34, 300,
+                RESUME = Line(242, 34, 300,
                           500, WINDOW_WIDTH, WINDOW_HEIGHT, 'back_to_map.png')
                 window_surface.blit(RESUME.image, RESUME.rect)
                 for i in range(len(text_surface_list)):

@@ -255,7 +255,7 @@ def game2_start():
             background.convert()
             window_surface.blit(background, (0, 0))
             group.draw(window_surface)
-            RESUME = Line(233, 34, 300,
+            RESUME = Line(242, 34, 300,
                           500, WINDOW_WIDTH, WINDOW_HEIGHT, 'G2-back_to_map.png')
             window_surface.blit(RESUME.image, RESUME.rect)
             for i in range(len(text_surface_list)):
