@@ -31,11 +31,12 @@ def initial():  # 遊戲初始畫面
 
     # 插入遊戲標題與開始鍵
     imageTitle = pygame.image.load("my life in ntu.png")
+    imageTitle = pygame.transform.scale(imageTitle,(400,200))
     imageStart = pygame.image.load("start.png")
     imageTitle.convert()
     imageStart.convert()
-    pos_Title = [145, 100]
-    pos_Start = [190, 330]
+    pos_Title = [100, 100]
+    pos_Start = [190, 450]
     bg.blit(imageTitle, pos_Title)
     bg.blit(imageStart, pos_Start)
 
@@ -67,12 +68,12 @@ def intro():  # 遊戲說明畫面
     imageMessage = pygame.transform.smoothscale(imageMessage,(500, 500))
     imageTeacher = pygame.image.load("teacher.png")
     imageTeacher = pygame.transform.scale(imageTeacher,(230, 230))
-    imageNext = pygame.image.load("next.png")
-    # imageNext = pygame.transform.scale(imageNext, (120,35))
+    imageNext = pygame.image.load("next_witharrow.png")
+    imageNext = pygame.transform.scale(imageNext, (100,30))
     imageTeacher.convert()
     imageMessage.convert()
     imageNext.convert()
-    pos_Teacher, pos_Message, pos_Next = [50,370],[50,0], [300,470]
+    pos_Teacher, pos_Message, pos_Next = [50,370],[50,0], [420,450]
     bg.blit(imageMessage, pos_Message)
     bg.blit(imageTeacher,pos_Teacher)
     bg.blit(imageNext, pos_Next)
@@ -87,8 +88,8 @@ def intro():  # 遊戲說明畫面
                 pygame.quit()
                 sys.exit()
             if event.type == pygame.MOUSEBUTTONDOWN:  # 點選並進入角色選擇畫面
-                if pos_Next[0] < pygame.mouse.get_pos()[0] < pos_Next[0]+150\
-                  and pos_Next[1] < pygame.mouse.get_pos()[1] < pos_Next[1]+100:
+                if pos_Next[0] < pygame.mouse.get_pos()[0] < pos_Next[0]+100\
+                  and pos_Next[1] < pygame.mouse.get_pos()[1] < pos_Next[1]+30:
                     point = {"Love": 60, "Money":60, "Health":60, "Study":60, "Friend":60}
                     grade = 1
                     stage1(point, grade)    
@@ -178,15 +179,15 @@ def lake(point, grade):  # 醉月湖畫面
     
     # 插入圖片、對話框、繼續圖片
     imageMessage = pygame.image.load("lake_bubble.png")
-    imageMessage = pygame.transform.smoothscale(imageMessage,(550,270))
+    imageMessage = pygame.transform.smoothscale(imageMessage,(550,200))
     imageJump = pygame.image.load("jump.png")
-    imageJump = pygame.transform.smoothscale(imageJump,(200,80))
+    imageJump = pygame.transform.smoothscale(imageJump,(200,60))
     imageNojump = pygame.image.load("nojump.png")
-    imageNojump = pygame.transform.smoothscale(imageNojump,(200,80))
+    imageNojump = pygame.transform.smoothscale(imageNojump,(200,60))
     imageMessage.convert()
     imageJump.convert()
     imageNojump.convert()
-    pos_Message, pos_Jump, pos_Nojump = [20,250], [80,310], [310,310]
+    pos_Message, pos_Jump, pos_Nojump = [20,370],  [310,420], [80,420]
     bg.blit(imageMessage, pos_Message)
     bg.blit(imageJump, pos_Jump)
     bg.blit(imageNojump, pos_Nojump)
@@ -749,10 +750,10 @@ def skip(point, grade):  # 非該年級遊戲畫面
     imageMessage = pygame.image.load("finished_msg.png")
     imageMessage = pygame.transform.smoothscale(imageMessage,(450,450))
     imageBack = pygame.image.load("back_witharrow.png")
-    imageBack = pygame.transform.scale(imageBack, (120,40))
+    imageBack = pygame.transform.scale(imageBack, (100,30))
     imageMessage.convert()
     imageBack.convert()
-    pos_Message, pos_Back = [70,70], [80,500]
+    pos_Message, pos_Back = [70,40], [80,450]
     bg.blit(imageMessage, pos_Message)
     bg.blit(imageBack, pos_Back)
 
@@ -767,8 +768,8 @@ def skip(point, grade):  # 非該年級遊戲畫面
                 sys.exit()
 
             if event.type == pygame.MOUSEBUTTONDOWN:
-                if pos_Back[0] < pygame.mouse.get_pos()[0] < pos_Back[0]+120\
-                  and pos_Back[1] < pygame.mouse.get_pos()[1] < pos_Back[1]+40:
+                if pos_Back[0] < pygame.mouse.get_pos()[0] < pos_Back[0]+100\
+                  and pos_Back[1] < pygame.mouse.get_pos()[1] < pos_Back[1]+30:
                     # 回到各年級畫面
                     if grade == 1:
                         stage1(point, grade)
@@ -790,12 +791,16 @@ def final(point):  # 遊戲結束畫面
 
     imageMessage = pygame.image.load("ending_bubble.png")
     imageMessage = pygame.transform.smoothscale(imageMessage,(500,250))
+    imageFinish = pygame.image.load("finish.png")
+    imageFinish = pygame.transform.scale(imageFinish,(130,40))
     imageRestart = pygame.image.load("restart.png")
-    imageRestart = pygame.transform.scale(imageRestart,(120,40))
+    imageRestart = pygame.transform.scale(imageRestart,(150,40))
     imageMessage.convert()
+    imageFinish.convert()
     imageRestart.convert()
-    pos_Message, pos_Restart = [50,50], [250, 350]
+    pos_Message, pos_Finish, pos_Restart = [50,50], [400,400], [400, 470]
     bg.blit(imageMessage, pos_Message)
+    bg.blit(imageFinish, pos_Finish)
     bg.blit(imageRestart, pos_Restart)
 
 
@@ -831,7 +836,11 @@ def final(point):  # 遊戲結束畫面
                 sys.exit()
 
             if event.type == pygame.MOUSEBUTTONDOWN:  # 重新開始
-                if pos_Restart[0] < pygame.mouse.get_pos()[0] < pos_Restart[0]+120\
+                if pos_Restart[0] < pygame.mouse.get_pos()[0] < pos_Restart[0]+130\
+                  and pos_Restart[1] < pygame.mouse.get_pos()[1] < pos_Restart[1]+40:
+                    pygame.quit()
+                    sys.exit()
+                elif pos_Restart[0] < pygame.mouse.get_pos()[0] < pos_Restart[0]+150\
                   and pos_Restart[1] < pygame.mouse.get_pos()[1] < pos_Restart[1]+40:
                     initial()
 
@@ -844,13 +853,13 @@ def gameover():  # 遊戲失敗畫面
     imageBG.convert()
     bg.blit(imageBG, (0,0))
 
-    imageMessage = pygame.image.load("expell_msg.png")
-    imageMessage = pygame.transform.smoothscale(imageMessage,(500,500))
+    imageMessage = pygame.image.load("gameover.png")
+    imageMessage = pygame.transform.smoothscale(imageMessage,(450,450))
     imageRestart = pygame.image.load("restart.png")
-    imageRestart = pygame.transform.scale(imageRestart,(120,40))
+    imageRestart = pygame.transform.scale(imageRestart,(140,40))
     imageMessage.convert()
     imageRestart.convert()
-    pos_Message, pos_Restart = [50,20], [250, 480]
+    pos_Message, pos_Restart = [70,40], [220,450]
     bg.blit(imageMessage, pos_Message)
     bg.blit(imageRestart, pos_Restart)
 
@@ -1074,15 +1083,15 @@ def game1_start():
 def game2_start():
     WINDOW_WIDTH = 600
     WINDOW_HEIGHT = 600
-    IMAGEWIDTH = 60
-    IMAGEHEIGHT = 110
+    IMAGEWIDTH = 140
+    IMAGEHEIGHT = int(IMAGEWIDTH/9*16)
     FPS = 10
-    line_x_position = 80
-    line_y_position = 150
+    line_x_position = 53
+    line_y_position = 233
     show_probability1 = 60  # 每次顯示通知機率 (%)
     # show_probability2 = 30
-    path1 = 'G2-line.png'
-    path2 = 'G2-line2.png'
+    path2 = 'G2-game2_msg1.png'
+    path1 = 'G2-game2_msg2.png'
     gpa_lsit = [4.3, 4.0, 3.7, 3.3, 3.0, 2.7, 2.3, 2.0, 1.7, 0]
 
     class Line(pygame.sprite.Sprite):
@@ -1091,8 +1100,7 @@ def game2_start():
             # 載入圖片
             self.raw_image = pygame.image.load(path).convert_alpha()
             # 縮小圖片
-            self.image = pygame.transform.scale(
-                self.raw_image, (width, height))
+            self.image = pygame.transform.scale(self.raw_image, (width, height))
             #  回傳位置
             self.rect = self.image.get_rect()
             #  定位
@@ -1102,10 +1110,10 @@ def game2_start():
             self.window_width = window_width
             self.window_height = window_height
 
-    def print_sirting(point, academic_performance, romantic_relationship, interpersonal_relationship, health_value, money_value, text_surface_list):
+    def print_sirting(point, academic_performance, romantic_relationship, interpersonal_relationship, health_value, text_surface_list):
         my_final_font = pygame.font.SysFont(None, 60)
         my_space_font = pygame.font.SysFont(None, 10)
-        list_ = [point, romantic_relationship, money_value, health_value, academic_performance,
+        list_ = [point, romantic_relationship, health_value, academic_performance,
                  interpersonal_relationship]
         list_[0] = '      = ' + str(list_[0])
         text_surface_list.append(my_final_font.render(
@@ -1118,8 +1126,14 @@ def game2_start():
 
             text_surface_list.append(my_final_font.render(
                 list_[i], True, (0, 0, 0)))
-        return text_surface_list
+            # text_surface_list.append(my_space_font.render(
+            # ' ', True, (0, 0, 0)))
 
+        return text_surface_list
+    '''
+    pygame.init()
+
+    pygame.display.set_caption('Stop Procrastinating!')'''
     window_surface = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
     line = Line(IMAGEWIDTH, IMAGEHEIGHT, WINDOW_WIDTH,
                 WINDOW_HEIGHT, WINDOW_WIDTH, WINDOW_HEIGHT, path1)
@@ -1127,7 +1141,7 @@ def game2_start():
     pygame.time.set_timer(reload_line_event, 2000)  # 更新頻率(unit = ms)
 
     increase_score_event = USEREVENT + 2
-    pygame.time.set_timer(increase_score_event, 2000)  # 加分頻率(unit = ms)
+    pygame.time.set_timer(increase_score_event, 5000)  # 加分頻率(unit = ms)
 
     i = 4
     points = gpa_lsit[i]  # 初始分數 : 3.0
@@ -1136,10 +1150,12 @@ def game2_start():
     hit_text_surface = None
     main_clock = pygame.time.Clock()
     game_over_time = 2
+    seconds = 0
+    milliseconds = 0
 
     while True:
 
-        if game_over_time == 0 and pygame.time.get_ticks()-start_ticks > 3000:  # 遊戲打開 {} 秒後結束
+        if game_over_time == 0 and pygame.time.get_ticks()-start_ticks > 30001:  # 遊戲打開 {} 秒後結束
             game_over_time = 1
 
         # 偵測事件
@@ -1202,6 +1218,21 @@ def game2_start():
                     game_over_time = 0
 
         if game_over_time == 0:  # 遊戲畫面
+        
+            # cursor
+            if line.rect.topleft[0] < pygame.mouse.get_pos()[0] < line.rect.topleft[0] + line.width \
+                and line.rect.topleft[1] < pygame.mouse.get_pos()[1] < line.rect.topleft[1] + line.height:
+                pygame.mouse.set_cursor(*pygame.cursors.diamond)
+            else:
+                pygame.mouse.set_cursor(*pygame.cursors.tri_left)
+
+            # 倒數計時器
+            seconds = 30 - (pygame.time.get_ticks()-start_ticks)//1000
+
+            clock_surface = my_font.render(
+                "00:%02d" % seconds, True, (0, 0, 0))
+
+            # milliseconds += 1/FPS*1000*2  #returns the time since the last time we called the function, and limits the frame rate to 60FPS
 
             # 遊戲分數儀表板
             text_surface = my_font.render(
@@ -1214,64 +1245,78 @@ def game2_start():
                 background_raw, (WINDOW_WIDTH, WINDOW_HEIGHT))
             background.convert()
             window_surface.blit(background, (0, 0))
+            # phone = Line(360, 360, 28,
+                                # 140, WINDOW_WIDTH, WINDOW_HEIGHT, 'G2-iphone7.png')
+            # window_surface.blit(phone.image, phone.rect)
             window_surface.blit(line.image, line.rect)
-            window_surface.blit(text_surface, (10, 5))
+            window_surface.blit(text_surface, (10, 25))
+            window_surface.blit(clock_surface, (10, 5))
 
         elif game_over_time == 1:  # 計分畫面
-            # 計算分數
 
+            # 計算分數
+            money_value = 0  # 本遊戲不計算 money 分數
             if points <= 1:
                 academic_performance = -30
                 romantic_relationship = 30
                 interpersonal_relationship = 10
                 health_value = -20
-                money_value = 0
+
             elif 1 < points <= 2:
                 academic_performance = -10
                 romantic_relationship = 20
                 interpersonal_relationship = 10
                 health_value = 0
-                money_value = 0
+
             elif 2 < points <= 3:
                 academic_performance = 0
                 romantic_relationship = 10
                 interpersonal_relationship = 10
                 health_value = -10
-                money_value = 0
+
             elif 3 < points <= 4:
                 academic_performance = 10
                 romantic_relationship = -10
                 interpersonal_relationship = 0
                 health_value = 10
-                money_value = 0
+
             else:
                 academic_performance = 30
                 romantic_relationship = 0  # 學霸加成
                 interpersonal_relationship = 10
                 health_value = 20
-                money_value = 20
+
 
             text_surface_list = []
+
             text_surface_list = print_sirting(points,
                                               academic_performance, romantic_relationship,
-                                              interpersonal_relationship, health_value, money_value, text_surface_list)
+                                              interpersonal_relationship, health_value, text_surface_list)
 
             GPA = Line(int(141*0.9), int(68*0.9), 50, 50,
-                       WINDOW_WIDTH, WINDOW_HEIGHT, 'gpa.png')
+                       WINDOW_WIDTH, WINDOW_HEIGHT, 'G2-gpa.png')
             love = Line(60, 60, 50, 50 + 70*1,
                         WINDOW_WIDTH, WINDOW_HEIGHT, 'love.png')
-            money = Line(60, 60, 50,
-                         50+70*2, WINDOW_WIDTH, WINDOW_HEIGHT, 'money.png')
+            #money = Line(60, 60, 50,
+                         #50+70*2, WINDOW_WIDTH, WINDOW_HEIGHT, 'money.png')
             health = Line(60, 60, 50,
-                          50+70*3, WINDOW_WIDTH, WINDOW_HEIGHT, 'health.png')
+                          50+70*2, WINDOW_WIDTH, WINDOW_HEIGHT, 'health.png')
             study = Line(60, 60, 50,
-                         50+70*4, WINDOW_WIDTH, WINDOW_HEIGHT, 'study.png')
+                         50+70*3, WINDOW_WIDTH, WINDOW_HEIGHT, 'study.png')
             friend = Line(60, 60, 50,
-                          50+70*5, WINDOW_WIDTH, WINDOW_HEIGHT, 'friend.png')
-            item_list = [GPA, love, money, health, study, friend]
+                          50+70*4, WINDOW_WIDTH, WINDOW_HEIGHT, 'friend.png')
+            item_list = [GPA, love, health, study, friend]
             group = pygame.sprite.Group()
             for item in item_list:
                 group.add(item)
+                
+            # cursor
+            if RESUME.rect.topleft[0] < pygame.mouse.get_pos()[0] < RESUME.rect.topleft[0] + RESUME.width \
+                and RESUME.rect.topleft[1] < pygame.mouse.get_pos()[1] < RESUME.rect.topleft[1] + RESUME.height:
+                pygame.mouse.set_cursor(*pygame.cursors.diamond)
+            else:
+                pygame.mouse.set_cursor(*pygame.cursors.tri_left)
+                
 
             # 渲染物件
             background_raw = pygame.image.load(
@@ -1283,26 +1328,36 @@ def game2_start():
             window_surface.blit(background, (0, 0))
             group.draw(window_surface)
             RESUME = Line(157, 34, 400,
-                          500, WINDOW_WIDTH, WINDOW_HEIGHT, 'resume.png')
+                          500, WINDOW_WIDTH, WINDOW_HEIGHT, 'G2-resume.png')
             window_surface.blit(RESUME.image, RESUME.rect)
             for i in range(len(text_surface_list)):
                 window_surface.blit(
                     text_surface_list[i], (int(141*0.9), int(68*0.9) + 70*i))  # text position
+                    
+            
 
         elif game_over_time == 2:  # 遊戲說明畫面
+        
+            RESUME = Line(157, 34, 350,
+                          400, WINDOW_WIDTH, WINDOW_HEIGHT, 'G2-resume.png')
+            # cursor
+            if RESUME.rect.topleft[0] < pygame.mouse.get_pos()[0] < RESUME.rect.topleft[0] + RESUME.width \
+                and RESUME.rect.topleft[1] < pygame.mouse.get_pos()[1] < RESUME.rect.topleft[1] + RESUME.height:
+                pygame.mouse.set_cursor(*pygame.cursors.diamond)
+            else:
+                pygame.mouse.set_cursor(*pygame.cursors.tri_left)       
+                
             background_raw = pygame.image.load(
-                'G2-background2.jpg')
+                'G2-intro1.png')
             # 調整背景圖片大小
             background = pygame.transform.scale(
                 background_raw, (WINDOW_WIDTH, WINDOW_HEIGHT))
             background.convert()
             window_surface.blit(background, (0, 0))
-            RESUME = Line(157, 34, 400,
-                          500, WINDOW_WIDTH, WINDOW_HEIGHT, 'resume.png')
             window_surface.blit(RESUME.image, RESUME.rect)
-            intro_text = my_final_font.render(
-                'this is the introduction.', True, (0, 0, 0))
-            window_surface.blit(intro_text, (10, 10))
+            # intro_text = my_final_font.render('this is the introduction.', True, (0, 0, 0))
+            # window_surface.blit(intro_text, (10, 10))
+            
 
         pygame.display.update()
         # 控制遊戲迴圈迭代速率
@@ -1843,4 +1898,5 @@ def game4_start():
         main_clock.tick(FPS)
 
 if __name__ == '__main__':    
-    initial()
+    # initial()
+    gameover()
