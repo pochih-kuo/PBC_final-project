@@ -65,11 +65,12 @@ def game4_start():
             self.window_width = window_width
             self.window_height = window_height
         
-    
+    '''
     pygame.init()
     # load window surface
     window_surface = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
     pygame.display.set_caption('Maximize Your Utility!')
+    '''
     
     
     computer = Line(COMPUTERWIDTH, COMPUTERHEIGHT, computer_x_position, computer_y_position, WINDOW_WIDTH, WINDOW_HEIGHT, computerpath)
@@ -256,6 +257,7 @@ def game4_start():
         # 控制遊戲迴圈迭代速率
         main_clock.tick(FPS)
 
-
+'''
 if __name__ == '__main__':
     print(game4_start())
+'''
