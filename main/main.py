@@ -13,7 +13,7 @@ clock = pygame.time.Clock()
 
 pygame.init()
 # 設定字型
-font1 = pygame.font.Font(None, 50)
+font1 = pygame.font.Font('SourceHanSansTC-Bold.otf', 38)
 font2 = pygame.font.Font(None, 28)
 font3 = pygame.font.Font(None, 20)
 font4 = pygame.font.Font(None, 40)
@@ -810,19 +810,19 @@ def final(point):  # 遊戲結束畫面
     result = list(point_list[0])
     prize = ""
     if result[0] == "Health":
-        prize = "Sunshine Boy"
+        prize = "BMI22的健康寶寶"
     elif result[0] == "Love":
-        prize = "Heartthrob"
+        prize = "縱橫戰場的情場老手"
     elif result[0] == "Friend":
-        prize = "King of Friends"
+        prize = "男女通吃的朋友王"
     elif result[0] == "Money":
-        prize = "Rich man"
+        prize = "畢業即退休的投資達人"
     elif result[0] == "Study":
-        prize = "knowledgeable Boy"
+        prize = "拿過八次書卷的超級學霸"
     
     # 顯示遊戲結果
     textPrize = font1.render(prize, True, (165,42,42))
-    pos_Prize = [150, 150]
+    pos_Prize = [100, 135]
     bg.blit(textPrize, pos_Prize)
 
     # 顯示畫布
@@ -836,8 +836,8 @@ def final(point):  # 遊戲結束畫面
                 sys.exit()
 
             if event.type == pygame.MOUSEBUTTONDOWN:  # 重新開始
-                if pos_Restart[0] < pygame.mouse.get_pos()[0] < pos_Restart[0]+130\
-                  and pos_Restart[1] < pygame.mouse.get_pos()[1] < pos_Restart[1]+40:
+                if pos_Finish[0] < pygame.mouse.get_pos()[0] < pos_Finish[0]+130\
+                  and pos_Finish[1] < pygame.mouse.get_pos()[1] < pos_Finish[1]+40:
                     pygame.quit()
                     sys.exit()
                 elif pos_Restart[0] < pygame.mouse.get_pos()[0] < pos_Restart[0]+150\
@@ -1898,5 +1898,5 @@ def game4_start():
         main_clock.tick(FPS)
 
 if __name__ == '__main__':    
-    # initial()
-    gameover()
+    initial()
+
