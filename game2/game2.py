@@ -10,15 +10,15 @@ def game2_start():
 
     WINDOW_WIDTH = 600
     WINDOW_HEIGHT = 600
-    IMAGEWIDTH = 100
-    IMAGEHEIGHT = 180
+    IMAGEWIDTH = 140
+    IMAGEHEIGHT = int(IMAGEWIDTH/9*16)
     FPS = 10
-    line_x_position = 130
-    line_y_position = 270
+    line_x_position = 53
+    line_y_position = 233
     show_probability1 = 60  # 每次顯示通知機率 (%)
     # show_probability2 = 30
-    path1 = 'G2-line.png'
-    path2 = 'G2-line2.png'
+    path2 = 'G2-game2_msg1.png'
+    path1 = 'G2-game2_msg2.png'
     gpa_lsit = [4.3, 4.0, 3.7, 3.3, 3.0, 2.7, 2.3, 2.0, 1.7, 0]
 
     class Line(pygame.sprite.Sprite):
@@ -27,8 +27,7 @@ def game2_start():
             # 載入圖片
             self.raw_image = pygame.image.load(path).convert_alpha()
             # 縮小圖片
-            self.image = pygame.transform.scale(
-                self.raw_image, (width, height))
+            self.image = pygame.transform.scale(self.raw_image, (width, height))
             #  回傳位置
             self.rect = self.image.get_rect()
             #  定位
@@ -174,8 +173,9 @@ def game2_start():
                 background_raw, (WINDOW_WIDTH, WINDOW_HEIGHT))
             background.convert()
             window_surface.blit(background, (0, 0))
-            window_surface.blit(pygame.transform.scale(pygame.image.load('G2-iphone7.png').convert_alpha()\
-                , (240, 240)), (60, 240))
+            # phone = Line(360, 360, 28,
+                                # 140, WINDOW_WIDTH, WINDOW_HEIGHT, 'G2-iphone7.png')
+            # window_surface.blit(phone.image, phone.rect)
             window_surface.blit(line.image, line.rect)
             window_surface.blit(text_surface, (10, 25))
             window_surface.blit(clock_surface, (10, 5))
@@ -266,8 +266,8 @@ def game2_start():
 
         elif game_over_time == 2:  # 遊戲說明畫面
         
-            RESUME = Line(157, 34, 400,
-                          500, WINDOW_WIDTH, WINDOW_HEIGHT, 'G2-resume.png')
+            RESUME = Line(157, 34, 350,
+                          400, WINDOW_WIDTH, WINDOW_HEIGHT, 'G2-resume.png')
             # cursor
             if RESUME.rect.topleft[0] < pygame.mouse.get_pos()[0] < RESUME.rect.topleft[0] + RESUME.width \
                 and RESUME.rect.topleft[1] < pygame.mouse.get_pos()[1] < RESUME.rect.topleft[1] + RESUME.height:
@@ -276,16 +276,15 @@ def game2_start():
                 pygame.mouse.set_cursor(*pygame.cursors.tri_left)       
                 
             background_raw = pygame.image.load(
-                'G2-background2.jpg')
+                'G2-intro1.png')
             # 調整背景圖片大小
             background = pygame.transform.scale(
                 background_raw, (WINDOW_WIDTH, WINDOW_HEIGHT))
             background.convert()
             window_surface.blit(background, (0, 0))
             window_surface.blit(RESUME.image, RESUME.rect)
-            intro_text = my_final_font.render(
-                'this is the introduction.', True, (0, 0, 0))
-            window_surface.blit(intro_text, (10, 10))
+            # intro_text = my_final_font.render('this is the introduction.', True, (0, 0, 0))
+            # window_surface.blit(intro_text, (10, 10))
             
 
         pygame.display.update()
