@@ -10,11 +10,11 @@ def game2_start():
 
     WINDOW_WIDTH = 600
     WINDOW_HEIGHT = 600
-    IMAGEWIDTH = 60
-    IMAGEHEIGHT = 110
+    IMAGEWIDTH = 100
+    IMAGEHEIGHT = 180
     FPS = 10
-    line_x_position = 80
-    line_y_position = 150
+    line_x_position = 130
+    line_y_position = 270
     show_probability1 = 60  # 每次顯示通知機率 (%)
     # show_probability2 = 30
     path1 = 'G2-line.png'
@@ -84,7 +84,7 @@ def game2_start():
 
     while True:
 
-        if game_over_time == 0 and pygame.time.get_ticks()-start_ticks > 3001:  # 遊戲打開 {} 秒後結束
+        if game_over_time == 0 and pygame.time.get_ticks()-start_ticks > 30001:  # 遊戲打開 {} 秒後結束
             game_over_time = 1
 
         # 偵測事件
@@ -174,6 +174,8 @@ def game2_start():
                 background_raw, (WINDOW_WIDTH, WINDOW_HEIGHT))
             background.convert()
             window_surface.blit(background, (0, 0))
+            window_surface.blit(pygame.transform.scale(pygame.image.load('G2-iphone7.png').convert_alpha()\
+                , (240, 240)), (60, 240))
             window_surface.blit(line.image, line.rect)
             window_surface.blit(text_surface, (10, 25))
             window_surface.blit(clock_surface, (10, 5))
@@ -220,7 +222,7 @@ def game2_start():
                                               interpersonal_relationship, health_value, text_surface_list)
 
             GPA = Line(int(141*0.9), int(68*0.9), 50, 50,
-                       WINDOW_WIDTH, WINDOW_HEIGHT, 'gpa.png')
+                       WINDOW_WIDTH, WINDOW_HEIGHT, 'G2-gpa.png')
             love = Line(60, 60, 50, 50 + 70*1,
                         WINDOW_WIDTH, WINDOW_HEIGHT, 'love.png')
             #money = Line(60, 60, 50,
@@ -254,7 +256,7 @@ def game2_start():
             window_surface.blit(background, (0, 0))
             group.draw(window_surface)
             RESUME = Line(157, 34, 400,
-                          500, WINDOW_WIDTH, WINDOW_HEIGHT, 'resume.png')
+                          500, WINDOW_WIDTH, WINDOW_HEIGHT, 'G2-resume.png')
             window_surface.blit(RESUME.image, RESUME.rect)
             for i in range(len(text_surface_list)):
                 window_surface.blit(
@@ -265,7 +267,7 @@ def game2_start():
         elif game_over_time == 2:  # 遊戲說明畫面
         
             RESUME = Line(157, 34, 400,
-                          500, WINDOW_WIDTH, WINDOW_HEIGHT, 'resume.png')
+                          500, WINDOW_WIDTH, WINDOW_HEIGHT, 'G2-resume.png')
             # cursor
             if RESUME.rect.topleft[0] < pygame.mouse.get_pos()[0] < RESUME.rect.topleft[0] + RESUME.width \
                 and RESUME.rect.topleft[1] < pygame.mouse.get_pos()[1] < RESUME.rect.topleft[1] + RESUME.height:
