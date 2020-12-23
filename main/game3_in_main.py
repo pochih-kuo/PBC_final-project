@@ -1,5 +1,5 @@
 
-# 請複製整份 code 到 main.py 謝謝。return in line 138
+
 def game3():
     
     import sys, time
@@ -42,14 +42,13 @@ def game3():
     
     '''
     pygame.init()
-    
+
     # load window surface
     window_surface = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
-    pygame.display.set_caption('Choose Wisely')
+    pygame.display.set_caption('Choose Wisely')'''
     group = pygame.sprite.Group()
-    '''
     ok = Picture(300-40, 480,'ok.png', 0)
-    ok.image = pygame.transform.scale(ok.raw_image, (80, 80))
+    ok.image = pygame.transform.scale(ok.raw_image, (94, 68))
     square_for_clothes = Picture(WINDOW_WIDTH, WINDOW_HEIGHT, 'square.png', 0)  # 把 square 藏在右下角
     square_for_pants = Picture(WINDOW_WIDTH, WINDOW_HEIGHT, 'square.png', 0)  # 把 square 藏在右下角
     square_for_shoes = Picture(WINDOW_WIDTH, WINDOW_HEIGHT, 'square.png', 0)  # 把 square 藏在右下角
@@ -138,6 +137,27 @@ def game3():
                     return romantic_relationship, money, health, academic_performance, interpersonal_relationship
   
         if page == 1:  # 遊戲畫面
+        
+            # cursor
+            touch = 0
+            for item in list:
+                if item.rect.topleft[0] < pygame.mouse.get_pos()[0] < item.rect.topleft[0] + IMAGEWIDTH \
+                    and item.rect.topleft[1] < pygame.mouse.get_pos()[1] < item.rect.topleft[1] + IMAGEHEIGHT:
+                    # pygame.mouse.set_cursor(*pygame.cursors.diamond)
+                    touch = 1
+                    break
+
+            if ok.rect.topleft[0] < pygame.mouse.get_pos()[0] < ok.rect.topleft[0] + 80 \
+                and ok.rect.topleft[1] < pygame.mouse.get_pos()[1] < ok.rect.topleft[1] + 80:
+                touch = 1
+                # pygame.mouse.set_cursor(*pygame.cursors.diamond)
+            
+            if touch == 1:
+                pygame.mouse.set_cursor(*pygame.cursors.diamond)
+            else:
+                pygame.mouse.set_cursor(*pygame.cursors.tri_left)
+            
+            # 計分
             points = clothes_points + pants_point + shoes_point
             # 遊戲分數儀表板
             text_surface = my_font.render('$$ = {}'.format(round(points,2)), True, (0, 0, 0))
@@ -156,6 +176,14 @@ def game3():
             window_surface.blit(text_surface, (10, 5 ))
         
         elif page == 2 :  # 顯示分數    
+        
+            # cursor
+            if RESUME.rect.topleft[0] < pygame.mouse.get_pos()[0] < RESUME.rect.topleft[0] + RESUME.width \
+                and RESUME.rect.topleft[1] < pygame.mouse.get_pos()[1] < RESUME.rect.topleft[1] + RESUME.height:
+                pygame.mouse.set_cursor(*pygame.cursors.diamond)
+            else:
+                pygame.mouse.set_cursor(*pygame.cursors.tri_left)
+            
             points = clothes_points + pants_point + shoes_point
             # 遊戲分數儀表板
             text_surface = my_font.render('$$ = {}'.format(round(points,2)), True, (0, 0, 0))
@@ -271,31 +299,37 @@ def game3():
                         text_surface_list[i], (300, 220 + 70*i))  # text position
 
         elif page == 0:  # 遊戲說明畫面
+        
+            # RESUME button
+            RESUME = Picture(400, 400, 'play.png', 0)
+            RESUME.image = pygame.transform.scale(RESUME.raw_image, (117, 34))
+            RESUME.width = 117
+            RESUME.height = 34
+
+
+            # cursor
+            if RESUME.rect.topleft[0] < pygame.mouse.get_pos()[0] < RESUME.rect.topleft[0] + RESUME.width \
+                and RESUME.rect.topleft[1] < pygame.mouse.get_pos()[1] < RESUME.rect.topleft[1] + RESUME.height:
+                pygame.mouse.set_cursor(*pygame.cursors.diamond)
+            else:
+                pygame.mouse.set_cursor(*pygame.cursors.tri_left)
+            
+            # 渲染物件
             background_raw = pygame.image.load(
                 'G3-background2.jpg')
-            # 調整背景圖片大小
             background = pygame.transform.scale(
                 background_raw, (WINDOW_WIDTH, WINDOW_HEIGHT))
             background.convert()
             window_surface.blit(background, (0, 0))
-            
-            # RESUME button
-            RESUME = Picture(400, 500, 'start.png', 0)
-            RESUME.image = pygame.transform.scale(RESUME.raw_image, (117, 34))
-            RESUME.width = 117
-            RESUME.height = 34
+
+            intro = pygame.image.load('G3-intro1.png')
+            window_surface.blit(intro, (0, 0))            
             window_surface.blit(RESUME.image, RESUME.rect)
-            
-            # introduction text
-            my_intro_font = pygame.font.SysFont(None, 50)
-            intro_text = my_intro_font.render(
-                'this is the introduction.', True, (0, 0, 0))
-            window_surface.blit(intro_text, (10, 10))
-        
+
         pygame.display.update()
         # 控制遊戲迴圈迭代速率
         main_clock.tick(FPS)
         
-
-# if __name__ == '__main__':    
-    # game3()
+'''
+if __name__ == '__main__':    
+    main()'''

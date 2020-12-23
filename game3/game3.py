@@ -48,7 +48,7 @@ def main():
     pygame.display.set_caption('Choose Wisely')
     group = pygame.sprite.Group()
     ok = Picture(300-40, 480,'ok.png', 0)
-    ok.image = pygame.transform.scale(ok.raw_image, (80, 80))
+    ok.image = pygame.transform.scale(ok.raw_image, (94, 68))
     square_for_clothes = Picture(WINDOW_WIDTH, WINDOW_HEIGHT, 'square.png', 0)  # 把 square 藏在右下角
     square_for_pants = Picture(WINDOW_WIDTH, WINDOW_HEIGHT, 'square.png', 0)  # 把 square 藏在右下角
     square_for_shoes = Picture(WINDOW_WIDTH, WINDOW_HEIGHT, 'square.png', 0)  # 把 square 藏在右下角
@@ -301,7 +301,7 @@ def main():
         elif page == 0:  # 遊戲說明畫面
         
             # RESUME button
-            RESUME = Picture(400, 500, 'start.png', 0)
+            RESUME = Picture(400, 400, 'play.png', 0)
             RESUME.image = pygame.transform.scale(RESUME.raw_image, (117, 34))
             RESUME.width = 117
             RESUME.height = 34
@@ -321,15 +321,10 @@ def main():
                 background_raw, (WINDOW_WIDTH, WINDOW_HEIGHT))
             background.convert()
             window_surface.blit(background, (0, 0))
-            window_surface.blit(RESUME.image, RESUME.rect)
-            
-            # introduction text
-            # my_intro_font = pygame.font.SysFont(None, 50)
-            # intro_text = my_intro_font.render(
-                # 'this is the introduction.', True, (0, 0, 0))
-            # window_surface.blit(intro_text, (10, 10))
+
             intro = pygame.image.load('G3-intro1.png')
-            window_surface.blit(intro, (0, 0))
+            window_surface.blit(intro, (0, 0))            
+            window_surface.blit(RESUME.image, RESUME.rect)
 
         pygame.display.update()
         # 控制遊戲迴圈迭代速率

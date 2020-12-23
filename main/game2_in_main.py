@@ -208,9 +208,9 @@ def game2_start():
                 interpersonal_relationship = 0
                 health_value = 10
 
-            else:
+            else: # point > 4
                 academic_performance = 30
-                romantic_relationship = 0  # 學霸加成
+                romantic_relationship = -30
                 interpersonal_relationship = 10
                 health_value = 20
 
@@ -255,8 +255,8 @@ def game2_start():
             background.convert()
             window_surface.blit(background, (0, 0))
             group.draw(window_surface)
-            RESUME = Line(157, 34, 400,
-                          500, WINDOW_WIDTH, WINDOW_HEIGHT, 'G2-resume.png')
+            RESUME = Line(233, 34, 300,
+                          500, WINDOW_WIDTH, WINDOW_HEIGHT, 'G2-back_to_map.png')
             window_surface.blit(RESUME.image, RESUME.rect)
             for i in range(len(text_surface_list)):
                 window_surface.blit(
@@ -266,22 +266,25 @@ def game2_start():
 
         elif game_over_time == 2:  # 遊戲說明畫面
         
-            RESUME = Line(int(185/2), int(67/2), 400,
+            RESUME = Line(int(185/2), int(67/2), 430,
                           430, WINDOW_WIDTH, WINDOW_HEIGHT, 'G2-play.png')
-                          
+            # cursor
             if RESUME.rect.topleft[0] < pygame.mouse.get_pos()[0] < RESUME.rect.topleft[0] + RESUME.width \
                 and RESUME.rect.topleft[1] < pygame.mouse.get_pos()[1] < RESUME.rect.topleft[1] + RESUME.height:
                 pygame.mouse.set_cursor(*pygame.cursors.diamond)
             else:
                 pygame.mouse.set_cursor(*pygame.cursors.tri_left)       
                 
-            background_raw = pygame.image.load(
-                'G2-intro1.png')
+            background_raw = pygame.image.load('G2-background2.jpg')
             # 調整背景圖片大小
             background = pygame.transform.scale(
                 background_raw, (WINDOW_WIDTH, WINDOW_HEIGHT))
+            intro_raw = pygame.image.load('G2-intro1.png')
+            intro = pygame.transform.smoothscale(
+                intro_raw, (WINDOW_WIDTH, WINDOW_HEIGHT))
             background.convert()
             window_surface.blit(background, (0, 0))
+            window_surface.blit(intro, (0, 0))
             window_surface.blit(RESUME.image, RESUME.rect)
             # intro_text = my_final_font.render('this is the introduction.', True, (0, 0, 0))
             # window_surface.blit(intro_text, (10, 10))
