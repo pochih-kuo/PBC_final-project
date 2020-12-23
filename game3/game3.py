@@ -1,6 +1,6 @@
 
 
-def main():
+def game3():
     
     import sys, time
     import random
@@ -263,36 +263,42 @@ def main():
                 health = 0
                 if score <= 60:
                     academic_performance = -30
-                    romantic_relationship = 30
+                    romantic_relationship = -30
                     interpersonal_relationship = 10
-                    money = 0
                 elif 60 < score <= 70:
                     academic_performance = -10
-                    romantic_relationship = 20
+                    romantic_relationship = -20
                     interpersonal_relationship = 10
-                    money = 0
                 elif 70 < score <= 80:
                     academic_performance = 0
                     romantic_relationship = 10
                     interpersonal_relationship = 10
-                    money = 0
                 elif 80 < score <= 90:
                     academic_performance = 10
-                    romantic_relationship = -10
+                    romantic_relationship = 10
                     interpersonal_relationship = 0
-                    money = 0
-                else:
+                else: # score > 90
                     academic_performance = 30
                     romantic_relationship = 0  # 學霸加成
                     interpersonal_relationship = 10
-                    money = 20
+                
+                if points < 12:
+                    money = 30
+                elif 12 <= points < 14:
+                    money = -10
+                elif 14 <= points < 16:
+                    money = -20
+                elif 16 <= points < 18:
+                    money = -25
+                else:  # points = 18
+                    money = -30
                 
                 text_surface_list = []
                 text_surface_list = print_sirting(
                                               academic_performance, romantic_relationship,
                                               interpersonal_relationship, money, text_surface_list)
-                RESUME = Line(157, 34, 400,
-                          500, WINDOW_WIDTH, WINDOW_HEIGHT, 'resume.png')
+                RESUME = Line(233, 34, 300,
+                          500, WINDOW_WIDTH, WINDOW_HEIGHT, 'back_to_map.png')
                 window_surface.blit(RESUME.image, RESUME.rect)
                 for i in range(len(text_surface_list)):
                     window_surface.blit(
@@ -322,7 +328,9 @@ def main():
             background.convert()
             window_surface.blit(background, (0, 0))
 
-            intro = pygame.image.load('G3-intro1.png')
+            intro_raw = pygame.image.load('G3-intro1.png')
+            intro = pygame.transform.smoothscale(
+                intro_raw, (WINDOW_WIDTH, WINDOW_HEIGHT))
             window_surface.blit(intro, (0, 0))            
             window_surface.blit(RESUME.image, RESUME.rect)
 
