@@ -5,7 +5,7 @@ import os
 import pygame
 from pygame.locals import Color, QUIT, MOUSEBUTTONDOWN, USEREVENT
 
-WINDOW_WIDTH = 800
+WINDOW_WIDTH = 600
 WINDOW_HEIGHT = 600
 BOSSWIDTH = 150
 BOSSHEIGHT = 470
@@ -14,12 +14,12 @@ COMPUTERHEIGHT = 320
 PHONEWIDTH = 40
 PHONEHEIGHT = 50
 FPS = 10
-boss_x_position = 50
-boss_y_position = 130
-computer_x_position = 247
+boss_x_position = 30
+boss_y_position = 120
+computer_x_position = 150
 computer_y_position = 220
-phone_x_position = 200
-phone_y_position = 455
+phone_x_position = 400
+phone_y_position = 470
 show_probability1 = 60  # 每次顯示通知機率 (%)
 # show_probability2 = 30
 bosspath = os.path.abspath('boss.gif')
@@ -108,9 +108,9 @@ def main():
                 if computer.rect.topleft[0] < pygame.mouse.get_pos()[0] < computer.rect.topleft[0] + COMPUTERWIDTH \
                    and computer.rect.topleft[1] < pygame.mouse.get_pos()[1] < computer.rect.topleft[1] + COMPUTERHEIGHT:
                     # 算分
-                    salary += 50
+                    salary += 300
                 else:
-                    salary -= 50
+                    salary -= 300
 
                 if salary <= 0:
                     salary = 0
@@ -121,10 +121,10 @@ def main():
                    and phone.rect.topleft[1] < pygame.mouse.get_pos()[1] < phone.rect.topleft[1] + PHONEHEIGHT:
                    
                     # 算分
-                    satisfaction += 50
+                    satisfaction += 300
                 
                 else:
-                    satisfaction -= 50
+                    satisfaction -= 300
 
                 if satisfaction <= 0:
                     satisfaction = 0
