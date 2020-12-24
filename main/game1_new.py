@@ -120,14 +120,14 @@ def game1_start():
                         draw_text("wealth = 30", 20, (255, 255, 255), 300, 200)
                         pygame.display.update()
                         ######印出減分
-                        time.sleep(5)
-                        time.sleep(1)
-                        romantic_relationship = 60
-                        money = 60
-                        health = 60
-                        academic_performance = 60
-                        interpersonal_relationship = 60
+                        time.sleep(2)
+                        romantic_relationship = 10
+                        money = 0
+                        health = 0
+                        academic_performance = 0
+                        interpersonal_relationship = 0
                         return romantic_relationship, money, health, academic_performance,interpersonal_relationship
+                        
                     for event in pygame.event.get():
                         if event.type == pygame.QUIT:
                             pygame.quit()
@@ -162,13 +162,15 @@ def game1_start():
                             draw_text("health = 40", 20, (255, 255, 255), 300, 225)
                             draw_text("wealth = 30", 20, (255, 255, 255), 300, 200)
                             pygame.display.update()
-                            time.sleep(5)
-                            romantic_relationship = 60
-                            money = 30
-                            health = 30
-                            academic_performance = 60
-                            interpersonal_relationship = 40
+                            time.sleep(2)
+                            romantic_relationship = 0
+                            money = -30
+                            health = -30
+                            academic_performance = 0
+                            interpersonal_relationship = -20
                             return romantic_relationship, money, health, academic_performance,interpersonal_relationship
+
+                    
                     #draw()
                     gameDisplay.fill((255, 255, 255))
                     gameDisplay.blit(space, (0,0,600,600))    # 背景尺寸要改
@@ -183,4 +185,4 @@ def game1_start():
         draw_text('Start', 25, (255, 255, 255), 250+(100/2), 350+(50/2))
 
         pygame.display.update()
-        clock.tick(30)            
+        clock.tick(30)
