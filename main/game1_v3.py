@@ -1,4 +1,14 @@
 def game1_start():
+
+    import sys, math
+    import pygame
+    from pygame.locals import Color, QUIT, MOUSEBUTTONDOWN, USEREVENT
+    import webbrowser
+    import random
+    from random import randint
+    import time
+    import os
+
     FPS = 60
     PLAYER_SPEED_X = 5
     space = pygame.image.load('G1-background.png')
@@ -14,6 +24,7 @@ def game1_start():
     window_surface = pygame.display.set_mode((600, 600))
     WINDOW_WIDTH=600
     WINDOW_HEIGHT=600
+    final = 3
 
     class Line(pygame.sprite.Sprite):
         def __init__(self, width, height, x_position, y_position, window_width, window_height, path):
@@ -115,146 +126,132 @@ def game1_start():
                 quit()
         gameDisplay.fill((0, 0, 0))
 #-----------------------------------------------------------------------------------------------
-        RESUME = Line(157, 34, 350,400, 600, 600, 'G2-resume.png')
-            # cursor
-        if RESUME.rect.topleft[0] < pygame.mouse.get_pos()[0] < RESUME.rect.topleft[0] + RESUME.width \
-            and RESUME.rect.topleft[1] < pygame.mouse.get_pos()[1] < RESUME.rect.topleft[1] + RESUME.height:
-            pygame.mouse.set_cursor(*pygame.cursors.diamond)
-        else:
-            pygame.mouse.set_cursor(*pygame.cursors.tri_left)       
+        if final == 3:   # 遊戲說明
+            RESUME = Line(157, 34, 350,400, 600, 600, 'G2-resume.png')
+                # cursor
+            if RESUME.rect.topleft[0] < pygame.mouse.get_pos()[0] < RESUME.rect.topleft[0] + RESUME.width \
+                and RESUME.rect.topleft[1] < pygame.mouse.get_pos()[1] < RESUME.rect.topleft[1] + RESUME.height:
+                pygame.mouse.set_cursor(*pygame.cursors.diamond)
+            else:
+                pygame.mouse.set_cursor(*pygame.cursors.tri_left)       
 
-        background_raw = pygame.image.load('G2-intro1.png')
-        background = pygame.transform.scale(background_raw, (600, 600))
-        background.convert()
-        window_surface.blit(background, (0, 0))
-        window_surface.blit(RESUME.image, RESUME.rect)
+            background_raw = pygame.image.load('G2-intro1.png')
+            background = pygame.transform.scale(background_raw, (600, 600))
+            background.convert()
+            window_surface.blit(background, (0, 0))
+            window_surface.blit(RESUME.image, RESUME.rect)
+            
+
+            # button("Start", 250, 350, 100, 50,(200, 0, 0), (255, 0, 0))    # button    # new
+
+            mouse = pygame.mouse.get_pos()
+            click = pygame.mouse.get_pressed()
+
+            my_font=pygame.font.SysFont(None, 30)
         
+            if RESUME.rect.topleft[0] < pygame.mouse.get_pos()[0] < RESUME.rect.topleft[0] + RESUME.width \
+                and RESUME.rect.topleft[1] < pygame.mouse.get_pos()[1] < RESUME.rect.topleft[1] + RESUME.height:
+                # 要改 click
+                final = 2
 
-        # button("Start", 250, 350, 100, 50,(200, 0, 0), (255, 0, 0))    # button    # new
+        elif final == 2:   # 遊戲畫面  
+            #new()
+            stones = []
 
-        mouse = pygame.mouse.get_pos()
-        click = pygame.mouse.get_pressed()
-
-        my_font=pygame.font.SysFont(None, 30)
-        
-        if RESUME.rect.topleft[0] < pygame.mouse.get_pos()[0] < RESUME.rect.topleft[0] + RESUME.width \
-            and RESUME.rect.topleft[1] < pygame.mouse.get_pos()[1] < RESUME.rect.topleft[1] + RESUME.height:
-            if click[0] == 1:
-                
-                #new()
-                stones = []
-
-                student = Student()
-                start_ticks=pygame.time.get_ticks()
-                #seconds = 30 - (pygame.time.get_ticks()-start_ticks)//1000
-                #clock_surface = my_font.render("00:%02d" % seconds, True, (0, 0, 0))
-                #gameDisplay.blit(clock_surface, (10, 5))
-                while True:
-                    seconds = 30 - (pygame.time.get_ticks()-start_ticks)//1000
-                    clock_surface = my_font.render("00:%02d" % seconds, True, (0, 0, 0))
-                    gameDisplay.blit(clock_surface, (10, 5))
-                    pygame.display.update()
-                    if pygame.time.get_ticks() - start_ticks > 30001:    #30秒
-                        draw_text("You AG!", 80, (255, 255, 255), 300, 300)
-                        final = 0
-                        pygame.display.update()
-                        time.sleep(1)
-                        gameDisplay.fill((255, 255, 255))
-                        gameDisplay.blit(blue, (0,0,600,600)) 
-                        pygame.display.update()
-                        time.sleep(1)
-                        gameDisplay.blit(health, (60,60,50,70))
-                        gameDisplay.blit(friend, (60,140,50,140))
-                        draw_text("+20", 60, (0,0,0),160,100)
-                        draw_text("+20", 60, (0,0,0),160,170)
-
-                        RESUME = Line(157, 34, 350,400, 600, 600, 'G2-resume.png')
-                        window_surface.blit(RESUME.image, RESUME.rect)
-                        pygame.display.update()
-                        time.sleep(3)
-                        
-                        # if RESUME.rect.topleft[0] < pygame.mouse.get_pos()[0] < RESUME.rect.topleft[0] + RESUME.width \
-                        # and RESUME.rect.topleft[1] < pygame.mouse.get_pos()[1] < RESUME.rect.topleft[1] + RESUME.height:
-                            # pygame.mouse.set_cursor(*pygame.cursors.diamond)
-                        # else:
-                            # pygame.mouse.set_cursor(*pygame.cursors.tri_left)
-                        # window_surface.blit(RESUME.image, RESUME.rect)
-                        # if RESUME.rect.topleft[0] < pygame.mouse.get_pos()[0] < RESUME.rect.topleft[0] + RESUME.width \
-                        # and RESUME.rect.topleft[1] < pygame.mouse.get_pos()[1] < RESUME.rect.topleft[1] + RESUME.height:
-                            # if click[0] == 1:
-                                # romantic_relationship = 0
-                                # money = 0
-                                # health_value = +20
-                                # academic_performance = 0
-                                # interpersonal_relationship = +20
-                                # return romantic_relationship, money, health_value, academic_performance,interpersonal_relationship
-                        
-                        # else:
-                            # time.sleep(100)
-
-                        romantic_relationship = 0
-                        money = 0
-                        health_value = +20
-                        academic_performance = 0
-                        interpersonal_relationship = +20
-                        return romantic_relationship, money, health_value, academic_performance,interpersonal_relationship
-                        
-                    for event in pygame.event.get():
-                        if event.type == pygame.QUIT:
-                            pygame.quit()
-                            quit()
-                    #update()
-                    now = pygame.time.get_ticks()
-                    if now - last_spawn_stone >= 800:
-                        stones.append(Stone())
-                        last_spawn_stone = now
-                        
-                    student.update()    # 更新學生
+            student = Student()
+            start_ticks=pygame.time.get_ticks()
+            #seconds = 30 - (pygame.time.get_ticks()-start_ticks)//1000
+            #clock_surface = my_font.render("00:%02d" % seconds, True, (0, 0, 0))
+            #gameDisplay.blit(clock_surface, (10, 5))
+            while final == 2:
+                seconds = 30 - (pygame.time.get_ticks()-start_ticks)//1000
+                clock_surface = my_font.render("00:%02d" % seconds, True, (0, 0, 0))
+                gameDisplay.blit(clock_surface, (10, 5))
+                pygame.display.update()
+                if pygame.time.get_ticks() - start_ticks > 3001:    #30秒
+                    draw_text("You AG!", 80, (255, 255, 255), 300, 300)
+                    final = 0
                     
-                    for stone in stones:
-                        stone.update()    # 更新石頭
-                        if stone.pos_y >= 600:    # 如果石頭超出範圍，除掉
-                            stones.remove(stone)
 
-                    for stone in stones:    # 每顆石頭檢查碰撞
-                        if collision_check(student, stone):    # collision_check
-                            final = 1
-                            draw_text("Lose!", 80, (255, 255, 255), 300, 300)
-                            pygame.display.update()
-                            time.sleep(1)
-                            gameDisplay.fill((255, 255, 255))
-                            gameDisplay.blit(blue, (0,0,600,600)) 
-                            pygame.display.update()
-                            time.sleep(1)
-                            gameDisplay.blit(health, (60,60,50,70))
-                            gameDisplay.blit(money, (60,140,50,140))
-                            gameDisplay.blit(friend, (60,210,50,210))
-                            draw_text("-30", 60, (0,0,0),160,100)
-                            draw_text("-30", 60, (0,0,0),160,170)
-                            draw_text("-20", 60, (0,0,0),160,240)
-                            RESUME = Line(157, 34, 350,400, 600, 600, 'G2-resume.png')
-                            window_surface.blit(RESUME.image, RESUME.rect)
+                    romantic_relationship = 0
+                    money = 0
+                    health_value = +20
+                    academic_performance = 0
+                    interpersonal_relationship = +20
+                    #return romantic_relationship, money, health_value, academic_performance,interpersonal_relationship
+                    
+                for event in pygame.event.get():
+                    if event.type == pygame.QUIT:
+                        pygame.quit()
+                        quit()
+                #update()
+                now = pygame.time.get_ticks()
+                if now - last_spawn_stone >= 800:
+                    stones.append(Stone())
+                    last_spawn_stone = now
+                    
+                student.update()    # 更新學生
+                
+                for stone in stones:
+                    stone.update()    # 更新石頭
+                    if stone.pos_y >= 600:    # 如果石頭超出範圍，除掉
+                        stones.remove(stone)
 
-                            pygame.display.update()
-                            time.sleep(3)
-                            romantic_relationship = 0
-                            money = -30
-                            health_value = -30
-                            academic_performance = 0
-                            interpersonal_relationship = -20
+                for stone in stones:    # 每顆石頭檢查碰撞
+                    if collision_check(student, stone):    # collision_check
+                        draw_text("Lose!", 80, (255, 255, 255), 300, 300)
+                        final = 1
+                        
+                gameDisplay.fill((255, 255, 255))
+                gameDisplay.blit(space, (0,0,600,600))
+                student.draw()
+                for stone in stones:
+                    stone.draw()
+                pygame.display.update()
+                clock.tick(FPS)
+        
+        elif final == 1:  # lose
+            # draw_text("Lose!", 80, (255, 255, 255), 300, 300)
+            
+            time.sleep(1)
+            gameDisplay.fill((255, 255, 255))
+            gameDisplay.blit(blue, (0,0,600,600)) 
+            
+            time.sleep(1)
+            gameDisplay.blit(health, (60,60,50,70))
+            gameDisplay.blit(money, (60,140,50,140))
+            gameDisplay.blit(friend, (60,210,50,210))
+            draw_text("-30", 60, (0,0,0),160,100)
+            draw_text("-30", 60, (0,0,0),160,170)
+            draw_text("-20", 60, (0,0,0),160,240)
+            RESUME = Line(157, 34, 350,400, 600, 600, 'G2-resume.png')
+            window_surface.blit(RESUME.image, RESUME.rect)
 
-                            return romantic_relationship, money, health_value, academic_performance,interpersonal_relationship
-                    #draw()
-                    gameDisplay.fill((255, 255, 255))
-                    gameDisplay.blit(space, (0,0,600,600))
-                    student.draw()
-                    for stone in stones:
-                        stone.draw()
-                    pygame.display.update()
-                    clock.tick(60)
+            
+            #time.sleep(3)
+            romantic_relationship = 0
+            money_value = -30
+            health_value = -30
+            academic_performance = 0
+            interpersonal_relationship = -20
 
-        else:
-            pass
+            #return romantic_relationship, money, health_value, academic_performance,interpersonal_relationship
+        
+        elif final == 0:  # win
+            
+            time.sleep(1)
+            gameDisplay.fill((255, 255, 255))
+            gameDisplay.blit(blue, (0,0,600,600)) 
+            time.sleep(1)
+            gameDisplay.blit(health, (60,60,50,70))
+            gameDisplay.blit(friend, (60,140,50,140))
+            draw_text("+20", 60, (0,0,0),160,100)
+            draw_text("+20", 60, (0,0,0),160,170)
 
+            RESUME = Line(157, 34, 350,400, 600, 600, 'G2-resume.png')
+            window_surface.blit(RESUME.image, RESUME.rect)
+            
         pygame.display.update()
-        clock.tick(30)
+        clock.tick(FPS)
+
+game1_start()
