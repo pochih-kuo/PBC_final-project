@@ -19,7 +19,8 @@ font3 = pygame.font.Font(None, 20)
 font4 = pygame.font.Font(None, 40)
 screen = pygame.display.set_mode((win_width, win_height))
 pygame.display.set_caption("My Life in NTU")  # 設定視窗標題
-
+pygame.mixer.music.load('bgm.mp3')
+pygame.mouse.set_cursor(*pygame.cursors.diamond)
 def initial():  # 遊戲初始畫面
     # 設定畫布並插入背景圖片
     bg = pygame.Surface((win_width, win_height))
@@ -260,6 +261,8 @@ def stage1(point, grade):  # 大一畫面
     screen.blit(bg,(0,0))
     pygame.display.update()
 
+    pygame.mixer.music.play()
+
     # 計算是否失敗
     point_list = list(point.items())
     point_list.sort(key=lambda x:x[1], reverse=True)
@@ -282,7 +285,7 @@ def stage1(point, grade):  # 大一畫面
                   and pos_Coco[1]+100 < pygame.mouse.get_pos()[1] < pos_Coco[1]+450:
                 # 進入大一遊戲畫面
                     grade += 1
-                    
+                    pygame.mixer.music.stop()
                     adj_Love, adj_Money, adj_Health, adj_Study, adj_Friend = game1_start()
                     point["Love"] += adj_Love
                     point["Money"] += adj_Money
@@ -397,17 +400,7 @@ def stage2(point, grade):  # 大二畫面
     # 顯示畫布
     screen.blit(bg,(0,0))
     pygame.display.update()
-    
-    # 計算是否失敗
-    point_list = list(point.items())
-    point_list.sort(key=lambda x:x[1], reverse=True)
-    sum_zero_point = 0
-    for pairs in point_list:
-        pairs_list = list(pairs)
-        if pairs_list[1] == 0:
-            sum_zero_point += 1
-    if sum_zero_point >= 3:
-        gameover()
+    pygame.mixer.music.play()
 
     while True:
         for event in pygame.event.get():            
@@ -420,6 +413,7 @@ def stage2(point, grade):  # 大二畫面
                   and pos_Lib[1] < pygame.mouse.get_pos()[1] < pos_Lib[1]+190:
                 # 進入大二遊戲畫面
                     grade += 1
+                    pygame.mixer.music.stop()
 
                     adj_Love, adj_Money, adj_Health, adj_Study, adj_Friend = game2_start()
                     point["Love"] += adj_Love
@@ -537,6 +531,7 @@ def stage3(point, grade):  # 大三畫面
     # 顯示畫布
     screen.blit(bg,(0,0))
     pygame.display.update()
+    pygame.mixer.music.play()
     
     while True:
         for event in pygame.event.get():            
@@ -549,6 +544,8 @@ def stage3(point, grade):  # 大三畫面
                   and pos_Dorm[1] < pygame.mouse.get_pos()[1] < pos_Dorm[1]+170:
                 # 進入大三遊戲畫面
                     grade += 1
+                    pygame.mixer.music.stop()
+
                     adj_Love, adj_Money, adj_Health, adj_Study, adj_Friend = game3()
                     point["Love"] += adj_Love
                     point["Money"] += adj_Money
@@ -670,17 +667,7 @@ def stage4(point, grade):  # 大四畫面
     # 顯示畫布
     screen.blit(bg,(0,0))
     pygame.display.update()
-
-    # 計算是否失敗
-    point_list = list(point.items())
-    point_list.sort(key=lambda x:x[1], reverse=True)
-    sum_zero_point = 0
-    for pairs in point_list:
-        pairs_list = list(pairs)
-        if pairs_list[1] == 0:
-            sum_zero_point += 1
-    if sum_zero_point >= 3:
-        gameover()
+    pygame.mixer.music.play()
 
     while True:
         for event in pygame.event.get():            
@@ -691,7 +678,9 @@ def stage4(point, grade):  # 大四畫面
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if pos_Lab[0] < pygame.mouse.get_pos()[0] < pos_Lab[0]+170\
                   and pos_Lab[1] < pygame.mouse.get_pos()[1] < pos_Lab[1]+170:
-                # 進入大四遊戲畫面
+                    # 進入大四遊戲畫面
+                    pygame.mixer.music.stop()
+
                     adj_Love, adj_Money, adj_Health, adj_Study, adj_Friend = game4_start()
                     point["Love"] += adj_Love
                     point["Money"] += adj_Money
