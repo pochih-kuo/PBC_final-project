@@ -10,24 +10,39 @@ def game4_start():
 
     WINDOW_WIDTH = 600
     WINDOW_HEIGHT = 600
-    BOSSWIDTH = 100
-    BOSSHEIGHT = 470
+    INTROWIDTH = 500
+    INTROHEIGHT = 480
+    BOSSWIDTH = 200
+    BOSSHEIGHT = 300
     COMPUTERWIDTH = 300
     COMPUTERHEIGHT = 320
-    PHONEWIDTH = 50
-    PHONEHEIGHT = 60
+    PHONEWIDTH = 80
+    PHONEHEIGHT = 100
+    ADD300WIDTH = 200
+    ADD300HEIGHT = 100
+    MINUS300WIDTH = 200
+    MINUS300HEIGHT = 100
     FPS = 10
+    intro_x_position = 50
+    intro_y_position = 50
     boss_x_position = 5
     boss_y_position = 120
-    computer_x_position = 150
+    computer_x_position = 200
     computer_y_position = 220
-    phone_x_position = 500
-    phone_y_position = 450
-    show_probability1 = 60  # 每次顯示通知機率 (%)
+    phone_x_position = 480
+    phone_y_position = 400
+    add300_x_position = 150
+    add300_y_position = 150
+    minus300_x_position = 150
+    minus300_y_position = 150
+    show_probability1 = 50  # 每次顯示通知機率 (%)
     # show_probability2 = 30
-    bosspath = os.path.abspath('G4-boss.gif')
-    computerpath = os.path.abspath('G4-computer.gif')
+    bosspath = os.path.abspath('G4-boss.png')
+    computerpath = os.path.abspath('G4-computer.png')
     phonepath = os.path.abspath('G4-phone.gif')
+    intropath = os.path.abspath('G4-intro.png')
+    add300path = os.path.abspath('G4-add300.gif')
+    minus300path = os.path.abspath('G4-minus300.gif')
 
 
     def print_sirting(academic_performance, romantic_relationship, wealth, health, text_surface_list):
@@ -55,7 +70,7 @@ def game4_start():
             # 載入圖片
             self.raw_image = pygame.image.load(path).convert_alpha()
             # 縮小圖片
-            self.image = pygame.transform.scale(self.raw_image, (width, height))
+            self.image = pygame.transform.smoothscale(self.raw_image, (width, height))
             #  回傳位置
             self.rect = self.image.get_rect()
             #  定位
@@ -65,11 +80,12 @@ def game4_start():
             self.window_width = window_width
             self.window_height = window_height
         
-    
+
     pygame.init()
     # load window surface
     window_surface = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
     pygame.display.set_caption('Maximize Your Utility!')
+
     
     
     computer = Line(COMPUTERWIDTH, COMPUTERHEIGHT, computer_x_position, computer_y_position, WINDOW_WIDTH, WINDOW_HEIGHT, computerpath)
@@ -89,7 +105,7 @@ def game4_start():
 
     while True:
 
-        if game_over_time == 0 and pygame.time.get_ticks()-start_ticks > 4000:  # 遊戲打開 {} 秒後結束
+        if game_over_time == 0 and pygame.time.get_ticks()-start_ticks > 20000:  # 遊戲打開 {} 秒後結束
             game_over_time = 1
 
         # 偵測事件
@@ -112,43 +128,42 @@ def game4_start():
                     boss = Line(BOSSWIDTH, BOSSHEIGHT, WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_WIDTH, WINDOW_HEIGHT, PATH)
                     BossIsHere = False
 
-            if event.type == MOUSEBUTTONDOWN and game_over_time == 0 and BossIsHere is True:
+            if event.type == MOUSEBUTTONDOWN and game_over_time == 0 and ran_number < show_probability1:
                 # 當使用者點擊滑鼠時，檢查是否滑鼠位置 x, y 有在電腦上
                 if computer.rect.topleft[0] < pygame.mouse.get_pos()[0] < computer.rect.topleft[0] + COMPUTERWIDTH \
                    and computer.rect.topleft[1] < pygame.mouse.get_pos()[1] < computer.rect.topleft[1] + COMPUTERHEIGHT:
                     # 算分
-                    salary += 500
-                else:
-                    salary -= 500
+                    salary += 300
 
+                    
+                else:
+                    salary -= 300
                 if salary <= 0:
                     salary = 0
-                print("HIBOSS")
 
-            elif event.type == MOUSEBUTTONDOWN and game_over_time == 0 and BossIsHere is False:
+            elif event.type == MOUSEBUTTONDOWN and game_over_time == 0 and ran_number > show_probability1:
                 # 當使用者點擊滑鼠時，檢查是否滑鼠位置 x, y 有在手機上
                 if phone.rect.topleft[0] < pygame.mouse.get_pos()[0] < phone.rect.topleft[0] + PHONEWIDTH \
                    and phone.rect.topleft[1] < pygame.mouse.get_pos()[1] < phone.rect.topleft[1] + PHONEHEIGHT:
                    
                     # 算分
-                    satisfaction += 500
+                    satisfaction += 300
                 
                 else:
-                    satisfaction -= 500
+                    satisfaction -= 300
 
                 if satisfaction <= 0:
                     satisfaction = 0
-                print("NOBOSS")
                     
             # 遊戲結束之後按下 RESUME 之後的動作
             elif event.type == MOUSEBUTTONDOWN and game_over_time == 1:
-                if RESUME.rect.topleft[0] < pygame.mouse.get_pos()[0] < RESUME.rect.topleft[0] + RESUME.width \
-                        and RESUME.rect.topleft[1] < pygame.mouse.get_pos()[1] < RESUME.rect.topleft[1] + RESUME.height:
+                if BACKTOMAP.rect.topleft[0] < pygame.mouse.get_pos()[0] < BACKTOMAP.rect.topleft[0] + BACKTOMAP.width \
+                        and BACKTOMAP.rect.topleft[1] < pygame.mouse.get_pos()[1] < BACKTOMAP.rect.topleft[1] + BACKTOMAP.height:
                     return romantic_relationship, wealth, health, academic_performance
 
             elif event.type == MOUSEBUTTONDOWN and game_over_time == 2:
-                if RESUME.rect.topleft[0] < pygame.mouse.get_pos()[0] < RESUME.rect.topleft[0] + RESUME.width \
-                        and RESUME.rect.topleft[1] < pygame.mouse.get_pos()[1] < RESUME.rect.topleft[1] + RESUME.height:
+                if PLAY.rect.topleft[0] < pygame.mouse.get_pos()[0] < PLAY.rect.topleft[0] + PLAY.width \
+                        and PLAY.rect.topleft[1] < pygame.mouse.get_pos()[1] < PLAY.rect.topleft[1] + PLAY.height:
                     start_ticks = pygame.time.get_ticks()
                     game_over_time = 0
 
@@ -175,6 +190,16 @@ def game4_start():
             window_surface.blit(phone.image, phone.rect)
             window_surface.blit(boss.image, boss.rect)
             window_surface.blit(text_surface, (10, 5))
+            
+            # cursor
+            if computer.rect.topleft[0] < pygame.mouse.get_pos()[0] < computer.rect.topleft[0] + computer.width \
+                and computer.rect.topleft[1] < pygame.mouse.get_pos()[1] < computer.rect.topleft[1] + computer.height:
+                pygame.mouse.set_cursor(*pygame.cursors.diamond)
+            elif phone.rect.topleft[0] < pygame.mouse.get_pos()[0] < phone.rect.topleft[0] + phone.width \
+                and phone.rect.topleft[1] < pygame.mouse.get_pos()[1] < phone.rect.topleft[1] + phone.height:
+                pygame.mouse.set_cursor(*pygame.cursors.diamond)
+            else:
+                pygame.mouse.set_cursor(*pygame.cursors.tri_left)
 
         elif game_over_time == 1:
             # 計算分數
@@ -188,12 +213,12 @@ def game4_start():
                 wealth = 20
 
             elif 800 <= salary < 1200:
-                academic_performance = 10
-                wealth = 10
-
-            elif 0 <= salary < 800:
                 academic_performance = 0
                 wealth = 0
+
+            elif 0 <= salary < 800:
+                academic_performance = -30
+                wealth = -30
 
             if satisfaction >= 1800:
                 romantic_relationship = 30
@@ -202,21 +227,20 @@ def game4_start():
                 romantic_relationship = 20
                 health = 20
             elif 800 <= satisfaction < 1200:
-                romantic_relationship = 10
-                health = 10
-            elif 0 <= satisfaction < 800:
                 romantic_relationship = 0
                 health = 0
+            elif 0 <= satisfaction < 800:
+                romantic_relationship = -30
+                health = -30
             text_surface_list = []
 
             text_surface_list = print_sirting(academic_performance, romantic_relationship, wealth, health, text_surface_list)
-            print("salary", salary, "satisfaction", satisfaction)
             love = Line(60, 60, 50, 50,
                        WINDOW_WIDTH, WINDOW_HEIGHT, 'love.png')
             money = Line(60, 60, 50, 50 + 70*1,
                         WINDOW_WIDTH, WINDOW_HEIGHT, 'money.png')
             health = Line(60, 60, 50,
-                         50+70*2, WINDOW_WIDTH, WINDOW_HEIGHT, 'health.png')
+                         50+70*2, WINDOW_WIDTH, WINDOW_HEIGHT, 'friend.png')
             study = Line(60, 60, 50,
                           50+70*3, WINDOW_WIDTH, WINDOW_HEIGHT, 'study.png')
 
@@ -231,9 +255,9 @@ def game4_start():
             background.convert()
             window_surface.blit(background, (0,0))
             group.draw(window_surface)
-            RESUME = Line(157, 34, 400,
-                          500, WINDOW_WIDTH, WINDOW_HEIGHT, 'resume.png')
-            window_surface.blit(RESUME.image, RESUME.rect)
+            BACKTOMAP = Line(157, 34, 400,
+                          500, WINDOW_WIDTH, WINDOW_HEIGHT, 'back_to_map.png')
+            window_surface.blit(BACKTOMAP.image, BACKTOMAP.rect)
             for i in range(len(text_surface_list)):
                 window_surface.blit(
                     text_surface_list[i], (int(141*0.9), int(68*0.9) + 70*i))  # text position
@@ -241,21 +265,28 @@ def game4_start():
         elif game_over_time == 2:  # 遊戲說明畫面
             background_raw = pygame.image.load('G4-background2.jpg')
             # 調整背景圖片大小
+            
             background = pygame.transform.scale(
                 background_raw, (WINDOW_WIDTH, WINDOW_HEIGHT))
             background.convert()
             window_surface.blit(background, (0, 0))
-            RESUME = Line(157, 34, 400,
-                          500, WINDOW_WIDTH, WINDOW_HEIGHT, 'resume.png')
-            window_surface.blit(RESUME.image, RESUME.rect)
-            intro_text = my_final_font.render(
-                'this is the introduction.', True, (0, 0, 0))
-            window_surface.blit(intro_text, (10, 10))
+            PLAY = Line(157, 34, 400,
+                          500, WINDOW_WIDTH, WINDOW_HEIGHT, 'play.png')
+            window_surface.blit(PLAY.image, PLAY.rect)
+            
+            # cursor
+            if PLAY.rect.topleft[0] < pygame.mouse.get_pos()[0] < PLAY.rect.topleft[0] + PLAY.width \
+                and PLAY.rect.topleft[1] < pygame.mouse.get_pos()[1] < PLAY.rect.topleft[1] + PLAY.height:
+                pygame.mouse.set_cursor(*pygame.cursors.diamond)
+            else:
+                pygame.mouse.set_cursor(*pygame.cursors.tri_left)
+            
+            intro = Line(INTROWIDTH, INTROHEIGHT, intro_x_position, intro_y_position, WINDOW_WIDTH, WINDOW_HEIGHT, intropath)
+            window_surface.blit(intro.image, intro.rect)
 
         pygame.display.update()
         # 控制遊戲迴圈迭代速率
         main_clock.tick(FPS)
-
 
 if __name__ == '__main__':
     print(game4_start())
