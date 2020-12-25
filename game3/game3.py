@@ -241,7 +241,7 @@ def game3():
                 score = random.randint(500, 1000) /10  # 分數為 50 至 100 到小數點後一位的數字
                 score_surface = my_score_font.render('{}'.format(score), True, (0, 0, 0))
                 window_surface.blit(score_surface, (WINDOW_WIDTH/2 - 75, 100))
-                print(1)
+
                 t += 1
             else:
                 score_surface = my_score_font.render('{}'.format(score), True, (0, 0, 0))
