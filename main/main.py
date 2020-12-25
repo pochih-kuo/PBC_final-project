@@ -94,79 +94,6 @@ def intro():  # 遊戲說明畫面
                     grade = 1
                     stage1(point, grade)    
 
-# def rolechoose():  # 角色選擇畫面
-#     # 設定畫布並插入背景畫面
-#     bg = pygame.Surface((win_width, win_height))
-#     bg.convert()
-#     imageBG = pygame.image.load("bg_blue.jpg")
-#     imageBG = pygame.transform.scale(imageBG,(win_width, win_height))
-#     imageBG.convert()
-#     bg.blit(imageBG, (0,0))
-
-#     # 插入 姓名、性別、Play圖片
-#     imageName = pygame.image.load("name.png")
-#     imageName = pygame.transform.scale(imageName, (120,35))
-#     textGender = font2.render("Gender:", True, (0,0,0))
-#     imageNMale = pygame.image.load("male_grey.png")  # 灰底(未選擇)
-#     imageNMale = pygame.transform.scale(imageNMale, (120,35))
-#     imageNFemale = pygame.image.load("female_grey.png")  # 灰底(未選擇)
-#     imageNFemale = pygame.transform.scale(imageNFemale, (120,35))
-#     imagePlay = pygame.image.load("play.png")
-#     imagePlay = pygame.transform.scale(imagePlay, (120,35))
-#     imageMale = pygame.image.load("male.png")  # 藍底(選擇)
-#     imageMale = pygame.transform.scale(imageMale, (120,35))
-#     imageFemale = pygame.image.load("female.png")  # 藍底(選擇)
-#     imageFemale = pygame.transform.scale(imageFemale, (120,35))
-#     imageName.convert()
-#     imageNMale.convert()
-#     imageNFemale.convert()
-#     imagePlay.convert()
-#     imageMale.convert()
-#     imageFemale.convert()
-#     pos_Name, pos_Gender, pos_NMale, pos_NFemale, pos_Play = [80, 150],[100, 250],[220, 250], [380, 250], [250, 340]
-#     bg.blit(imageName, pos_Name)
-#     bg.blit(textGender, pos_Gender)
-#     bg.blit(imageNMale, pos_NMale)
-#     bg.blit(imageNFemale, pos_NFemale)
-#     bg.blit(imagePlay, pos_Play)
-    
-#     # 顯示畫布
-#     screen.blit(bg,(0,0))
-#     pygame.display.update()
-#     gender = ""  # 記錄角色性別
-
-#     while True:
-#         for event in pygame.event.get():   
-#             if event.type == pygame.QUIT:  # 關閉程式
-#                 pygame.quit()
-#                 sys.exit()
-
-#             if event.type == pygame.MOUSEBUTTONDOWN:
-#                 if pos_NMale[0] < pygame.mouse.get_pos()[0] < pos_NMale[0]+100\
-#                   and pos_NMale[1] < pygame.mouse.get_pos()[1] < pos_NMale[1]+50:
-#                 # 選擇男性
-#                     gender = "Male"
-#                     pos_Male = [220, 250]
-#                     bg.blit(imageMale, pos_Male)
-#                     bg.blit(imageNFemale, pos_NFemale)  # 灰底Female覆蓋
-#                 elif pos_NFemale[0] < pygame.mouse.get_pos()[0] < pos_NFemale[0]+100\
-#                   and pos_NFemale[1] < pygame.mouse.get_pos()[1] < pos_NFemale[1]+50:
-#                 # 選擇女性
-#                     gender = "Female"
-#                     pos_Female = [380, 250]
-#                     bg.blit(imageFemale, pos_Female)
-#                     bg.blit(imageNMale, pos_NMale)   # 灰底Male覆蓋
-                
-#                 screen.blit(bg, (0,0))
-#                 pygame.display.update()
-            
-#                 if pos_Play[0] < pygame.mouse.get_pos()[0] < pos_Play[0]+100\
-#                   and pos_Play[1] < pygame.mouse.get_pos()[1] < pos_Play[1]+50:
-#                     if gender != "":  # 進入大一畫面
-#                     # 記錄初始化分數、年級
-#                         point = {"Love": 60, "Money":60, "Health":60, "Study":60, "Friend":60}
-#                         grade = 1
-#                         stage1(gender, point, grade)
 
 def lake(point, grade):  # 醉月湖畫面
     # 設定畫布並插入背景畫面
@@ -321,16 +248,13 @@ def stage1(point, grade):  # 大一畫面
     imageLab = pygame.transform.scale(imageLab, (170,170))
     imageLake = pygame.image.load("lake.png")
     imageLake = pygame.transform.scale(imageLake, (170,170))
-    # imageAlert = pygame.image.load("alert.png")
 
     pos_Lib, pos_Coco, pos_Dorm, pos_Lab, pos_Lake = [200,10],[200,90],[410,330],[410,130],[10,100]
-    # pos_Alert1 = [310,470]
     bg.blit(imageLib, pos_Lib)
     bg.blit(imageCoco, pos_Coco)
     bg.blit(imageDorm, pos_Dorm)
     bg.blit(imageLab, pos_Lab)
     bg.blit(imageLake, pos_Lake)
-    # bg.blit(imageAlert, pos_Alert1)
 
     # 顯示畫布
     screen.blit(bg,(0,0))
@@ -462,19 +386,13 @@ def stage2(point, grade):  # 大二畫面
     imageLab = pygame.transform.scale(imageLab, (170,170))
     imageLake = pygame.image.load("lake.png")
     imageLake = pygame.transform.scale(imageLake, (170,170))
-    # imageAlert = pygame.image.load("alert.png")
-    # imageCheck = pygame.image.load("check.png")
 
     pos_Lib, pos_Coco, pos_Dorm, pos_Lab, pos_Lake = [200,10],[200,90],[410,330],[410,130],[10,100]
-    # pos_Alert2, pos_Check1 = [310, 120], [310,470]
-
     bg.blit(imageLib, pos_Lib)
     bg.blit(imageCoco, pos_Coco)
     bg.blit(imageDorm, pos_Dorm)
     bg.blit(imageLab, pos_Lab)
     bg.blit(imageLake, pos_Lake)
-    # bg.blit(imageAlert, pos_Alert2)
-    # bg.blit(imageCheck, pos_Check1)
 
     # 顯示畫布
     screen.blit(bg,(0,0))
@@ -608,26 +526,18 @@ def stage3(point, grade):  # 大三畫面
     imageLab = pygame.transform.scale(imageLab, (170,170))
     imageLake = pygame.image.load("lake.png")
     imageLake = pygame.transform.scale(imageLake, (170,170))
-    # imageAlert = pygame.image.load("alert.png")
-    # imageCheck = pygame.image.load("check.png")
 
     pos_Lib, pos_Coco, pos_Dorm, pos_Lab, pos_Lake = [200,10],[200,90],[410,330],[410,130],[10,100]
-    # pos_Alert3, pos_Check1, pos_Check2 = [490,440], [310, 120], [310,470]
     bg.blit(imageLib, pos_Lib)
     bg.blit(imageCoco, pos_Coco)
     bg.blit(imageDorm, pos_Dorm)
     bg.blit(imageLab, pos_Lab)
     bg.blit(imageLake, pos_Lake)
-    # bg.blit(imageAlert, pos_Alert3)
-    # bg.blit(imageCheck, pos_Check1)
-    # bg.blit(imageCheck, pos_Check2)
 
     # 顯示畫布
     screen.blit(bg,(0,0))
     pygame.display.update()
     
-
-
     while True:
         for event in pygame.event.get():            
             if event.type == pygame.QUIT:  # 關閉程式
@@ -749,20 +659,13 @@ def stage4(point, grade):  # 大四畫面
     imageLab = pygame.transform.scale(imageLab, (170,170))
     imageLake = pygame.image.load("lake.png")
     imageLake = pygame.transform.scale(imageLake, (170,170))
-    # imageAlert = pygame.image.load("alert.png")
-    # imageCheck = pygame.image.load("check.png")
 
     pos_Lib, pos_Coco, pos_Dorm, pos_Lab, pos_Lake = [200,10],[200,90],[410,330],[410,130],[10,100]
-    # pos_Alert4, pos_Check1, pos_Check2, pos_Check3= [490,240], [490,440], [310, 120], [310,470]
     bg.blit(imageLib, pos_Lib)
     bg.blit(imageCoco, pos_Coco)
     bg.blit(imageDorm, pos_Dorm)
     bg.blit(imageLab, pos_Lab)
     bg.blit(imageLake, pos_Lake)
-    # bg.blit(imageAlert, pos_Alert4)
-    # bg.blit(imageCheck, pos_Check1)
-    # bg.blit(imageCheck, pos_Check2)
-    # bg.blit(imageCheck, pos_Check3)
 
     # 顯示畫布
     screen.blit(bg,(0,0))
@@ -944,7 +847,6 @@ def final(point):  # 遊戲結束畫面
         imagePrize = pygame.transform.smoothscale(imagePrize,(310,250))
         pos_imagePrize = [130,250]
 
-    
     # 顯示遊戲結果
     textPrize = font1.render(prize, True, (165,42,42))
     pos_txtPrize = [100, 135]
@@ -2123,5 +2025,4 @@ def game4_start():
         main_clock.tick(FPS)
 
 if __name__ == '__main__':    
-    # initial()
-    gameover()
+    initial()
