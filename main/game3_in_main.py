@@ -188,7 +188,7 @@ def game3():
             # 遊戲分數儀表板
             text_surface = my_font.render('$$ = {}'.format(round(points,2)), True, (0, 0, 0))
             # 渲染物件
-            background_raw = pygame.image.load('G3-background.jpg')
+            background_raw = pygame.image.load('G3-background2.jpg')
             # background_raw = pygame.image.load(os.path.abspath('./game2/background.jpg'))
             # 調整背景圖片大小
             background = pygame.transform.scale(background_raw, (WINDOW_WIDTH , WINDOW_HEIGHT ))
