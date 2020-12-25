@@ -167,9 +167,13 @@ def game1_start():
                 seconds = 30 - (pygame.time.get_ticks()-start_ticks)//1000
                 clock_surface = my_font.render("00:%02d" % seconds, True, (0, 0, 0))
                 gameDisplay.blit(clock_surface, (10, 5))
-                pygame.display.update()
-                if pygame.time.get_ticks() - start_ticks > 3001:    #30秒
+                
+                if pygame.time.get_ticks() - start_ticks > 30001:    #30秒
+
                     draw_text("You AG!", 80, (255, 255, 255), 300, 300)
+                    pygame.display.update()  # show text
+                    time.sleep(1)  # 等1秒鐘
+
                     final = 0
                     
 
@@ -200,24 +204,28 @@ def game1_start():
                 for stone in stones:    # 每顆石頭檢查碰撞
                     if collision_check(student, stone):    # collision_check
                         draw_text("Lose!", 80, (255, 255, 255), 300, 300)
+                        pygame.display.update()  # show text
+                        time.sleep(1)  # 等1秒鐘
                         final = 1
+                        break
                         
                 gameDisplay.fill((255, 255, 255))
                 gameDisplay.blit(space, (0,0,600,600))
                 student.draw()
                 for stone in stones:
                     stone.draw()
+                gameDisplay.blit(clock_surface, (10, 5))
                 pygame.display.update()
                 clock.tick(FPS)
         
         elif final == 1:  # lose
             # draw_text("Lose!", 80, (255, 255, 255), 300, 300)
             
-            time.sleep(1)
+
             gameDisplay.fill((255, 255, 255))
             gameDisplay.blit(blue, (0,0,600,600)) 
             
-            time.sleep(1)
+
             gameDisplay.blit(health, (60,60,50,70))
             gameDisplay.blit(money, (60,140,50,140))
             gameDisplay.blit(friend, (60,210,50,210))
@@ -225,6 +233,7 @@ def game1_start():
             draw_text("-30", 60, (0,0,0),160,170)
             draw_text("-20", 60, (0,0,0),160,240)
             RESUME = Line(157, 34, 350,400, 600, 600, 'G2-resume.png')
+            
             window_surface.blit(RESUME.image, RESUME.rect)
 
             
@@ -239,10 +248,10 @@ def game1_start():
         
         elif final == 0:  # win
             
-            time.sleep(1)
+
             gameDisplay.fill((255, 255, 255))
             gameDisplay.blit(blue, (0,0,600,600)) 
-            time.sleep(1)
+
             gameDisplay.blit(health, (60,60,50,70))
             gameDisplay.blit(friend, (60,140,50,140))
             draw_text("+20", 60, (0,0,0),160,100)
