@@ -221,17 +221,29 @@ def lake(point, grade):  # 醉月湖畫面
                     if point["Health"] <= 0:
                         point["Health"] = 0
                     webbrowser.open("https://scc_osa.ntu.edu.tw")
+
+                    # 分數範圍0~100
                     if point["Love"] <= 0:
                         point["Love"] = 0
+                    elif point["Love"] >= 100:
+                        point["Love"] = 100
                     if point["Money"] <= 0:
                         point["Money"] = 0
+                    elif point["Money"] >= 100:
+                        point["Money"] = 100
                     if point["Health"] <= 0:
                         point["Health"] = 0
+                    elif point["Health"] >= 100:
+                        point["Health"] = 100
                     if point["Study"] <= 0:
                         point["Study"] = 0
+                    elif point["Study"] >= 100:
+                        point["Study"] = 100
                     if point["Friend"] <= 0:
                         point["Friend"] = 0
-                    
+                    elif point["Friend"] >= 100:
+                        point["Friend"] = 100
+
                     # 計算是否失敗
                     point_list = list(point.items())
                     point_list.sort(key=lambda x:x[1], reverse=True)
@@ -354,16 +366,27 @@ def stage1(point, grade):  # 大一畫面
                     point["Study"] += adj_Study
                     point["Friend"] += adj_Friend
 
+                    # 分數範圍0~100
                     if point["Love"] <= 0:
                         point["Love"] = 0
+                    elif point["Love"] >= 100:
+                        point["Love"] = 100
                     if point["Money"] <= 0:
                         point["Money"] = 0
+                    elif point["Money"] >= 100:
+                        point["Money"] = 100
                     if point["Health"] <= 0:
                         point["Health"] = 0
+                    elif point["Health"] >= 100:
+                        point["Health"] = 100
                     if point["Study"] <= 0:
                         point["Study"] = 0
+                    elif point["Study"] >= 100:
+                        point["Study"] = 100
                     if point["Friend"] <= 0:
                         point["Friend"] = 0
+                    elif point["Friend"] >= 100:
+                        point["Friend"] = 100
 
                     # 計算是否失敗
                     point_list = list(point.items())
@@ -487,16 +510,27 @@ def stage2(point, grade):  # 大二畫面
                     point["Study"] += adj_Study
                     point["Friend"] += adj_Friend
 
+                    # 分數範圍0~100
                     if point["Love"] <= 0:
                         point["Love"] = 0
+                    elif point["Love"] >= 100:
+                        point["Love"] = 100
                     if point["Money"] <= 0:
                         point["Money"] = 0
+                    elif point["Money"] >= 100:
+                        point["Money"] = 100
                     if point["Health"] <= 0:
                         point["Health"] = 0
+                    elif point["Health"] >= 100:
+                        point["Health"] = 100
                     if point["Study"] <= 0:
                         point["Study"] = 0
+                    elif point["Study"] >= 100:
+                        point["Study"] = 100
                     if point["Friend"] <= 0:
                         point["Friend"] = 0
+                    elif point["Friend"] >= 100:
+                        point["Friend"] = 100
                     
                      # 計算是否失敗
                     point_list = list(point.items())
@@ -612,16 +646,27 @@ def stage3(point, grade):  # 大三畫面
                     point["Study"] += adj_Study
                     point["Friend"] += adj_Friend
                     
+                    # 分數範圍0~100
                     if point["Love"] <= 0:
                         point["Love"] = 0
+                    elif point["Love"] >= 100:
+                        point["Love"] = 100
                     if point["Money"] <= 0:
                         point["Money"] = 0
+                    elif point["Money"] >= 100:
+                        point["Money"] = 100
                     if point["Health"] <= 0:
                         point["Health"] = 0
+                    elif point["Health"] >= 100:
+                        point["Health"] = 100
                     if point["Study"] <= 0:
                         point["Study"] = 0
+                    elif point["Study"] >= 100:
+                        point["Study"] = 100
                     if point["Friend"] <= 0:
                         point["Friend"] = 0
+                    elif point["Friend"] >= 100:
+                        point["Friend"] = 100
 
                      # 計算是否失敗
                     point_list = list(point.items())
@@ -751,16 +796,27 @@ def stage4(point, grade):  # 大四畫面
                     point["Study"] += adj_Study
                     point["Friend"] += adj_Friend
 
+                    # 分數範圍0~100
                     if point["Love"] <= 0:
                         point["Love"] = 0
+                    elif point["Love"] >= 100:
+                        point["Love"] = 100
                     if point["Money"] <= 0:
                         point["Money"] = 0
+                    elif point["Money"] >= 100:
+                        point["Money"] = 100
                     if point["Health"] <= 0:
                         point["Health"] = 0
+                    elif point["Health"] >= 100:
+                        point["Health"] = 100
                     if point["Study"] <= 0:
                         point["Study"] = 0
+                    elif point["Study"] >= 100:
+                        point["Study"] = 100
                     if point["Friend"] <= 0:
                         point["Friend"] = 0
+                    elif point["Friend"] >= 100:
+                        point["Friend"] = 100
 
                      # 計算是否失敗
                     point_list = list(point.items())
@@ -2067,5 +2123,5 @@ def game4_start():
         main_clock.tick(FPS)
 
 if __name__ == '__main__':    
-    initial()
-
+    # initial()
+    gameover()
