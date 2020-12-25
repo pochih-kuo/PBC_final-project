@@ -1807,7 +1807,7 @@ def game4_start():
     # show_probability2 = 30
     bosspath = os.path.abspath('G4-boss.gif')
     computerpath = os.path.abspath('G4-computer.gif')
-    phonepath = os.path.abspath('G4-phone.gif')
+    phonepath = os.path.abspath('G4-phone.png')
 
 
     def print_sirting(academic_performance, romantic_relationship, wealth, health, text_surface_list):

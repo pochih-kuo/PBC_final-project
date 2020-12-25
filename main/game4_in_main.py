@@ -39,7 +39,7 @@ def game4_start():
     # show_probability2 = 30
     bosspath = os.path.abspath('G4-boss.png')
     computerpath = os.path.abspath('G4-computer.png')
-    phonepath = os.path.abspath('G4-phone.gif')
+    phonepath = os.path.abspath('G4-phone.png')
     intropath = os.path.abspath('G4-intro.png')
     add300path = os.path.abspath('G4-add300.gif')
     minus300path = os.path.abspath('G4-minus300.gif')
@@ -82,9 +82,8 @@ def game4_start():
         
 
     pygame.init()
-    
-    '''
     # load window surface
+    '''
     window_surface = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
     pygame.display.set_caption('Maximize Your Utility!')
     '''
