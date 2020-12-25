@@ -221,6 +221,16 @@ def lake(point, grade):  # 醉月湖畫面
                     if point["Health"] <= 0:
                         point["Health"] = 0
                     webbrowser.open("https://scc_osa.ntu.edu.tw")
+                    if point["Love"] <= 0:
+                        point["Love"] = 0
+                    if point["Money"] <= 0:
+                        point["Money"] = 0
+                    if point["Health"] <= 0:
+                        point["Health"] = 0
+                    if point["Study"] <= 0:
+                        point["Study"] = 0
+                    if point["Friend"] <= 0:
+                        point["Friend"] = 0
                     
                     # 計算是否失敗
                     point_list = list(point.items())
@@ -344,6 +354,17 @@ def stage1(point, grade):  # 大一畫面
                     point["Study"] += adj_Study
                     point["Friend"] += adj_Friend
 
+                    if point["Love"] <= 0:
+                        point["Love"] = 0
+                    if point["Money"] <= 0:
+                        point["Money"] = 0
+                    if point["Health"] <= 0:
+                        point["Health"] = 0
+                    if point["Study"] <= 0:
+                        point["Study"] = 0
+                    if point["Friend"] <= 0:
+                        point["Friend"] = 0
+
                     # 計算是否失敗
                     point_list = list(point.items())
                     point_list.sort(key=lambda x:x[1], reverse=True)
@@ -466,6 +487,17 @@ def stage2(point, grade):  # 大二畫面
                     point["Study"] += adj_Study
                     point["Friend"] += adj_Friend
 
+                    if point["Love"] <= 0:
+                        point["Love"] = 0
+                    if point["Money"] <= 0:
+                        point["Money"] = 0
+                    if point["Health"] <= 0:
+                        point["Health"] = 0
+                    if point["Study"] <= 0:
+                        point["Study"] = 0
+                    if point["Friend"] <= 0:
+                        point["Friend"] = 0
+                    
                      # 計算是否失敗
                     point_list = list(point.items())
                     point_list.sort(key=lambda x:x[1], reverse=True)
@@ -579,6 +611,17 @@ def stage3(point, grade):  # 大三畫面
                     point["Health"] += adj_Health
                     point["Study"] += adj_Study
                     point["Friend"] += adj_Friend
+                    
+                    if point["Love"] <= 0:
+                        point["Love"] = 0
+                    if point["Money"] <= 0:
+                        point["Money"] = 0
+                    if point["Health"] <= 0:
+                        point["Health"] = 0
+                    if point["Study"] <= 0:
+                        point["Study"] = 0
+                    if point["Friend"] <= 0:
+                        point["Friend"] = 0
 
                      # 計算是否失敗
                     point_list = list(point.items())
@@ -707,6 +750,17 @@ def stage4(point, grade):  # 大四畫面
                     point["Health"] += adj_Health
                     point["Study"] += adj_Study
                     point["Friend"] += adj_Friend
+
+                    if point["Love"] <= 0:
+                        point["Love"] = 0
+                    if point["Money"] <= 0:
+                        point["Money"] = 0
+                    if point["Health"] <= 0:
+                        point["Health"] = 0
+                    if point["Study"] <= 0:
+                        point["Study"] = 0
+                    if point["Friend"] <= 0:
+                        point["Friend"] = 0
 
                      # 計算是否失敗
                     point_list = list(point.items())
@@ -882,6 +936,7 @@ def game1_start():
     PLAYER_SPEED_X = 5
     space = pygame.image.load('G1-background.png')
     # pygame.init()
+    blue = pygame.image.load('G1-background.jpg')
     health = pygame.image.load("G1-health.png")
     money = pygame.image.load("G1-money.png")
     friend = pygame.image.load("G1-friend.png")
@@ -1003,42 +1058,67 @@ def game1_start():
         background.convert()
         window_surface.blit(background, (0, 0))
         window_surface.blit(RESUME.image, RESUME.rect)
-        
         # button("Start", 250, 350, 100, 50,(200, 0, 0), (255, 0, 0))    # button    # new
 
         mouse = pygame.mouse.get_pos()
         click = pygame.mouse.get_pressed()
+
+        my_font=pygame.font.SysFont(None, 30)
+        
         if RESUME.rect.topleft[0] < pygame.mouse.get_pos()[0] < RESUME.rect.topleft[0] + RESUME.width \
             and RESUME.rect.topleft[1] < pygame.mouse.get_pos()[1] < RESUME.rect.topleft[1] + RESUME.height:
             if click[0] == 1:
                 
                 #new()
                 stones = []
-
                 student = Student()
-
+                start_ticks=pygame.time.get_ticks()
+                #seconds = 30 - (pygame.time.get_ticks()-start_ticks)//1000
+                #clock_surface = my_font.render("00:%02d" % seconds, True, (0, 0, 0))
+                #gameDisplay.blit(clock_surface, (10, 5))
                 while True:
-                    if pygame.time.get_ticks() > 25000:    #25秒
+                    seconds = 30 - (pygame.time.get_ticks()-start_ticks)//1000
+                    clock_surface = my_font.render("00:%02d" % seconds, True, (0, 0, 0))
+                    gameDisplay.blit(clock_surface, (10, 5))
+                    pygame.display.update()
+                    if pygame.time.get_ticks() - start_ticks > 30001:    #30秒
                         draw_text("You AG!", 80, (255, 255, 255), 300, 300)
                         final = 0
                         pygame.display.update()
                         time.sleep(1)
                         gameDisplay.fill((255, 255, 255))
-                        gameDisplay.blit(space, (0,0,600,600)) 
+                        gameDisplay.blit(blue, (0,0,600,600)) 
                         pygame.display.update()
                         time.sleep(1)
                         gameDisplay.blit(health, (60,60,50,70))
                         gameDisplay.blit(friend, (60,140,50,140))
                         draw_text("+20", 60, (0,0,0),160,100)
                         draw_text("+20", 60, (0,0,0),160,170)
-                        #draw_text("academic_performance = 60", 20, (255, 255, 255), 300, 300)
-                        #draw_text("romantic_relationship = 60", 20, (255, 255, 255), 300, 275)
-                        #draw_text("interpersonal_relationship = 60", 20, (255, 255, 255), 300, 250)
-                        #draw_text("health = 60", 20, (255, 255, 255), 300, 225)
-                        #draw_text("wealth = 60", 20, (255, 255, 255), 300, 200)
+
+                        RESUME = Line(157, 34, 350,400, 600, 600, 'G2-resume.png')
+                        window_surface.blit(RESUME.image, RESUME.rect)
                         pygame.display.update()
-                        ######印出減分
-                        time.sleep(5)
+                        time.sleep(3)
+                        
+                        # if RESUME.rect.topleft[0] < pygame.mouse.get_pos()[0] < RESUME.rect.topleft[0] + RESUME.width \
+                        # and RESUME.rect.topleft[1] < pygame.mouse.get_pos()[1] < RESUME.rect.topleft[1] + RESUME.height:
+                            # pygame.mouse.set_cursor(*pygame.cursors.diamond)
+                        # else:
+                            # pygame.mouse.set_cursor(*pygame.cursors.tri_left)
+                        # window_surface.blit(RESUME.image, RESUME.rect)
+                        # if RESUME.rect.topleft[0] < pygame.mouse.get_pos()[0] < RESUME.rect.topleft[0] + RESUME.width \
+                        # and RESUME.rect.topleft[1] < pygame.mouse.get_pos()[1] < RESUME.rect.topleft[1] + RESUME.height:
+                            # if click[0] == 1:
+                                # romantic_relationship = 0
+                                # money = 0
+                                # health_value = +20
+                                # academic_performance = 0
+                                # interpersonal_relationship = +20
+                                # return romantic_relationship, money, health_value, academic_performance,interpersonal_relationship
+                        
+                        # else:
+                            # time.sleep(100)
+
                         romantic_relationship = 0
                         money = 0
                         health_value = +20
@@ -1070,7 +1150,7 @@ def game1_start():
                             pygame.display.update()
                             time.sleep(1)
                             gameDisplay.fill((255, 255, 255))
-                            gameDisplay.blit(space, (0,0,600,600)) 
+                            gameDisplay.blit(blue, (0,0,600,600)) 
                             pygame.display.update()
                             time.sleep(1)
                             gameDisplay.blit(health, (60,60,50,70))
@@ -1079,14 +1159,11 @@ def game1_start():
                             draw_text("-30", 60, (0,0,0),160,100)
                             draw_text("-30", 60, (0,0,0),160,170)
                             draw_text("-20", 60, (0,0,0),160,240)
-                            #draw_text("academic_performance = 60", 20, (255, 255, 255), 300, 300)
-                            #draw_text("romantic_relationship = 60", 20, (255, 255, 255), 300, 275)
-                            #draw_text("interpersonal_relationship = 40", 20, (255, 255, 255), 300, 250)
-                            #draw_text("health = 30", 20, (255, 255, 255), 300, 225)
-                            #draw_text("wealth = 30", 20, (255, 255, 255), 300, 200)
-                            
+                            RESUME = Line(157, 34, 350,400, 600, 600, 'G2-resume.png')
+                            window_surface.blit(RESUME.image, RESUME.rect)
+
                             pygame.display.update()
-                            time.sleep(5)
+                            time.sleep(3)
                             romantic_relationship = 0
                             money = -30
                             health_value = -30
@@ -1094,8 +1171,6 @@ def game1_start():
                             interpersonal_relationship = -20
 
                             return romantic_relationship, money, health_value, academic_performance,interpersonal_relationship
-
-                    
                     #draw()
                     gameDisplay.fill((255, 255, 255))
                     gameDisplay.blit(space, (0,0,600,600))
