@@ -301,24 +301,24 @@ def stage1(point, grade):  # 大一畫面
     # 插入關卡、未完成任務及已完成任務
     imageCoco = pygame.image.load("coco.png")
     imageCoco = pygame.transform.scale(imageCoco, (200,450))
-    imageLib = pygame.image.load("library.png")
+    imageLib = pygame.image.load("greyscale_lib.png")
     imageLib = pygame.transform.scale(imageLib, (190,190))
-    imageDorm = pygame.image.load("dorm.png")
+    imageDorm = pygame.image.load("greyscale_dorm.png")
     imageDorm = pygame.transform.scale(imageDorm, (170,170))
-    imageLab = pygame.image.load("laboratory.png")
+    imageLab = pygame.image.load("greyscale_lab.png")
     imageLab = pygame.transform.scale(imageLab, (170,170))
     imageLake = pygame.image.load("lake.png")
     imageLake = pygame.transform.scale(imageLake, (170,170))
-    imageAlert = pygame.image.load("alert.png")
+    # imageAlert = pygame.image.load("alert.png")
 
     pos_Lib, pos_Coco, pos_Dorm, pos_Lab, pos_Lake = [200,10],[200,90],[410,330],[410,130],[10,100]
-    pos_Alert1 = [310,470]
+    # pos_Alert1 = [310,470]
     bg.blit(imageLib, pos_Lib)
     bg.blit(imageCoco, pos_Coco)
     bg.blit(imageDorm, pos_Dorm)
     bg.blit(imageLab, pos_Lab)
     bg.blit(imageLake, pos_Lake)
-    bg.blit(imageAlert, pos_Alert1)
+    # bg.blit(imageAlert, pos_Alert1)
 
     # 顯示畫布
     screen.blit(bg,(0,0))
@@ -433,25 +433,25 @@ def stage2(point, grade):  # 大二畫面
     imageCoco = pygame.transform.scale(imageCoco, (200,450))
     imageLib = pygame.image.load("library.png")
     imageLib = pygame.transform.scale(imageLib, (190,190))
-    imageDorm = pygame.image.load("dorm.png")
+    imageDorm = pygame.image.load("greyscale_dorm.png")
     imageDorm = pygame.transform.scale(imageDorm, (170,170))
-    imageLab = pygame.image.load("laboratory.png")
+    imageLab = pygame.image.load("greyscale_lab.png")
     imageLab = pygame.transform.scale(imageLab, (170,170))
     imageLake = pygame.image.load("lake.png")
     imageLake = pygame.transform.scale(imageLake, (170,170))
-    imageAlert = pygame.image.load("alert.png")
-    imageCheck = pygame.image.load("check.png")
+    # imageAlert = pygame.image.load("alert.png")
+    # imageCheck = pygame.image.load("check.png")
 
     pos_Lib, pos_Coco, pos_Dorm, pos_Lab, pos_Lake = [200,10],[200,90],[410,330],[410,130],[10,100]
-    pos_Alert2, pos_Check1 = [310, 120], [310,470]
+    # pos_Alert2, pos_Check1 = [310, 120], [310,470]
 
     bg.blit(imageLib, pos_Lib)
     bg.blit(imageCoco, pos_Coco)
     bg.blit(imageDorm, pos_Dorm)
     bg.blit(imageLab, pos_Lab)
     bg.blit(imageLake, pos_Lake)
-    bg.blit(imageAlert, pos_Alert2)
-    bg.blit(imageCheck, pos_Check1)
+    # bg.blit(imageAlert, pos_Alert2)
+    # bg.blit(imageCheck, pos_Check1)
 
     # 顯示畫布
     screen.blit(bg,(0,0))
@@ -570,23 +570,23 @@ def stage3(point, grade):  # 大三畫面
     imageLib = pygame.transform.scale(imageLib, (190,190))
     imageDorm = pygame.image.load("dorm.png")
     imageDorm = pygame.transform.scale(imageDorm, (170,170))
-    imageLab = pygame.image.load("laboratory.png")
+    imageLab = pygame.image.load("greyscale_lab.png")
     imageLab = pygame.transform.scale(imageLab, (170,170))
     imageLake = pygame.image.load("lake.png")
     imageLake = pygame.transform.scale(imageLake, (170,170))
-    imageAlert = pygame.image.load("alert.png")
-    imageCheck = pygame.image.load("check.png")
+    # imageAlert = pygame.image.load("alert.png")
+    # imageCheck = pygame.image.load("check.png")
 
     pos_Lib, pos_Coco, pos_Dorm, pos_Lab, pos_Lake = [200,10],[200,90],[410,330],[410,130],[10,100]
-    pos_Alert3, pos_Check1, pos_Check2 = [490,440], [310, 120], [310,470]
+    # pos_Alert3, pos_Check1, pos_Check2 = [490,440], [310, 120], [310,470]
     bg.blit(imageLib, pos_Lib)
     bg.blit(imageCoco, pos_Coco)
     bg.blit(imageDorm, pos_Dorm)
     bg.blit(imageLab, pos_Lab)
     bg.blit(imageLake, pos_Lake)
-    bg.blit(imageAlert, pos_Alert3)
-    bg.blit(imageCheck, pos_Check1)
-    bg.blit(imageCheck, pos_Check2)
+    # bg.blit(imageAlert, pos_Alert3)
+    # bg.blit(imageCheck, pos_Check1)
+    # bg.blit(imageCheck, pos_Check2)
 
     # 顯示畫布
     screen.blit(bg,(0,0))
@@ -704,20 +704,20 @@ def stage4(point, grade):  # 大四畫面
     imageLab = pygame.transform.scale(imageLab, (170,170))
     imageLake = pygame.image.load("lake.png")
     imageLake = pygame.transform.scale(imageLake, (170,170))
-    imageAlert = pygame.image.load("alert.png")
-    imageCheck = pygame.image.load("check.png")
+    # imageAlert = pygame.image.load("alert.png")
+    # imageCheck = pygame.image.load("check.png")
 
     pos_Lib, pos_Coco, pos_Dorm, pos_Lab, pos_Lake = [200,10],[200,90],[410,330],[410,130],[10,100]
-    pos_Alert4, pos_Check1, pos_Check2, pos_Check3= [490,240], [490,440], [310, 120], [310,470]
+    # pos_Alert4, pos_Check1, pos_Check2, pos_Check3= [490,240], [490,440], [310, 120], [310,470]
     bg.blit(imageLib, pos_Lib)
     bg.blit(imageCoco, pos_Coco)
     bg.blit(imageDorm, pos_Dorm)
     bg.blit(imageLab, pos_Lab)
     bg.blit(imageLake, pos_Lake)
-    bg.blit(imageAlert, pos_Alert4)
-    bg.blit(imageCheck, pos_Check1)
-    bg.blit(imageCheck, pos_Check2)
-    bg.blit(imageCheck, pos_Check3)
+    # bg.blit(imageAlert, pos_Alert4)
+    # bg.blit(imageCheck, pos_Check1)
+    # bg.blit(imageCheck, pos_Check2)
+    # bg.blit(imageCheck, pos_Check3)
 
     # 顯示畫布
     screen.blit(bg,(0,0))
@@ -851,7 +851,7 @@ def final(point):  # 遊戲結束畫面
     imageMessage.convert()
     imageFinish.convert()
     imageRestart.convert()
-    pos_Message, pos_Finish, pos_Restart = [50,50], [400,400], [400, 470]
+    pos_Message, pos_Finish, pos_Restart = [50,50], [130,510], [320, 510]
     bg.blit(imageMessage, pos_Message)
     bg.blit(imageFinish, pos_Finish)
     bg.blit(imageRestart, pos_Restart)
@@ -862,21 +862,38 @@ def final(point):  # 遊戲結束畫面
     point_list.sort(key=lambda x:x[1], reverse=True)
     result = list(point_list[0])
     prize = ""
-    if result[0] == "Health":
-        prize = "BMI22的健康寶寶"
-    elif result[0] == "Love":
+    if result[0] == "Love":
         prize = "縱橫戰場的情場老手"
-    elif result[0] == "Friend":
-        prize = "男女通吃的朋友王"
+        imagePrize = pygame.image.load("loveending.png")
+        imagePrize = pygame.transform.smoothscale(imagePrize,(400,170))
+        pos_imagePrize = [100,280]
     elif result[0] == "Money":
         prize = "畢業即退休的投資達人"
+        imagePrize = pygame.image.load("moneyending.png")
+        imagePrize = pygame.transform.smoothscale(imagePrize,(400,190))
+        pos_imagePrize = [100,280]
+    elif result[0] == "Health":
+        prize = "BMI22的健康寶寶"
+        imagePrize = pygame.image.load("healthyending.png")
+        imagePrize = pygame.transform.smoothscale(imagePrize,(400,220))
+        pos_imagePrize = [100,270]
     elif result[0] == "Study":
         prize = "拿過八次書卷的超級學霸"
+        imagePrize = pygame.image.load("studyending.png")
+        imagePrize = pygame.transform.smoothscale(imagePrize,(400,210))
+        pos_imagePrize = [100,280]
+    elif result[0] == "Friend":
+        prize = "男女通吃的朋友王"
+        imagePrize = pygame.image.load("friendending.png")
+        imagePrize = pygame.transform.smoothscale(imagePrize,(310,250))
+        pos_imagePrize = [130,250]
+
     
     # 顯示遊戲結果
     textPrize = font1.render(prize, True, (165,42,42))
-    pos_Prize = [100, 135]
-    bg.blit(textPrize, pos_Prize)
+    pos_txtPrize = [100, 135]
+    bg.blit(textPrize, pos_txtPrize)
+    bg.blit(imagePrize, pos_imagePrize)
 
     # 顯示畫布
     screen.blit(bg, (0,0))
