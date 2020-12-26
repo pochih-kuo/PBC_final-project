@@ -21,6 +21,7 @@ screen = pygame.display.set_mode((win_width, win_height))
 pygame.display.set_caption("My Life in NTU")  # 設定視窗標題
 pygame.mixer.music.load('bgm.mp3')
 pygame.mouse.set_cursor(*pygame.cursors.diamond)
+
 def initial():  # 遊戲初始畫面
     # 設定畫布並插入背景圖片
     bg = pygame.Surface((win_width, win_height))
@@ -97,6 +98,7 @@ def intro():  # 遊戲說明畫面
 
 
 def lake(point, grade):  # 醉月湖畫面
+    pygame.mixer.music.stop()
     # 設定畫布並插入背景畫面
     bg = pygame.Surface((win_width, win_height))
     bg.convert()
@@ -740,6 +742,7 @@ def stage4(point, grade):  # 大四畫面
                     lake(point, grade)
 
 def skip(point, grade):  # 非該年級遊戲畫面
+    pygame.mixer.music.stop()
     # 設定畫布並插入背景畫面
     bg = pygame.Surface((win_width, win_height))
     bg.convert()
