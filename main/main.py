@@ -1842,9 +1842,6 @@ def game4_start():
         text_surface_list.append(my_final_font.render(list_[3], True, (0, 0, 0)))
         text_surface_list.append(my_final_font.render(list_[0], True, (0, 0, 0)))
         
-
-
-
         return text_surface_list
 
     class Line(pygame.sprite.Sprite):
@@ -2081,6 +2078,7 @@ def game4_start():
         pygame.display.update()
         # 控制遊戲迴圈迭代速率
         main_clock.tick(FPS)
+
 
 if __name__ == '__main__':    
     initial()
