@@ -81,13 +81,12 @@ def game4_start():
             self.window_width = window_width
             self.window_height = window_height
         
-
+    '''
     pygame.init()
+    pygame.display.set_caption('Maximize Your Utility!')
     '''
     # load window surface
     window_surface = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
-    pygame.display.set_caption('Maximize Your Utility!')
-    '''
     
     
     computer = Line(COMPUTERWIDTH, COMPUTERHEIGHT, computer_x_position, computer_y_position, WINDOW_WIDTH, WINDOW_HEIGHT, computerpath)

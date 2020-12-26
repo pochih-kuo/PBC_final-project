@@ -113,7 +113,6 @@ def game4_start():
 
         # 偵測事件
         for event in pygame.event.get():
-            BossIsHere = False
             if event.type == QUIT:
                 pygame.quit()
                 sys.exit()
@@ -137,7 +136,6 @@ def game4_start():
                    and computer.rect.topleft[1] < pygame.mouse.get_pos()[1] < computer.rect.topleft[1] + COMPUTERHEIGHT:
                     # 算分
                     salary += 300
-                    
                     PATH = add300path
                     add300 = Line(ADD300WIDTH, ADD300HEIGHT, add300_x_position, add300_y_position, WINDOW_WIDTH, WINDOW_HEIGHT, PATH)
                     window_surface.blit(add300.image, add300.rect)
@@ -202,6 +200,7 @@ def game4_start():
             window_surface.blit(phone.image, phone.rect)
             window_surface.blit(boss.image, boss.rect)      
             window_surface.blit(text_surface, (10, 5))
+            BossIsHere = False
             
             # cursor
             if computer.rect.topleft[0] < pygame.mouse.get_pos()[0] < computer.rect.topleft[0] + computer.width \
