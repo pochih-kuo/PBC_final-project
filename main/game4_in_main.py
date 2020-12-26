@@ -6,6 +6,7 @@ def game4_start():
     import os
 
     import pygame
+    import itertools
     from pygame.locals import Color, QUIT, MOUSEBUTTONDOWN, USEREVENT
 
     WINDOW_WIDTH = 600
@@ -42,7 +43,7 @@ def game4_start():
     phonepath = os.path.abspath('G4-phone.png')
     intropath = os.path.abspath('G4-intro.png')
     add300path = os.path.abspath('G4-add300.gif')
-    minus300path = os.path.abspath('G4-minus300.gif')
+    minus300path = os.path.abspath('G4-minus300.png')
 
 
     def print_sirting(academic_performance, romantic_relationship, wealth, health, text_surface_list):
@@ -82,17 +83,17 @@ def game4_start():
         
 
     pygame.init()
-    # load window surface
     '''
+    # load window surface
     window_surface = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
     pygame.display.set_caption('Maximize Your Utility!')
     '''
-
     
     
     computer = Line(COMPUTERWIDTH, COMPUTERHEIGHT, computer_x_position, computer_y_position, WINDOW_WIDTH, WINDOW_HEIGHT, computerpath)
     phone = Line(PHONEWIDTH, PHONEHEIGHT, phone_x_position, phone_y_position, WINDOW_WIDTH, WINDOW_HEIGHT, phonepath)
     boss = Line(BOSSWIDTH, BOSSHEIGHT, WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_WIDTH, WINDOW_HEIGHT, bosspath)
+    
     reload_line_event = USEREVENT + 1
     pygame.time.set_timer(reload_line_event, 2000)  # 更新頻率(unit = ms)
 
@@ -103,6 +104,7 @@ def game4_start():
     hit_text_surface = None
     main_clock = pygame.time.Clock()
     game_over_time = 2
+    ran_number = 10000
 
 
     while True:
@@ -136,10 +138,19 @@ def game4_start():
                    and computer.rect.topleft[1] < pygame.mouse.get_pos()[1] < computer.rect.topleft[1] + COMPUTERHEIGHT:
                     # 算分
                     salary += 300
-
                     
+                    PATH = add300path
+                    add300 = Line(ADD300WIDTH, ADD300HEIGHT, add300_x_position, add300_y_position, WINDOW_WIDTH, WINDOW_HEIGHT, PATH)
+                    window_surface.blit(add300.image, add300.rect)
+                    pygame.display.flip() 
+                                        
                 else:
                     salary -= 300
+                    PATH = minus300path
+                    minus300 = Line(MINUS300WIDTH, MINUS300HEIGHT, minus300_x_position, minus300_y_position, WINDOW_WIDTH, WINDOW_HEIGHT, PATH) 
+                    window_surface.blit(minus300.image, minus300.rect)
+                    pygame.display.flip()
+                
                 if salary <= 0:
                     salary = 0
 
@@ -159,13 +170,13 @@ def game4_start():
                     
             # 遊戲結束之後按下 RESUME 之後的動作
             elif event.type == MOUSEBUTTONDOWN and game_over_time == 1:
-                if BACKTOMAP.rect.topleft[0] < pygame.mouse.get_pos()[0] < BACKTOMAP.rect.topleft[0] + BACKTOMAP.width \
-                        and BACKTOMAP.rect.topleft[1] < pygame.mouse.get_pos()[1] < BACKTOMAP.rect.topleft[1] + BACKTOMAP.height:
+                if RESUME.rect.topleft[0] < pygame.mouse.get_pos()[0] < RESUME.rect.topleft[0] + RESUME.width \
+                        and RESUME.rect.topleft[1] < pygame.mouse.get_pos()[1] < RESUME.rect.topleft[1] + RESUME.height:
                     return romantic_relationship, wealth, health, academic_performance
 
             elif event.type == MOUSEBUTTONDOWN and game_over_time == 2:
-                if PLAY.rect.topleft[0] < pygame.mouse.get_pos()[0] < PLAY.rect.topleft[0] + PLAY.width \
-                        and PLAY.rect.topleft[1] < pygame.mouse.get_pos()[1] < PLAY.rect.topleft[1] + PLAY.height:
+                if RESUME.rect.topleft[0] < pygame.mouse.get_pos()[0] < RESUME.rect.topleft[0] + RESUME.width \
+                        and RESUME.rect.topleft[1] < pygame.mouse.get_pos()[1] < RESUME.rect.topleft[1] + RESUME.height:
                     start_ticks = pygame.time.get_ticks()
                     game_over_time = 0
 
@@ -190,7 +201,7 @@ def game4_start():
             window_surface.blit(background, (0, 0))
             window_surface.blit(computer.image, computer.rect)
             window_surface.blit(phone.image, phone.rect)
-            window_surface.blit(boss.image, boss.rect)
+            window_surface.blit(boss.image, boss.rect)      
             window_surface.blit(text_surface, (10, 5))
             
             # cursor
@@ -257,9 +268,9 @@ def game4_start():
             background.convert()
             window_surface.blit(background, (0,0))
             group.draw(window_surface)
-            BACKTOMAP = Line(157, 34, 400,
+            RESUME = Line(157, 34, 400,
                           500, WINDOW_WIDTH, WINDOW_HEIGHT, 'back_to_map.png')
-            window_surface.blit(BACKTOMAP.image, BACKTOMAP.rect)
+            window_surface.blit(RESUME.image, RESUME.rect)
             for i in range(len(text_surface_list)):
                 window_surface.blit(
                     text_surface_list[i], (int(141*0.9), int(68*0.9) + 70*i))  # text position
@@ -272,13 +283,13 @@ def game4_start():
                 background_raw, (WINDOW_WIDTH, WINDOW_HEIGHT))
             background.convert()
             window_surface.blit(background, (0, 0))
-            PLAY = Line(157, 34, 400,
+            RESUME = Line(157, 34, 400,
                           500, WINDOW_WIDTH, WINDOW_HEIGHT, 'play.png')
-            window_surface.blit(PLAY.image, PLAY.rect)
+            window_surface.blit(RESUME.image, RESUME.rect)
             
             # cursor
-            if PLAY.rect.topleft[0] < pygame.mouse.get_pos()[0] < PLAY.rect.topleft[0] + PLAY.width \
-                and PLAY.rect.topleft[1] < pygame.mouse.get_pos()[1] < PLAY.rect.topleft[1] + PLAY.height:
+            if RESUME.rect.topleft[0] < pygame.mouse.get_pos()[0] < RESUME.rect.topleft[0] + RESUME.width \
+                and RESUME.rect.topleft[1] < pygame.mouse.get_pos()[1] < RESUME.rect.topleft[1] + RESUME.height:
                 pygame.mouse.set_cursor(*pygame.cursors.diamond)
             else:
                 pygame.mouse.set_cursor(*pygame.cursors.tri_left)
