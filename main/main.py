@@ -1950,7 +1950,7 @@ def game4_start():
             elif event.type == MOUSEBUTTONDOWN and game_over_time == 1:
                 if RESUME.rect.topleft[0] < pygame.mouse.get_pos()[0] < RESUME.rect.topleft[0] + RESUME.width \
                         and RESUME.rect.topleft[1] < pygame.mouse.get_pos()[1] < RESUME.rect.topleft[1] + RESUME.height:
-                    return romantic_relationship, wealth, 0, academic_performance, health
+                    return romantic_relationship, wealth, health_value, academic_performance, 0
 
             elif event.type == MOUSEBUTTONDOWN and game_over_time == 2:
                 if RESUME.rect.topleft[0] < pygame.mouse.get_pos()[0] < RESUME.rect.topleft[0] + RESUME.width \
@@ -2013,19 +2013,19 @@ def game4_start():
 
             if satisfaction >= 1800:
                 romantic_relationship = 30
-                health = 30
+                health_value = 30
             elif 1200 <= satisfaction < 1800:
                 romantic_relationship = 20
-                health = 20
+                health_value = 20
             elif 800 <= satisfaction < 1200:
                 romantic_relationship = 0
-                health = 0
+                health_value = 0
             elif 0 <= satisfaction < 800:
                 romantic_relationship = -30
-                health = -30
+                health_value = -30
             text_surface_list = []
 
-            text_surface_list = print_sirting(academic_performance, romantic_relationship, wealth, health, text_surface_list)
+            text_surface_list = print_sirting(academic_performance, romantic_relationship, wealth, health_value, text_surface_list)
             love = Line(60, 60, 50, 50,
                        WINDOW_WIDTH, WINDOW_HEIGHT, 'love.png')
             money = Line(60, 60, 50, 50 + 70*1,
@@ -2082,3 +2082,4 @@ def game4_start():
 
 if __name__ == '__main__':    
     initial()
+
