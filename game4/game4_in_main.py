@@ -169,7 +169,7 @@ def game4_start():
             elif event.type == MOUSEBUTTONDOWN and game_over_time == 1:
                 if RESUME.rect.topleft[0] < pygame.mouse.get_pos()[0] < RESUME.rect.topleft[0] + RESUME.width \
                         and RESUME.rect.topleft[1] < pygame.mouse.get_pos()[1] < RESUME.rect.topleft[1] + RESUME.height:
-                    return romantic_relationship, wealth, health, academic_performance
+                    return romantic_relationship, wealth, 0, academic_performance, health
 
             elif event.type == MOUSEBUTTONDOWN and game_over_time == 2:
                 if RESUME.rect.topleft[0] < pygame.mouse.get_pos()[0] < RESUME.rect.topleft[0] + RESUME.width \

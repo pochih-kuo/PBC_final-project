@@ -81,12 +81,12 @@ def game4_start():
             self.window_width = window_width
             self.window_height = window_height
         
-    '''
+
     pygame.init()
-    pygame.display.set_caption('Maximize Your Utility!')
-    '''
     # load window surface
     window_surface = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
+    pygame.display.set_caption('Maximize Your Utility!')
+
     
     
     computer = Line(COMPUTERWIDTH, COMPUTERHEIGHT, computer_x_position, computer_y_position, WINDOW_WIDTH, WINDOW_HEIGHT, computerpath)
@@ -113,7 +113,6 @@ def game4_start():
 
         # 偵測事件
         for event in pygame.event.get():
-            BossIsHere = False
             if event.type == QUIT:
                 pygame.quit()
                 sys.exit()
@@ -137,7 +136,6 @@ def game4_start():
                    and computer.rect.topleft[1] < pygame.mouse.get_pos()[1] < computer.rect.topleft[1] + COMPUTERHEIGHT:
                     # 算分
                     salary += 300
-                    
                     PATH = add300path
                     add300 = Line(ADD300WIDTH, ADD300HEIGHT, add300_x_position, add300_y_position, WINDOW_WIDTH, WINDOW_HEIGHT, PATH)
                     window_surface.blit(add300.image, add300.rect)
@@ -171,7 +169,7 @@ def game4_start():
             elif event.type == MOUSEBUTTONDOWN and game_over_time == 1:
                 if RESUME.rect.topleft[0] < pygame.mouse.get_pos()[0] < RESUME.rect.topleft[0] + RESUME.width \
                         and RESUME.rect.topleft[1] < pygame.mouse.get_pos()[1] < RESUME.rect.topleft[1] + RESUME.height:
-                    return romantic_relationship, wealth, health, academic_performance
+                    return romantic_relationship, wealth, 0, academic_performance, health
 
             elif event.type == MOUSEBUTTONDOWN and game_over_time == 2:
                 if RESUME.rect.topleft[0] < pygame.mouse.get_pos()[0] < RESUME.rect.topleft[0] + RESUME.width \
@@ -202,6 +200,7 @@ def game4_start():
             window_surface.blit(phone.image, phone.rect)
             window_surface.blit(boss.image, boss.rect)      
             window_surface.blit(text_surface, (10, 5))
+            BossIsHere = False
             
             # cursor
             if computer.rect.topleft[0] < pygame.mouse.get_pos()[0] < computer.rect.topleft[0] + computer.width \
@@ -300,7 +299,5 @@ def game4_start():
         # 控制遊戲迴圈迭代速率
         main_clock.tick(FPS)
 
-'''
 if __name__ == '__main__':
     print(game4_start())
-'''
