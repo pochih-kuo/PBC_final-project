@@ -2044,12 +2044,12 @@ def game4_start():
                        WINDOW_WIDTH, WINDOW_HEIGHT, 'love.png')
             money = Line(60, 60, 50, 50 + 70*1,
                         WINDOW_WIDTH, WINDOW_HEIGHT, 'money.png')
-            interpersonal_relationship = Line(60, 60, 50,
+            friend = Line(60, 60, 50,
                          50+70*2, WINDOW_WIDTH, WINDOW_HEIGHT, 'friend.png')
             study = Line(60, 60, 50,
                           50+70*3, WINDOW_WIDTH, WINDOW_HEIGHT, 'study.png')
 
-            item_list = [love, money, interpersonal_relationship, study]
+            item_list = [love, money, friend, study]
             group = pygame.sprite.Group()
             for item in item_list:
                 group.add(item)
