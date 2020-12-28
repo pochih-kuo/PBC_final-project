@@ -1832,9 +1832,9 @@ def game4_start():
     minus300path = os.path.abspath('G4-minus300.png')
 
 
-    def print_sirting(academic_performance, romantic_relationship, wealth, health, text_surface_list):
+    def print_sirting(academic_performance, romantic_relationship, wealth, interpersonal_relationship, text_surface_list):
         my_final_font = pygame.font.SysFont(None, 50)
-        list_ = [academic_performance, romantic_relationship, wealth, health]
+        list_ = [academic_performance, romantic_relationship, wealth, interpersonal_relationship]
         for i in range(len(list_)):
             if list_[i] >= 0:
                 list_[i] = '+' + str(list_[i])
@@ -2044,12 +2044,12 @@ def game4_start():
                        WINDOW_WIDTH, WINDOW_HEIGHT, 'love.png')
             money = Line(60, 60, 50, 50 + 70*1,
                         WINDOW_WIDTH, WINDOW_HEIGHT, 'money.png')
-            health = Line(60, 60, 50,
+            interpersonal_relationship = Line(60, 60, 50,
                          50+70*2, WINDOW_WIDTH, WINDOW_HEIGHT, 'friend.png')
             study = Line(60, 60, 50,
                           50+70*3, WINDOW_WIDTH, WINDOW_HEIGHT, 'study.png')
 
-            item_list = [love, money, health, study]
+            item_list = [love, money, interpersonal_relationship, study]
             group = pygame.sprite.Group()
             for item in item_list:
                 group.add(item)
