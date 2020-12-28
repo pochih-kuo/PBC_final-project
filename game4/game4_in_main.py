@@ -145,7 +145,8 @@ def game4_start():
                     window_surface.blit(add300.image, add300.rect)
                     pygame.display.flip() 
                                         
-                else:
+                elif phone.rect.topleft[0] < pygame.mouse.get_pos()[0] < phone.rect.topleft[0] + PHONEWIDTH \
+                   and phone.rect.topleft[1] < pygame.mouse.get_pos()[1] < phone.rect.topleft[1] + PHONEHEIGHT:
                     salary -= 300
                     PATH = minus300path
                     minus300 = Line(MINUS300WIDTH, MINUS300HEIGHT, minus300_x_position, minus300_y_position, WINDOW_WIDTH, WINDOW_HEIGHT, PATH) 
@@ -171,7 +172,8 @@ def game4_start():
                     window_surface.blit(emoji.image, emoji.rect)
                     pygame.display.flip()
                 
-                else:
+                elif computer.rect.topleft[0] < pygame.mouse.get_pos()[0] < computer.rect.topleft[0] + COMPUTERWIDTH \
+                   and computer.rect.topleft[1] < pygame.mouse.get_pos()[1] < computer.rect.topleft[1] + COMPUTERHEIGHT:
                     satisfaction -= 300
                     ran_number1 = random.randrange(0, 100)
                     

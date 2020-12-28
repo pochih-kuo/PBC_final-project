@@ -23,6 +23,8 @@ def game4_start():
     ADD300HEIGHT = 100
     MINUS300WIDTH = 200
     MINUS300HEIGHT = 100
+    EMOJIWIDTH = 35
+    EMOJIHEIGHT = 35
     FPS = 10
     intro_x_position = 50
     intro_y_position = 50
@@ -36,6 +38,8 @@ def game4_start():
     add300_y_position = 150
     minus300_x_position = 150
     minus300_y_position = 150
+    emoji_x_position = 502
+    emoji_y_position = 350
     show_probability1 = 50  # 每次顯示通知機率 (%)
     # show_probability2 = 30
     bosspath = os.path.abspath('G4-boss.png')
@@ -141,7 +145,8 @@ def game4_start():
                     window_surface.blit(add300.image, add300.rect)
                     pygame.display.flip() 
                                         
-                else:
+                elif phone.rect.topleft[0] < pygame.mouse.get_pos()[0] < phone.rect.topleft[0] + PHONEWIDTH \
+                   and phone.rect.topleft[1] < pygame.mouse.get_pos()[1] < phone.rect.topleft[1] + PHONEHEIGHT:
                     salary -= 300
                     PATH = minus300path
                     minus300 = Line(MINUS300WIDTH, MINUS300HEIGHT, minus300_x_position, minus300_y_position, WINDOW_WIDTH, WINDOW_HEIGHT, PATH) 
@@ -158,9 +163,20 @@ def game4_start():
                    
                     # 算分
                     satisfaction += 300
+                    ran_number1 = random.randrange(0, 100)
+                    if ran_number1 < 50:
+                        emojipath = os.path.abspath('partyface.png')
+                    else:
+                        emojipath = os.path.abspath('love.png')
+                    emoji = Line(EMOJIWIDTH, EMOJIHEIGHT, emoji_x_position, emoji_y_position, WINDOW_WIDTH, WINDOW_HEIGHT, emojipath)
+                    window_surface.blit(emoji.image, emoji.rect)
+                    pygame.display.flip()
                 
-                else:
+                elif computer.rect.topleft[0] < pygame.mouse.get_pos()[0] < computer.rect.topleft[0] + COMPUTERWIDTH \
+                   and computer.rect.topleft[1] < pygame.mouse.get_pos()[1] < computer.rect.topleft[1] + COMPUTERHEIGHT:
                     satisfaction -= 300
+                    ran_number1 = random.randrange(0, 100)
+                    
 
                 if satisfaction <= 0:
                     satisfaction = 0
