@@ -9,14 +9,12 @@ import os
 
 # 設定視窗尺寸
 win_width, win_height = 600, 600
-clock = pygame.time.Clock()
+#clock = pygame.time.Clock()
 
 pygame.init()
 # 設定字型
 font1 = pygame.font.Font('SourceHanSansTC-Bold.otf', 38)
-font2 = pygame.font.Font(None, 28)
-font3 = pygame.font.Font(None, 20)
-font4 = pygame.font.Font(None, 40)
+font2 = pygame.font.Font(None, 40)
 screen = pygame.display.set_mode((win_width, win_height))
 pygame.display.set_caption("My Life in NTU")  # 設定視窗標題
 pygame.mixer.music.load('bgm.mp3')
@@ -89,7 +87,7 @@ def intro():  # 遊戲說明畫面
             if event.type == pygame.QUIT:  # 關閉程式
                 pygame.quit()
                 sys.exit()
-            if event.type == pygame.MOUSEBUTTONDOWN:  # 點選並進入角色選擇畫面
+            if event.type == pygame.MOUSEBUTTONDOWN:  # 點選並進入大一畫面
                 if pos_Next[0] < pygame.mouse.get_pos()[0] < pos_Next[0]+100\
                   and pos_Next[1] < pygame.mouse.get_pos()[1] < pos_Next[1]+30:
                     point = {"Love": 60, "Money":60, "Health":60, "Study":60, "Friend":60}
@@ -228,11 +226,11 @@ def stage1(point, grade):  # 大一畫面
     bg.blit(imageFriend, pos_Friend)
     
     # 插入能力值分數
-    score_Love = font4.render(str(point["Love"]), True, (0,0,0))
-    score_Money = font4.render(str(point["Money"]), True, (0,0,0))
-    score_Health = font4.render(str(point["Health"]), True, (0,0,0))
-    score_Study = font4.render(str(point["Study"]), True, (0,0,0))
-    score_Friend = font4.render(str(point["Friend"]), True, (0,0,0)) 
+    score_Love = font2.render(str(point["Love"]), True, (0,0,0))
+    score_Money = font2.render(str(point["Money"]), True, (0,0,0))
+    score_Health = font2.render(str(point["Health"]), True, (0,0,0))
+    score_Study = font2.render(str(point["Study"]), True, (0,0,0))
+    score_Friend = font2.render(str(point["Friend"]), True, (0,0,0)) 
     pos_scLove, pos_scMoney, pos_scHealth, pos_scStudy, pos_scFriend = [110,330], [110,380], [110,430],[110,480],[110,530]
     bg.blit(score_Love, pos_scLove)
     bg.blit(score_Money, pos_scMoney)
@@ -240,7 +238,7 @@ def stage1(point, grade):  # 大一畫面
     bg.blit(score_Study, pos_scStudy)
     bg.blit(score_Friend, pos_scFriend)
 
-    # 插入關卡、未完成任務及已完成任務
+    # 插入關卡
     imageCoco = pygame.image.load("coco.png")
     imageCoco = pygame.transform.scale(imageCoco, (200,450))
     imageLib = pygame.image.load("greyscale_lib.png")
@@ -265,17 +263,6 @@ def stage1(point, grade):  # 大一畫面
 
     pygame.mixer.music.play()
 
-    # 計算是否失敗
-    point_list = list(point.items())
-    point_list.sort(key=lambda x:x[1], reverse=True)
-    sum_zero_point = 0
-    for pairs in point_list:
-        pairs_list = list(pairs)
-        if pairs_list[1] == 0:
-            sum_zero_point += 1
-    if sum_zero_point >= 3:
-        gameover()
-
     while True:
         for event in pygame.event.get():            
             if event.type == pygame.QUIT:  # 關閉程式
@@ -285,9 +272,10 @@ def stage1(point, grade):  # 大一畫面
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if pos_Coco[0] < pygame.mouse.get_pos()[0] < pos_Coco[0]+200\
                   and pos_Coco[1]+100 < pygame.mouse.get_pos()[1] < pos_Coco[1]+450:
-                # 進入大一遊戲畫面
                     grade += 1
                     pygame.mixer.music.stop()
+                    
+                    # 進入大一遊戲畫面
                     adj_Love, adj_Money, adj_Health, adj_Study, adj_Friend = game1_start()
                     point["Love"] += adj_Love
                     point["Money"] += adj_Money
@@ -368,11 +356,11 @@ def stage2(point, grade):  # 大二畫面
     bg.blit(imageFriend, pos_Friend)
     
     # 插入能力值分數
-    score_Love = font4.render(str(point["Love"]), True, (0,0,0))
-    score_Money = font4.render(str(point["Money"]), True, (0,0,0))
-    score_Health = font4.render(str(point["Health"]), True, (0,0,0))
-    score_Study = font4.render(str(point["Study"]), True, (0,0,0))
-    score_Friend = font4.render(str(point["Friend"]), True, (0,0,0)) 
+    score_Love = font2.render(str(point["Love"]), True, (0,0,0))
+    score_Money = font2.render(str(point["Money"]), True, (0,0,0))
+    score_Health = font2.render(str(point["Health"]), True, (0,0,0))
+    score_Study = font2.render(str(point["Study"]), True, (0,0,0))
+    score_Friend = font2.render(str(point["Friend"]), True, (0,0,0)) 
     pos_scLove, pos_scMoney, pos_scHealth, pos_scStudy, pos_scFriend = [110,330], [110,380], [110,430],[110,480],[110,530]
     bg.blit(score_Love, pos_scLove)
     bg.blit(score_Money, pos_scMoney)
@@ -380,7 +368,7 @@ def stage2(point, grade):  # 大二畫面
     bg.blit(score_Study, pos_scStudy)
     bg.blit(score_Friend, pos_scFriend)
 
-    # 插入關卡、未完成任務及已完成任務
+    # 插入關卡
     imageCoco = pygame.image.load("coco.png")
     imageCoco = pygame.transform.scale(imageCoco, (200,450))
     imageLib = pygame.image.load("library.png")
@@ -413,10 +401,10 @@ def stage2(point, grade):  # 大二畫面
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if pos_Lib[0] < pygame.mouse.get_pos()[0] < pos_Lib[0]+190\
                   and pos_Lib[1] < pygame.mouse.get_pos()[1] < pos_Lib[1]+190:
-                # 進入大二遊戲畫面
                     grade += 1
                     pygame.mixer.music.stop()
-
+                    
+                    # 進入大二遊戲畫面
                     adj_Love, adj_Money, adj_Health, adj_Study, adj_Friend = game2_start()
                     point["Love"] += adj_Love
                     point["Money"] += adj_Money
@@ -499,11 +487,11 @@ def stage3(point, grade):  # 大三畫面
     bg.blit(imageFriend, pos_Friend)
     
     # 插入能力值分數
-    score_Love = font4.render(str(point["Love"]), True, (0,0,0))
-    score_Money = font4.render(str(point["Money"]), True, (0,0,0))
-    score_Health = font4.render(str(point["Health"]), True, (0,0,0))
-    score_Study = font4.render(str(point["Study"]), True, (0,0,0))
-    score_Friend = font4.render(str(point["Friend"]), True, (0,0,0)) 
+    score_Love = font2.render(str(point["Love"]), True, (0,0,0))
+    score_Money = font2.render(str(point["Money"]), True, (0,0,0))
+    score_Health = font2.render(str(point["Health"]), True, (0,0,0))
+    score_Study = font2.render(str(point["Study"]), True, (0,0,0))
+    score_Friend = font2.render(str(point["Friend"]), True, (0,0,0)) 
     pos_scLove, pos_scMoney, pos_scHealth, pos_scStudy, pos_scFriend = [110,330], [110,380], [110,430],[110,480],[110,530]
     bg.blit(score_Love, pos_scLove)
     bg.blit(score_Money, pos_scMoney)
@@ -511,7 +499,7 @@ def stage3(point, grade):  # 大三畫面
     bg.blit(score_Study, pos_scStudy)
     bg.blit(score_Friend, pos_scFriend)
 
-    # 插入關卡、未完成任務及已完成任務
+    # 插入關卡
     imageCoco = pygame.image.load("coco.png")
     imageCoco = pygame.transform.scale(imageCoco, (200,450))
     imageLib = pygame.image.load("library.png")
@@ -544,10 +532,10 @@ def stage3(point, grade):  # 大三畫面
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if pos_Dorm[0] < pygame.mouse.get_pos()[0] < pos_Dorm[0]+170\
                   and pos_Dorm[1] < pygame.mouse.get_pos()[1] < pos_Dorm[1]+170:
-                # 進入大三遊戲畫面
                     grade += 1
                     pygame.mixer.music.stop()
 
+                    # 進入大三遊戲畫面
                     adj_Love, adj_Money, adj_Health, adj_Study, adj_Friend = game3()
                     point["Love"] += adj_Love
                     point["Money"] += adj_Money
@@ -635,11 +623,11 @@ def stage4(point, grade):  # 大四畫面
     bg.blit(imageFriend, pos_Friend)
     
     # 插入能力值分數
-    score_Love = font4.render(str(point["Love"]), True, (0,0,0))
-    score_Money = font4.render(str(point["Money"]), True, (0,0,0))
-    score_Health = font4.render(str(point["Health"]), True, (0,0,0))
-    score_Study = font4.render(str(point["Study"]), True, (0,0,0))
-    score_Friend = font4.render(str(point["Friend"]), True, (0,0,0)) 
+    score_Love = font2.render(str(point["Love"]), True, (0,0,0))
+    score_Money = font2.render(str(point["Money"]), True, (0,0,0))
+    score_Health = font2.render(str(point["Health"]), True, (0,0,0))
+    score_Study = font2.render(str(point["Study"]), True, (0,0,0))
+    score_Friend = font2.render(str(point["Friend"]), True, (0,0,0)) 
     pos_scLove, pos_scMoney, pos_scHealth, pos_scStudy, pos_scFriend = [110,330], [110,380], [110,430],[110,480],[110,530]
     bg.blit(score_Love, pos_scLove)
     bg.blit(score_Money, pos_scMoney)
@@ -647,7 +635,7 @@ def stage4(point, grade):  # 大四畫面
     bg.blit(score_Study, pos_scStudy)
     bg.blit(score_Friend, pos_scFriend)
 
-    # 插入關卡、未完成任務及已完成任務
+    # 插入關卡
     imageCoco = pygame.image.load("coco.png")
     imageCoco = pygame.transform.scale(imageCoco, (200,450))
     imageLib = pygame.image.load("library.png")
@@ -680,9 +668,9 @@ def stage4(point, grade):  # 大四畫面
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if pos_Lab[0] < pygame.mouse.get_pos()[0] < pos_Lab[0]+170\
                   and pos_Lab[1] < pygame.mouse.get_pos()[1] < pos_Lab[1]+170:
-                    # 進入大四遊戲畫面
                     pygame.mixer.music.stop()
-
+                    
+                    # 進入大四遊戲畫面
                     adj_Love, adj_Money, adj_Health, adj_Study, adj_Friend = game4_start()
                     point["Love"] += adj_Love
                     point["Money"] += adj_Money
@@ -741,7 +729,7 @@ def stage4(point, grade):  # 大四畫面
                 # 進入醉月湖畫面
                     lake(point, grade)
 
-def skip(point, grade):  # 非該年級遊戲畫面
+def skip(point, grade):  # 略過畫面
     pygame.mixer.music.stop()
     # 設定畫布並插入背景畫面
     bg = pygame.Surface((win_width, win_height))
@@ -902,12 +890,11 @@ def game1_start():
     FPS = 60
     PLAYER_SPEED_X = 5
     space = pygame.image.load('G1-background.png')
-    # pygame.init() 
     blue = pygame.image.load('G1-background.jpg')
     health = pygame.image.load("G1-health.png")
     money = pygame.image.load("G1-money.png")
     friend = pygame.image.load("G1-friend.png")
-#--------------------------------------------------------------------------------------------------------
+    
     window_surface = pygame.display.set_mode((600, 600))
     WINDOW_WIDTH=600
     WINDOW_HEIGHT=600
@@ -929,10 +916,8 @@ def game1_start():
             self.window_width = window_width
             self.window_height = window_height
 
-#---------------------------------------------------------------------------------------------------------
     class Student:
         def __init__(self):
-            # self.game = game
             self.pos_x = (600 *0.45)
             self.pos_y = (600 * 0.8)
             self.direction_x = 0
@@ -962,7 +947,6 @@ def game1_start():
 
     class Stone:
         def __init__(self):
-            # self.game = game
             self.pos_x = randint(0, 565)
             self.pos_y = -50
             self.speed_y = randint(5, 20)
@@ -1003,7 +987,6 @@ def game1_start():
         gameDisplay.blit(text_surface, text_rect)
 
     gameDisplay = pygame.display.set_mode((600, 600))
-    #pygame.display.set_caption('Dodge people on Palm Avenue!')
     clock = pygame.time.Clock()
     last_spawn_stone = pygame.time.get_ticks()    # 獲取時間(毫秒)
     while True:
@@ -1012,7 +995,7 @@ def game1_start():
                 pygame.quit()
                 quit()
         gameDisplay.fill((0, 0, 0))
-#-----------------------------------------------------------------------------------------------
+
         if final == 3:   # 遊戲說明
             RESUME = Line(93, 34, 350,400, 600, 600, 'G3-play.png')
                 # cursor
@@ -1029,8 +1012,6 @@ def game1_start():
             gameDisplay.blit(background_raw,(0,0,600,600))
             window_surface.blit(RESUME.image, RESUME.rect)
 
-            # button("Start", 250, 350, 100, 50,(200, 0, 0), (255, 0, 0))    # button    # new
-
             mouse = pygame.mouse.get_pos()
             click = pygame.mouse.get_pressed()
             
@@ -1042,14 +1023,10 @@ def game1_start():
                     final = 2
 
         elif final == 2:   # 遊戲畫面  
-            #new()
             stones = []
-
             student = Student()
             start_ticks=pygame.time.get_ticks()
-            #seconds = 30 - (pygame.time.get_ticks()-start_ticks)//1000
-            #clock_surface = my_font.render("00:%02d" % seconds, True, (0, 0, 0))
-            #gameDisplay.blit(clock_surface, (10, 5))
+
             while final == 2:
                 seconds = 30 - (pygame.time.get_ticks()-start_ticks)//1000
                 clock_surface = my_font.render("00:%02d" % seconds, True, (0, 0, 0))
@@ -1066,13 +1043,11 @@ def game1_start():
                     health_value = +20
                     academic_performance = 0
                     interpersonal_relationship = +20
-                    #return romantic_relationship, money, health_value, academic_performance,interpersonal_relationship
                     
                 for event in pygame.event.get():
                     if event.type == pygame.QUIT:
                         pygame.quit()
                         quit()
-                #update()
                 now = pygame.time.get_ticks()
                 if now - last_spawn_stone >= 800:
                     stones.append(Stone())
@@ -1102,7 +1077,6 @@ def game1_start():
                 clock.tick(FPS)
         
         elif final == 1:  # lose
-            # draw_text("Lose!", 80, (255, 255, 255), 300, 300)
             click1 = pygame.mouse.get_pressed()
             gameDisplay.fill((255, 255, 255))
             gameDisplay.blit(blue, (0,0,600,600)) 
@@ -1122,8 +1096,6 @@ def game1_start():
                 pygame.mouse.set_cursor(*pygame.cursors.tri_left)
             window_surface.blit(RESUME.image, RESUME.rect)
 
-            
-            #time.sleep(3)
             romantic_relationship = 0
             money_value = -30
             health_value = -30
@@ -1134,8 +1106,6 @@ def game1_start():
             and RESUME.rect.topleft[1] < pygame.mouse.get_pos()[1] < RESUME.rect.topleft[1] + RESUME.height:
                 if click1[0] == 1:
                     return romantic_relationship, money_value, health_value, academic_performance,interpersonal_relationship
-            
-            #return romantic_relationship, money, health_value, academic_performance,interpersonal_relationship
         
         elif final == 0:  # win
             click0 = pygame.mouse.get_pressed()
@@ -1167,7 +1137,6 @@ def game1_start():
                 if click0[0] == 1:
                     return romantic_relationship, money_value, health_value, academic_performance,interpersonal_relationship
             
-            
         pygame.display.update()
         clock.tick(FPS)
 
@@ -1181,7 +1150,6 @@ def game2_start():
     line_x_position = 53
     line_y_position = 233
     show_probability1 = 60  # 每次顯示通知機率 (%)
-    # show_probability2 = 30
     path2 = 'G2-game2_msg1.png'
     path1 = 'G2-game2_msg2.png'
     gpa_lsit = [4.3, 4.0, 3.7, 3.3, 3.0, 2.7, 2.3, 2.0, 1.7, 0]
@@ -1218,14 +1186,9 @@ def game2_start():
 
             text_surface_list.append(my_final_font.render(
                 list_[i], True, (0, 0, 0)))
-            # text_surface_list.append(my_space_font.render(
-            # ' ', True, (0, 0, 0)))
 
         return text_surface_list
-    '''
-    pygame.init()
 
-    pygame.display.set_caption('Stop Procrastinating!')'''
     window_surface = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
 
     line = Line(IMAGEWIDTH, IMAGEHEIGHT, WINDOW_WIDTH,
@@ -1325,8 +1288,6 @@ def game2_start():
             clock_surface = my_font.render(
                 "00:%02d" % seconds, True, (0, 0, 0))
 
-            # milliseconds += 1/FPS*1000*2  #returns the time since the last time we called the function, and limits the frame rate to 60FPS
-
             # 遊戲分數儀表板
             text_surface = my_font.render(
                 'GPA = {}'.format(round(points, 2)), True, (0, 0, 0))
@@ -1338,9 +1299,6 @@ def game2_start():
                 background_raw, (WINDOW_WIDTH, WINDOW_HEIGHT))
             background.convert()
             window_surface.blit(background, (0, 0))
-            # phone = Line(360, 360, 28,
-                                # 140, WINDOW_WIDTH, WINDOW_HEIGHT, 'G2-iphone7.png')
-            # window_surface.blit(phone.image, phone.rect)
             window_surface.blit(line.image, line.rect)
             window_surface.blit(text_surface, (10, 25))
             window_surface.blit(clock_surface, (10, 5))
@@ -1390,8 +1348,6 @@ def game2_start():
                        WINDOW_WIDTH, WINDOW_HEIGHT, 'G2-gpa.png')
             love = Line(60, 60, 50, 50 + 70*1,
                         WINDOW_WIDTH, WINDOW_HEIGHT, 'love.png')
-            #money = Line(60, 60, 50,
-                         #50+70*2, WINDOW_WIDTH, WINDOW_HEIGHT, 'money.png')
             health = Line(60, 60, 50,
                           50+70*2, WINDOW_WIDTH, WINDOW_HEIGHT, 'health.png')
             study = Line(60, 60, 50,
@@ -1451,9 +1407,6 @@ def game2_start():
             window_surface.blit(background, (0, 0))
             window_surface.blit(intro, (0, 0))
             window_surface.blit(RESUME.image, RESUME.rect)
-            # intro_text = my_final_font.render('this is the introduction.', True, (0, 0, 0))
-            # window_surface.blit(intro_text, (10, 10))
-            
 
         pygame.display.update()
         # 控制遊戲迴圈迭代速率
@@ -1472,8 +1425,6 @@ def game3():
 
     pathes = ['clothes1.png', 'clothes2.png', 'clothes3.png', 'pants1.png', 'pants2.png', 'pants3.png', 'shoes1.png', 'shoes2.png', 'shoes3.png']
     point_list = [1,2,3, 4, 5, 6, 7, 8, 9]
-    # ---------------------------
-
     class Picture(pygame.sprite.Sprite):
         def __init__(self, x_position, y_position, path, point):
             super().__init__()
@@ -1492,10 +1443,6 @@ def game3():
             self.window_height = WINDOW_HEIGHT
             self.point = point
     
-    '''
-    pygame.init()
-    # load window surface
-    pygame.display.set_caption('Choose Wisely')'''
     window_surface = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
     group = pygame.sprite.Group()
     ok = Picture(300-40, 480,'ok.png', 0)
@@ -1594,14 +1541,12 @@ def game3():
             for item in list:
                 if item.rect.topleft[0] < pygame.mouse.get_pos()[0] < item.rect.topleft[0] + IMAGEWIDTH \
                     and item.rect.topleft[1] < pygame.mouse.get_pos()[1] < item.rect.topleft[1] + IMAGEHEIGHT:
-                    # pygame.mouse.set_cursor(*pygame.cursors.diamond)
                     touch = 1
                     break
 
             if ok.rect.topleft[0] < pygame.mouse.get_pos()[0] < ok.rect.topleft[0] + 80 \
                 and ok.rect.topleft[1] < pygame.mouse.get_pos()[1] < ok.rect.topleft[1] + 80:
                 touch = 1
-                # pygame.mouse.set_cursor(*pygame.cursors.diamond)
             
             if touch == 1:
                 pygame.mouse.set_cursor(*pygame.cursors.diamond)
@@ -1614,7 +1559,6 @@ def game3():
             text_surface = my_font.render('$$ = {}'.format(round(points,2)), True, (0, 0, 0))
             # 渲染物件
             background_raw = pygame.image.load('G3-background.jpg')
-            # background_raw = pygame.image.load(os.path.abspath('./game2/background.jpg'))
             # 調整背景圖片大小
             background = pygame.transform.scale(background_raw, (WINDOW_WIDTH , WINDOW_HEIGHT ))
             background.convert()
@@ -1640,7 +1584,6 @@ def game3():
             text_surface = my_font.render('$$ = {}'.format(round(points,2)), True, (0, 0, 0))
             # 渲染物件
             background_raw = pygame.image.load('G3-background2.jpg')
-            # background_raw = pygame.image.load(os.path.abspath('./game2/background.jpg'))
             # 調整背景圖片大小
             background = pygame.transform.scale(background_raw, (WINDOW_WIDTH , WINDOW_HEIGHT ))
             background.convert()
@@ -1683,9 +1626,6 @@ def game3():
 
                     text_surface_list.append(my_final_font.render(
                         list_[i], True, (0, 0, 0)))
-                    # text_surface_list.append(my_space_font.render(
-                    # ' ', True, (0, 0, 0)))
-
                 return text_surface_list
             
             if t < FPS*3:  # 跑三秒後顯示最終分數
@@ -1756,13 +1696,11 @@ def game3():
                         text_surface_list[i], (300, 220 + 70*i))  # text position
 
         elif page == 0:  # 遊戲說明畫面
-        
             # RESUME button
             RESUME = Picture(400, 400, 'play.png', 0)
             RESUME.image = pygame.transform.scale(RESUME.raw_image, (117, 34))
             RESUME.width = 117
             RESUME.height = 34
-
 
             # cursor
             if RESUME.rect.topleft[0] < pygame.mouse.get_pos()[0] < RESUME.rect.topleft[0] + RESUME.width \
@@ -1823,14 +1761,12 @@ def game4_start():
     emoji_x_position = 502
     emoji_y_position = 350
     show_probability1 = 50  # 每次顯示通知機率 (%)
-    # show_probability2 = 30
     bosspath = os.path.abspath('G4-boss.png')
     computerpath = os.path.abspath('G4-computer.png')
     phonepath = os.path.abspath('G4-phone.png')
     intropath = os.path.abspath('G4-intro.png')
     add300path = os.path.abspath('G4-add300.gif')
     minus300path = os.path.abspath('G4-minus300.png')
-
 
     def print_sirting(academic_performance, romantic_relationship, wealth, interpersonal_relationship, text_surface_list):
         my_final_font = pygame.font.SysFont(None, 50)
@@ -1863,14 +1799,8 @@ def game4_start():
             self.height = height
             self.window_width = window_width
             self.window_height = window_height
-        
-    '''
-    pygame.init()
-    pygame.display.set_caption('Maximize Your Utility!')
-    '''
-    # load window surface
-    window_surface = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
-    
+
+    window_surface = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))    
     
     computer = Line(COMPUTERWIDTH, COMPUTERHEIGHT, computer_x_position, computer_y_position, WINDOW_WIDTH, WINDOW_HEIGHT, computerpath)
     phone = Line(PHONEWIDTH, PHONEHEIGHT, phone_x_position, phone_y_position, WINDOW_WIDTH, WINDOW_HEIGHT, phonepath)
@@ -2096,4 +2026,3 @@ def game4_start():
 
 if __name__ == '__main__':    
     initial()
-
